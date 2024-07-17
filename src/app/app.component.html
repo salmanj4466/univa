@@ -1,0 +1,14 @@
+<ng-container *ngIf="!isSigninPage()">
+  <app-header></app-header>
+  <app-sidebar></app-sidebar>
+</ng-container>
+
+<main [class.main-content]="!isSigninPage()">
+  <div [class.container-fluid]="!isSigninPage()">
+    <router-outlet />
+  </div>
+</main>
+
+<ng-container *ngIf="!isSigninPage()">
+  <app-footer></app-footer>
+</ng-container>

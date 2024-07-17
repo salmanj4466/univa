@@ -1,0 +1,73 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Participants</a></li>
+    <li class="breadcrumb-item active" aria-current="page">List</li>
+  </ol>
+</nav>
+
+<div class="card">
+  <h4 class="card-header">Participants List</h4>
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered mb-2">
+        <thead>
+          <tr>
+            <th>Participant Full Name</th>
+            <th>Participant code</th>
+            <th>Study short code</th>
+            <th>Status</th>
+            <th>Next vist</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Participant full name #1</td>
+            <td>UH-MON-001</td>
+            <td>UH-MON</td>
+            <td><span class="badge text-bg-info">On-going</span></td>
+            <td>25/03/2024</td>
+            <td>
+              <a
+                routerLink="/participant-overview"
+                class="btn btn-outline-success px-3"
+              >
+                View details
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>Participant full name #2</td>
+            <td>UH-MON-002</td>
+            <td>UH-MON</td>
+            <td><span class="badge text-bg-danger">Alert</span></td>
+            <td>14/04/2024</td>
+            <td>
+              <a
+                routerLink="/participant-overview"
+                class="btn btn-outline-success px-3"
+              >
+                View details
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <td>Participant full name #3</td>
+            <td>UH-TRT-001</td>
+            <td>UH-TRT</td>
+            <td><span class="badge text-bg-success">Complete</span></td>
+            <td>-</td>
+            <td>
+              <a
+                routerLink="/participant-overview"
+                class="btn btn-outline-success px-3"
+              >
+                View details
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

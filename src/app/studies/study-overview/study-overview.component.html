@@ -1,0 +1,124 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Studies</a></li>
+    <li class="breadcrumb-item active" aria-current="page">UH-ST-00</li>
+  </ol>
+</nav>
+
+<div class="card">
+  <h4 class="card-header d-flex justify-content-between">
+    <span>UH-ST-001</span>
+    <span class="badge text-bg-info">On-going</span>
+  </h4>
+  <div class="card-body">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="info-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#info-tab-pane"
+          type="button"
+          role="tab"
+          aria-controls="info-tab-pane"
+          aria-selected="true"
+        >
+          <i class="bi bi-info-circle"></i> Study Information
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="collection-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#collection-tab-pane"
+          type="button"
+          role="tab"
+          aria-controls="collection-tab-pane"
+          aria-selected="false"
+        >
+          <i class="bi bi-gear"></i> Data Collection Settings
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="consent-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#consent-tab-pane"
+          type="button"
+          role="tab"
+          aria-controls="consent-tab-pane"
+          aria-selected="false"
+        >
+          <i class="bi bi-file-earmark-check"></i> Informed Consent Forms
+        </button>
+      </li>
+
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="overview-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#overview-tab-pane"
+          type="button"
+          role="tab"
+          aria-controls="overview-tab-pane"
+          aria-selected="false"
+        >
+          <i class="bi bi-search"></i> Study Overview
+        </button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div
+        class="tab-pane fade show active"
+        id="info-tab-pane"
+        role="tabpanel"
+        aria-labelledby="info-tab"
+        tabindex="0"
+      >
+        <app-study-information></app-study-information>
+        <div class="text-end mt-4">
+          <span class="text-danger me-4 me-md-5"
+            ><i class="bi bi-x-circle-fill me-1"></i> Delete Study</span
+          >
+          <button class="btn btn-success">Update</button>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="collection-tab-pane"
+        role="tabpanel"
+        aria-labelledby="collection-tab"
+        tabindex="0"
+      >
+        <app-data-collection></app-data-collection>
+        <div class="text-end mt-4">
+          <button class="btn btn-success">Update</button>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="consent-tab-pane"
+        role="tabpanel"
+        aria-labelledby="consent-tab"
+        tabindex="0"
+      >
+        <app-informed-consent-form></app-informed-consent-form>
+        <div class="text-end mt-4">
+          <button class="btn btn-success">Update</button>
+        </div>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="overview-tab-pane"
+        role="tabpanel"
+        aria-labelledby="overview-tab"
+        tabindex="0"
+      >
+        <app-study-overview-data></app-study-overview-data>
+      </div>
+    </div>
+  </div>
+</div>

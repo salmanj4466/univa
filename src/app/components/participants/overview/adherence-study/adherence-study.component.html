@@ -1,0 +1,496 @@
+<h5 class="mt-2 mb-0">Overall</h5>
+<hr class="mt-2 mb-4" />
+
+<div class="row align-items-center mb-4">
+  <div class="col-md-6 col-lg-6 col-xl-7">
+    <div class="row">
+      <div class="col-md-6 col-xl-7">
+        <div
+          class="progress"
+          role="progressbar"
+          aria-label="Info striped example"
+          aria-valuenow="60"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div
+            class="progress-bar progress-bar-striped bg-info"
+            style="width: 60%"
+          ></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-xl-5">
+        <p class="mt-2 mt-md-0 mb-3 mb-md-0">X / # of weeks completed</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 col-lg-6 col-xl-5 text-end">
+    <button
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#completeStudy"
+      class="btn btn-outline-info me-3 px-3"
+    >
+      Complete study
+    </button>
+    <button
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#dropOut"
+      class="btn btn-outline-danger px-3"
+    >
+      Drop out
+    </button>
+  </div>
+</div>
+
+<h5 class="mt-2 mb-0">Wearbale integration</h5>
+<hr class="mt-2 mb-4" />
+
+<ul class="d-flex gap-5 mb-4">
+  <li class="fw-medium">Firbit</li>
+  <li>
+    <span class="d-block text-green mb-2">Enabled</span>
+    <span class="d-block">Disabled</span>
+  </li>
+  <li>
+    <a
+      href="#"
+      class="text-gray"
+      data-bs-toggle="modal"
+      data-bs-target="#showDetails"
+      ><i class="bi bi-eye me-1"></i> Show details</a
+    >
+  </li>
+</ul>
+
+<h5 class="mt-2 mb-0">Visits</h5>
+<hr class="mt-2 mb-4" />
+
+<div class="row align-items-end mb-4">
+  <div class="col-sm-6 col-md-4 col-xl-5">
+    <div class="form-group mb-3 mb-sm-0">
+      <label class="form-label">Study member</label>
+      <select class="form-select">
+        <option selected>Select study member</option>
+        <option value="1">Study member #1</option>
+        <option value="2">Study member #2</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4 col-xl-5">
+    <div class="form-group mb-0">
+      <label class="form-label">Status</label>
+      <select class="form-select">
+        <option selected>Select status</option>
+        <option value="1">Completed</option>
+        <option value="2">Scheduled</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-md-4 col-xl-2">
+    <button
+      type="button"
+      data-bs-toggle="modal"
+      data-bs-target="#scheduleVisit"
+      class="btn btn-success px-3 mb-1 mt-3 mt-md-0"
+    >
+      <i class="bi bi-plus"></i> New Visit
+    </button>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-bordered mb-2">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Study member</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>26/02/2024</td>
+        <td>Study member #1</td>
+        <td><span class="text-green">Completed</span></td>
+        <td>
+          <a routerLink="/study-overview" class="btn btn-outline-success px-3">
+            View details
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>05/01/2025</td>
+        <td>Study member #1</td>
+        <td><span class="text-info">Schedule</span></td>
+        <td>
+          <button
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#rescheduleVisit"
+            class="btn btn-success px-3 mx-1"
+          >
+            Re-schedule
+          </button>
+          <button
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#cancelVisit"
+            class="text-danger"
+            class="btn btn-danger px-4 mx-1"
+          >
+            Cancel
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>13/02/2025</td>
+        <td>Study member #2</td>
+        <td><span class="text-warning">In-progress</span></td>
+        <td>
+          <a routerLink="/study-overview" class="btn btn-outline-success px-3">
+            View details
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>02/03/2025</td>
+        <td>Study member #1</td>
+        <td><span class="text-warning">In-progress</span></td>
+        <td>
+          <a routerLink="/study-overview" class="btn btn-outline-success px-3">
+            View details
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- Cancel Visit -->
+<div
+  class="modal fade"
+  id="cancelVisit"
+  tabindex="-1"
+  aria-labelledby="cancelVisitLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="cancelVisitLabel">
+          <i class="bi bi-exclamation-triangle me-1"></i> Cancel Visit
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          You are about to cancel a scheduled visit. The visit will be removed.
+          This action cannot be undone. Are you sure you want to proceed?
+        </p>
+
+        <div class="d-flex justify-content-end gap-2 mt-5">
+          <button type="button" class="btn btn-danger">Yes, cancel</button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            data-bs-dismiss="modal"
+          >
+            No, Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Reschedule visit with John Doe -->
+<div
+  class="modal fade"
+  id="rescheduleVisit"
+  tabindex="-1"
+  aria-labelledby="rescheduleVisitLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="rescheduleVisitLabel">
+          Reschedule visit with John Do
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group mb-2">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control" />
+          </div>
+          <div class="form-group mb-2">
+            <label class="form-label">Study</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Demo Study 1"
+            />
+          </div>
+          <div class="form-group mb-2">
+            <label class="form-label">Site</label>
+            <input type="text" class="form-control" placeholder="Demo site 1" />
+          </div>
+          <div class="form-group mb-2">
+            <label class="form-label">Participant</label>
+            <input type="text" class="form-control" placeholder="John Doe" />
+          </div>
+        </form>
+
+        <div class="d-flex justify-content-end gap-2 mt-5">
+          <button type="button" class="btn btn-success">Re-schedule</button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Complete study -->
+<div
+  class="modal fade"
+  id="completeStudy"
+  tabindex="-1"
+  aria-labelledby="completeStudyLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="completeStudyLabel">
+          <i class="bi bi-exclamation-triangle me-1"></i> Complete study
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          You are about to complete the study for this participant. The
+          scheduled visits will be removed and the participant will not be able
+          to upload data anymore. This action cannot be undone. Are you sure you
+          want to proceed?
+        </p>
+
+        <div class="d-flex justify-content-end gap-2 mt-5">
+          <button type="button" class="btn btn-info">Yes, complete</button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            data-bs-dismiss="modal"
+          >
+            No, cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Drop out participant -->
+<div
+  class="modal fade"
+  id="dropOut"
+  tabindex="-1"
+  aria-labelledby="dropOutLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="dropOutLabel">
+          Drop out participant?
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          You are about to drop a participant out of the study. The scheduled
+          visits will be removed and the participant will not be able to access
+          the platform anymore. This action cannot be undone. Are you sure you
+          want to proceed?
+        </p>
+        <form>
+          <div class="form-group mb-3">
+            <label class="form-label">Status</label>
+            <select class="form-select">
+              <option selected>Select a reason</option>
+              <option value="1">Screen out</option>
+              <option value="2">Other</option>
+            </select>
+          </div>
+          <div class="form-group mb-2">
+            <label class="form-label">Notes</label>
+            <textarea
+              class="form-control"
+              rows="4"
+              placeholder="Additional notes here"
+            ></textarea>
+          </div>
+        </form>
+
+        <div class="d-flex justify-content-end gap-2 mt-5">
+          <button type="button" class="btn btn-danger">Yes, drop out</button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            data-bs-dismiss="modal"
+          >
+            Nox, cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Schedule visit with John Doe -->
+<div
+  class="modal fade"
+  id="scheduleVisit"
+  tabindex="-1"
+  aria-labelledby="scheduleVisitLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="scheduleVisitLabel">
+          Reschedule visit with John Do
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group mb-2">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-control" />
+          </div>
+          <div class="form-group mb-2">
+            <label class="form-label">Study</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Demo Study 1"
+            />
+          </div>
+          <div class="form-group mb-2">
+            <label class="form-label">Site</label>
+            <input type="text" class="form-control" placeholder="Demo site 1" />
+          </div>
+          <div class="form-group mb-2">
+            <label class="form-label">Participant</label>
+            <input type="text" class="form-control" placeholder="John Doe" />
+          </div>
+        </form>
+
+        <div class="d-flex justify-content-end gap-2 mt-5">
+          <button type="button" class="btn btn-success">Schedule</button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Fitbit Credentials -->
+<div
+  class="modal fade"
+  id="showDetails"
+  tabindex="-1"
+  aria-labelledby="showDetailsLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="showDetailsLabel">
+          Fitbit Credentials
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group mb-2">
+            <label class="form-label">Username</label>
+            <input type="text" class="form-control" />
+          </div>
+          <div class="form-group mb-2">
+            <label class="form-label">Password</label>
+            <input type="text" class="form-control" />
+          </div>
+        </form>
+
+        <div class="d-flex justify-content-end gap-2 mt-5">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

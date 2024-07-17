@@ -1,0 +1,53 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Participant</a></li>
+    <li class="breadcrumb-item active" aria-current="page">
+      Add New Participant
+    </li>
+  </ol>
+</nav>
+
+<div class="card">
+  <h4 class="card-header">Add New Participant</h4>
+  <div class="card-body px-2 py-4">
+    <mat-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup" label="Personal Information">
+        <form [formGroup]="firstFormGroup">
+          <app-personal-info></app-personal-info>
+
+          <div class="text-end mt-4">
+            <button mat-button matStepperNext class="btn btn-success">
+              Next <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" label="Patinet Profile">
+        <form [formGroup]="secondFormGroup">
+          <app-patient-profile></app-patient-profile>
+          <div class="d-flex justify-content-between mt-4">
+            <button mat-button matStepperPrevious class="btn btn-secondary">
+              <i class="bi bi-arrow-left me-1"></i> Back
+            </button>
+            <button mat-button matStepperNext class="btn btn-success">
+              Next <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="fourFormGroup">
+        <ng-template matStepLabel>Confirmation</ng-template>
+        <app-confirmation></app-confirmation>
+        <div class="d-flex justify-content-between mt-5">
+          <button mat-button matStepperPrevious class="btn btn-secondary">
+            <i class="bi bi-arrow-left me-1"></i> Back
+          </button>
+          <button mat-button class="btn btn-success">
+            Submit and send ICFs
+          </button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>

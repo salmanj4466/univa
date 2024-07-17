@@ -1,0 +1,123 @@
+<h5 class="mb-0">Clinical devices</h5>
+<hr class="mt-2 mb-4" />
+
+<div class="row align-items-center mb-3">
+  <div class="col-9 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+    <div class="form-group mb-0">
+      <input type="text" class="form-control" placeholder="Device 1" />
+    </div>
+  </div>
+  <div class="col-3 col-sm-4 col-md-6 col-lg-7 col-xl-8">
+    <span class="me-2"><i class="bi bi-file-earmark-text-fill"></i></span>
+    <span class="text-danger"><i class="bi bi-x-circle-fill"></i></span>
+  </div>
+</div>
+
+<div class="row align-items-center mb-3">
+  <div class="col-9 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+    <div class="form-group mb-0">
+      <input type="text" class="form-control" placeholder="Device 2" />
+    </div>
+  </div>
+  <div class="col-3 col-sm-4 col-md-6 col-lg-7 col-xl-8">
+    <span class="me-2"><i class="bi bi-file-earmark-text-fill"></i></span>
+    <span class="text-danger"><i class="bi bi-x-circle-fill"></i></span>
+  </div>
+</div>
+
+<div class="row align-items-center mb-3">
+  <div class="col-9 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+    <div class="form-group mb-0">
+      <input type="text" class="form-control" placeholder="Device 3" />
+    </div>
+  </div>
+  <div class="col-3 col-sm-4 col-md-6 col-lg-7 col-xl-8">
+    <span class="me-2"><i class="bi bi-file-earmark-text-fill"></i></span>
+    <span class="text-danger"><i class="bi bi-x-circle-fill"></i></span>
+  </div>
+</div>
+
+<div class="row align-items-center mb-3">
+  <div class="col-9 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+    <div class="form-group mb-0">
+      <input type="text" class="form-control" placeholder="Device 4" />
+    </div>
+  </div>
+  <div class="col-3 col-sm-4 col-md-6 col-lg-7 col-xl-8">
+    <span class="me-2"><i class="bi bi-file-earmark-text-fill"></i></span>
+    <span class="text-danger"><i class="bi bi-x-circle-fill"></i></span>
+  </div>
+</div>
+
+<p class="text-gray">
+  There are no Clinical devices for this site. To add one, enter the name for
+  the device and click on the "Add device" button next to the input field below.
+</p>
+
+<div class="row align-items-center mb-3">
+  <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+    <div class="form-group mb-3 mb-sm-0">
+      <input type="text" class="form-control" placeholder="My new device 5" />
+    </div>
+  </div>
+  <div class="col-12 col-sm-4 col-md-6 col-lg-7 col-xl-8">
+    <a href="#" class="text-info">
+      <i class="bi bi-plus-circle me-1"></i> Add device
+    </a>
+  </div>
+</div>
+
+<p class="mt-4">
+  <a
+    href="#"
+    data-bs-toggle="modal"
+    data-bs-target="#deletAllDevices"
+    class="text-danger"
+  >
+    <i class="bi bi-x-circle-fill me-1"></i> Delete all devices
+  </a>
+</p>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="deletAllDevices"
+  tabindex="-1"
+  aria-labelledby="deletAllDevicesLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deletAllDevicesLabel">
+          <i class="bi bi-exclamation-triangle me-1"></i> Delete all devices
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <i class="bi bi-x"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          You are about to delete all the devices added for the site. This
+          action cannot be undone. Are you sure you want to proceed?
+        </p>
+
+        <div class="d-flex justify-content-end gap-2 mt-5">
+          <button type="button" class="btn btn-danger">Yes delete</button>
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            data-bs-dismiss="modal"
+          >
+            No, Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

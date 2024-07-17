@@ -1,0 +1,62 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Studies</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Add New Study</li>
+  </ol>
+</nav>
+
+<div class="card">
+  <h4 class="card-header">Add New Study</h4>
+  <div class="card-body px-2 py-4">
+    <mat-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup" label="Study Information">
+        <form [formGroup]="firstFormGroup">
+          <app-study-information></app-study-information>
+
+          <div class="text-end mt-4">
+            <button mat-button matStepperNext class="btn btn-success">
+              Next <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup" label="Data Collection">
+        <form [formGroup]="secondFormGroup">
+          <app-data-collection></app-data-collection>
+          <div class="d-flex justify-content-between mt-4">
+            <button mat-button matStepperPrevious class="btn btn-secondary">
+              <i class="bi bi-arrow-left me-1"></i> Back
+            </button>
+            <button mat-button matStepperNext class="btn btn-success">
+              Next <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="thirdFormGroup" label="Informed Consent Form">
+        <form [formGroup]="thirdFormGroup">
+          <app-informed-consent-form></app-informed-consent-form>
+          <div class="d-flex justify-content-between mt-5">
+            <button mat-button matStepperPrevious class="btn btn-secondary">
+              <i class="bi bi-arrow-left me-1"></i> Back
+            </button>
+            <button mat-button matStepperNext class="btn btn-success">
+              Next <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="fourFormGroup">
+        <ng-template matStepLabel>Confirmation</ng-template>
+        <app-confirmation></app-confirmation>
+
+        <div class="d-flex justify-content-between mt-5">
+          <button mat-button matStepperPrevious class="btn btn-secondary">
+            <i class="bi bi-arrow-left me-1"></i> Back
+          </button>
+          <button mat-button class="btn btn-success">Submit</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>
