@@ -16,4 +16,9 @@ export class ApiService {
     const payload = { email, password };
     return this.http.post(signInUrl, payload);
   }
+
+  signOut(): Observable<any> {
+    const signInUrl = `${environment.apiUrl}auth/sign-out`;
+    return this.http.post(signInUrl, {});
+  }
 }
