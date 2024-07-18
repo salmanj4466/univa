@@ -26,17 +26,16 @@ export class StudyListComponent implements OnInit, AfterViewInit {
 
   constructor(private api: ApiService) {}
 
-  ngOnInit(): void {
-    this.setPage({ offset: 0 });
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    if (this.datatable && this.datatable.nativeElement) {
-      const rect = this.datatable.nativeElement.getBoundingClientRect();
-      console.log('Datatable bounding rect:', rect);
-    } else {
-      console.error('Datatable element not found or not yet initialized.');
-    }
+    // if (this.datatable && this.datatable.nativeElement) {
+    //   const rect = this.datatable.nativeElement.getBoundingClientRect();
+    //   console.log('Datatable bounding rect:', rect);
+    // } else {
+    //   console.error('Datatable element not found or not yet initialized.');
+    // }
+    this.setPage({ offset: 0 });
   }
 
   fetchSiteList() {

@@ -26,17 +26,15 @@ export class SiteListComponent implements OnInit, AfterViewInit {
   @ViewChild('datatable') datatable: ElementRef;
   constructor(private api: ApiService ) {}
   ngAfterViewInit(): void {
-    if (this.datatable && this.datatable.nativeElement) {
-      const rect = this.datatable.nativeElement.getBoundingClientRect();
-      console.log('Datatable bounding rect:', rect);
-    } else {
-      console.error('Datatable element not found or not yet initialized.');
-    }
+    // if (this.datatable && this.datatable.nativeElement) {
+    //   const rect = this.datatable.nativeElement.getBoundingClientRect();
+    //   console.log('Datatable bounding rect:', rect);
+    // } else {
+    //   console.error('Datatable element not found or not yet initialized.');
+    // }
+    this.setPage({ offset: 0 });
   }
-  ngOnInit(): void {
-    this.fetchSiteList();
-
-  }
+  ngOnInit(): void {}
 
   fetchSiteList(){
     this.loadingIndicator = true;
