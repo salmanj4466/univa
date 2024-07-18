@@ -35,6 +35,7 @@
     "fullcalendar": "^4.0.0-alpha.4",
     "fullcalendar-scheduler": "^4.0.0-alpha.4",
     "ngx-fullcalendar": "^5.0.0-alpha.0",
+    "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
