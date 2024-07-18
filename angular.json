@@ -27,7 +27,9 @@
             "styles": [
               "node_modules/fullcalendar/dist/fullcalendar.min.css",
               "node_modules/fullcalendar-scheduler/dist/scheduler.min.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/@swimlane/ngx-datatable/index.css",
+              "node_modules/@swimlane/ngx-datatable/assets/icons.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",

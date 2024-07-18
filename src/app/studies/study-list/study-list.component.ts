@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { ApiService } from '../../api.service';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   templateUrl: './study-list.component.html',
   styleUrl: './study-list.component.scss',
 })
-export class StudyListComponent {
+export class StudyListComponent implements OnInit, AfterViewInit {
   rows = [];
   page = {
     totalElements: 0,
@@ -22,11 +22,21 @@ export class StudyListComponent {
     offset:0
   };
   loadingIndicator = false;
+  @ViewChild('datatable') datatable: ElementRef;
 
   constructor(private api: ApiService) {}
 
   ngOnInit(): void {
     this.setPage({ offset: 0 });
+  }
+
+  ngAfterViewInit(): void {
+    if (this.datatable && this.datatable.nativeElement) {
+      const rect = this.datatable.nativeElement.getBoundingClientRect();
+      console.log('Datatable bounding rect:', rect);
+    } else {
+      console.error('Datatable element not found or not yet initialized.');
+    }
   }
 
   fetchSiteList() {

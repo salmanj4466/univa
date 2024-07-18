@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ApiService } from '../../api.service';
@@ -14,7 +14,7 @@ import { OnInit } from '@angular/core';
   templateUrl: './site-list.component.html',
   styleUrl: './site-list.component.scss',
 })
-export class SiteListComponent implements OnInit {
+export class SiteListComponent implements OnInit, AfterViewInit {
   rows = [];
   columns = [{ prop: 'name', name: 'Site Name' }, { prop: 'studyShortCode:', name: 'Study short code' }, { prop: 'participantsRecruited:', name: 'Participant Recruited' }];
   page = {
@@ -23,7 +23,16 @@ export class SiteListComponent implements OnInit {
     size: 1
   };
   loadingIndicator = false;
+  @ViewChild('datatable') datatable: ElementRef;
   constructor(private api: ApiService ) {}
+  ngAfterViewInit(): void {
+    if (this.datatable && this.datatable.nativeElement) {
+      const rect = this.datatable.nativeElement.getBoundingClientRect();
+      console.log('Datatable bounding rect:', rect);
+    } else {
+      console.error('Datatable element not found or not yet initialized.');
+    }
+  }
   ngOnInit(): void {
     this.fetchSiteList();
 
