@@ -21,4 +21,14 @@ export class ApiService {
     const signInUrl = `${environment.apiUrl}auth/sign-out`;
     return this.http.post(signInUrl, {});
   }
+
+  siteListing(params: any): Observable<any> {
+    const signInUrl = `${environment.apiUrl}sites`;
+    return this.http.get(signInUrl, { params: params });
+  }
+
+  studyListing(params: any): Observable<any> {
+    const signInUrl = `${environment.apiUrl}studies`;
+    return this.http.get(signInUrl, { params: params });
+  }
 }

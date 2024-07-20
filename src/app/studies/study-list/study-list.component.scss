@@ -1,0 +1,28 @@
+/* app.component.css */
+
+/* Customize the table header using Bootstrap classes */
+ngx-datatable.bootstrap .datatable-header {
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+  }
+  
+  /* Customize the table rows */
+  ngx-datatable.bootstrap .datatable-body-row {
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Customize the table cells */
+  ngx-datatable.bootstrap .datatable-body-cell {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Customize the table footer */
+  ngx-datatable.bootstrap .datatable-footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    font-size: 14px;
+  }
+  

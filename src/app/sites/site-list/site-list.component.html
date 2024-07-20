@@ -8,7 +8,7 @@
 <div class="card">
   <h4 class="card-header">Site List</h4>
   <div class="card-body">
-    <div class="table-responsive">
+    <!-- <div class="table-responsive">
       <table class="table table-bordered mb-2">
         <thead>
           <tr>
@@ -60,6 +60,61 @@
           </tr>
         </tbody>
       </table>
+    </div> -->
+    <div>
+      <!-- <ngx-datatable [rows]="rows" [columns]="columns"> </ngx-datatable> -->
+
+      <ngx-datatable
+      #datatable
+      class="bootstrap"
+      [rows]="rows"
+      [columnMode]="'flex'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="'auto'"
+      [externalPaging]="true"
+      [count]="page.totalElements"
+      [limit]="page.size"
+      [offset]="page.pageNumber"
+      (page)="setPage($event)">
+    
+      <ngx-datatable-column prop="name" name="Site Name" [sortable]="true" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.name }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column prop="studyShortCode" name="Study Short Code" [sortable]="true" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.studyShortCode }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column prop="participantsRecruited" name="Participant Recruited" [sortable]="true" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row?.participantsRecruited }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column prop="id" name="Action" [sortable]="true" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <a
+                routerLink="/site-overview"
+                class="btn btn-outline-success px-3"
+              >
+                View details
+              </a>
+        </ng-template>
+      </ngx-datatable-column>
+    
+    </ngx-datatable>
+    
+
+
     </div>
   </div>
 </div>
+
+
+<!-- provideHttpClient -->
+
