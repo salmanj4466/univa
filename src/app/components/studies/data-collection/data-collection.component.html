@@ -42,7 +42,7 @@
         role="switch"
         id="heart_rate"
       />
-      <label class="form-check-label" for="heart_rate">Heart rate **</label>
+      <label class="form-check-label" for="heart_rate">Heart rate</label>
     </div>
 
     <div class="form-check form-switch mb-2">
@@ -65,7 +65,7 @@
         id="blood_pressure"
       />
       <label class="form-check-label" for="blood_pressure"
-        >Blood pressure **</label
+        >Blood pressure</label
       >
     </div>
 
@@ -77,7 +77,7 @@
         id="oxygenation"
       />
       <label class="form-check-label" for="oxygenation"
-        >Blood oxygenation level **</label
+        >Blood oxygenation level</label
       >
     </div>
 
@@ -89,7 +89,7 @@
         id="breathing_rate"
       />
       <label class="form-check-label" for="breathing_rate"
-        >Breathing rate **</label
+        >Breathing rate</label
       >
     </div>
 
@@ -100,7 +100,7 @@
         role="switch"
         id="temperature"
       />
-      <label class="form-check-label" for="temperature">Temperature **</label>
+      <label class="form-check-label" for="temperature">Temperature</label>
     </div>
 
     <div class="form-check form-switch mb-2">
@@ -111,19 +111,7 @@
         id="blood_test"
       />
       <label class="form-check-label" for="blood_test"
-        >Blood test (Electrolyte balance)</label
-      >
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="ech" />
-      <label class="form-check-label" for="ech">ECH **</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="suss" />
-      <label class="form-check-label" for="suss"
-        >Squat to stand test (SUSS test)</label
+        >Blood test (electrolyte balance)</label
       >
     </div>
 
@@ -135,47 +123,39 @@
         id="glands"
       />
       <label class="form-check-label" for="glands"
-        >Parotid glands (yes/no + change in size)</label
+        >Size of parotic glands</label
       >
+    </div>
+
+    <div class="form-check form-switch mb-2">
+      <input class="form-check-input" type="checkbox" role="switch" id="Skin" />
+      <label class="form-check-label" for="Skin">Skin breakdown</label>
+    </div>
+
+    <div class="form-check form-switch mb-2">
+      <input class="form-check-input" type="checkbox" role="switch" id="Neck" />
+      <label class="form-check-label" for="Neck">Neck circumference</label>
+    </div>
+    <div class="form-check form-switch mb-2">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="Alcohol"
+      />
+      <label class="form-check-label" for="Alcohol">Alcohol use</label>
+    </div>
+    <div class="form-check form-switch mb-2">
+      <input class="form-check-input" type="checkbox" role="switch" id="Flu" />
+      <label class="form-check-label" for="Flu">Flu symptoms</label>
+    </div>
+    <div class="form-check form-switch mb-2">
+      <input class="form-check-input" type="checkbox" role="switch" id="Face" />
+      <label class="form-check-label" for="Face">Face swelling</label>
     </div>
   </div>
 
   <div class="col-md-4">
-    <h6 class="text-success mt-4 mt-md-0 mb-3">In-app scales/surveys</h6>
-    <div class="form-check form-switch mb-2">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        role="switch"
-        id="weight"
-      />
-      <label class="form-check-label" for="weight"
-        >Anxiety single question</label
-      >
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        role="switch"
-        id="mood_single"
-      />
-      <label class="form-check-label" for="mood_single"
-        >Mood single question</label
-      >
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="gad" />
-      <label class="form-check-label" for="gad">GAD-7 scale</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="phq" />
-      <label class="form-check-label" for="phq">PHQ-9 scale</label>
-    </div>
-
     <h6 class="text-success mt-4 pt-1 mb-3">In-app digital measurements</h6>
 
     <div class="form-check form-switch mb-2">
@@ -199,19 +179,34 @@
     </div>
 
     <div class="form-check form-switch mb-2">
+      <input class="form-check-input" type="checkbox" role="switch" id="test" />
+      <label class="form-check-label" for="test">Sit-Up-Squat-Stand Test</label>
+    </div>
+
+    <div class="form-check form-switch mb-2">
       <input
         class="form-check-input"
         type="checkbox"
         role="switch"
-        id="video"
+        id="photo"
       />
-      <label class="form-check-label" for="video">Video diary</label>
+      <label class="form-check-label" for="photo">Photo reel</label>
     </div>
 
-    <h6 class="text-success mt-4 mb-2">Video diary topics</h6>
+    <div class="form-check form-switch mb-2">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="diary"
+      />
+      <label class="form-check-label" for="diary">Video diary</label>
+    </div>
+
+    <h6 class="text-success mt-5 mb-2">Video diary topics</h6>
 
     <div class="row">
-      <div class="col-sm-7 col-md-8">
+      <div class="col-sm-7 col-md-7">
         <div class="form-group mb-3">
           <select class="form-select">
             <option selected>Select topic</option>
@@ -222,7 +217,29 @@
           </select>
         </div>
       </div>
-      <div class="col-sm-5 col-md-4">
+      <div class="col-sm-5 col-md-5">
+        <div class="form-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Duration in secs"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-7 col-md-7">
+        <div class="form-group mb-3">
+          <select class="form-select">
+            <option selected>Select topic</option>
+            <option value="1">Question 1</option>
+            <option value="1">Question 2</option>
+            <option value="1">Question 3</option>
+            <option value="1">Question 4</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-5 col-md-5">
         <div class="form-group mb-3">
           <input
             type="text"
@@ -235,15 +252,18 @@
   </div>
 
   <div class="col-md-4">
-    <h6 class="text-success mt-4 mt-md-0 mb-3">Wearable integration</h6>
+    <h6 class="text-success mt-4 mt-md-0 mb-3">In-app scales/surveys</h6>
+
     <div class="form-check form-switch mb-2">
       <input
         class="form-check-input"
         type="checkbox"
         role="switch"
-        id="FitBit"
+        id="Anxiety"
       />
-      <label class="form-check-label" for="FitBit">FitBit</label>
+      <label class="form-check-label" for="Anxiety"
+        >Anxiety single question</label
+      >
     </div>
 
     <div class="form-check form-switch mb-2">
@@ -251,9 +271,26 @@
         class="form-check-input"
         type="checkbox"
         role="switch"
-        id="apple_health"
+        id="Depression"
       />
-      <label class="form-check-label" for="apple_health">Apple Health</label>
+      <label class="form-check-label" for="Depression"
+        >Depression single question</label
+      >
+    </div>
+
+    <div class="form-check form-switch mb-2">
+      <input class="form-check-input" type="checkbox" role="switch" id="gad" />
+      <label class="form-check-label" for="gad">GAD-7 scale</label>
+    </div>
+
+    <div class="form-check form-switch mb-2">
+      <input class="form-check-input" type="checkbox" role="switch" id="phq" />
+      <label class="form-check-label" for="phq">PHQ-9 scale</label>
+    </div>
+
+    <div class="form-check form-switch mb-2">
+      <input class="form-check-input" type="checkbox" role="switch" id="EDI" />
+      <label class="form-check-label" for="EDI">EDI-3 subscales</label>
     </div>
 
     <div class="form-check form-switch mb-2">
@@ -261,9 +298,16 @@
         class="form-check-input"
         type="checkbox"
         role="switch"
-        id="google_fit"
+        id="questionnaire"
       />
-      <label class="form-check-label" for="google_fit">Google Fit</label>
+      <label class="form-check-label" for="questionnaire"
+        >Patient acceptance questionnaire
+      </label>
+    </div>
+
+    <div class="form-check form-switch mb-2">
+      <input class="form-check-input" type="checkbox" role="switch" id="FSST" />
+      <label class="form-check-label" for="FSST">FSST</label>
     </div>
   </div>
 </div>
