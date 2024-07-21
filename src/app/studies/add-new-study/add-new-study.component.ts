@@ -14,6 +14,8 @@ import { DataCollectionComponent } from "../../components/studies/data-collectio
 import { InformedConsentFormComponent } from "../../components/studies/informed-consent-form/informed-consent-form.component";
 import { ConfirmationComponent } from "../../components/studies/confirmation/confirmation.component";
 import { ScreeningQuestionnaireComponent } from "../../components/studies/screening-questionnaire/screening-questionnaire.component";
+import { HttpClientModule } from "@angular/common/http";
+import { ApiService } from "../../api.service";
 
 @Component({
   selector: "app-add-new-study",
@@ -30,7 +32,9 @@ import { ScreeningQuestionnaireComponent } from "../../components/studies/screen
     InformedConsentFormComponent,
     ConfirmationComponent,
     ScreeningQuestionnaireComponent,
+    HttpClientModule
   ],
+  providers: [ApiService],
   templateUrl: "./add-new-study.component.html",
   styleUrl: "./add-new-study.component.scss",
 })
@@ -46,7 +50,7 @@ export class AddNewStudyComponent {
   @ViewChild(InformedConsentFormComponent)
   public InformedConsentFormComponent!: InformedConsentFormComponent;
 
-  
+
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ["", Validators.required],
   });
@@ -66,16 +70,74 @@ export class AddNewStudyComponent {
   });
 
   isLinear = false;
-  inAppLists: any[] =[];
-  onsiteLists: any[]=[];
-  constructor(private _formBuilder: FormBuilder) {}
+  inAppLists: any[] = [];
+  onsiteLists: any[] = [];
+  constructor(private _formBuilder: FormBuilder, public api: ApiService) { }
 
-  nextStep1(){
+  nextStep1() {
     console.log(this.StudyInformationComponent.studyInformationForm.value);
   }
 
-  screeningQuestionnairNext(){
+  screeningQuestionnairNext() {
     this.inAppLists = this.DataCollectionComponent?.inAppLists.filter(e => e.checkbox == true);
     this.onsiteLists = this.DataCollectionComponent?.onsiteLists.filter(e => e.checkbox == true);
+  }
+
+  onSubmit() {
+    this.api.postStudy({
+      "name": this.StudyInformationComponent.studyInformationForm.value.name,
+      "description":  this.StudyInformationComponent.studyInformationForm.value.description,
+      "shortCode":  this.StudyInformationComponent.studyInformationForm.value.shortCode,
+      "startDate":  this.StudyInformationComponent.studyInformationForm.value.startDate,
+      "plannedEndDate":  this.StudyInformationComponent.studyInformationForm.value.plannedEndDate,
+      "plannedNumberOfParticipants":  this.StudyInformationComponent.studyInformationForm.value.plannedNumberOfParticipants,
+      "durationInWeeksPerParticipant":  this.StudyInformationComponent.studyInformationForm.value.durationInWeeksPerParticipant,
+      "icfParticipant":  this.StudyInformationComponent.studyInformationForm.value.icfParticipant,
+      "icfCarer":  this.StudyInformationComponent.studyInformationForm.value.icfCarer,
+      "icfStudyManager":  this.StudyInformationComponent.studyInformationForm.value.icfStudyManager,
+      "studyTeamMembers": [1, 3, 5],
+      "studyMeasurements": [
+        ...this.inAppLists.map(e => {
+          return e = {
+            id: e.id,
+            active: e.checkbox
+          }
+        }),
+        ...this.onsiteLists.map(e => {
+          return e = {
+            id: e.id,
+            active: e.checkbox
+          }
+        }) 
+      ],
+      "studyVideoDiaryTopics": [
+       
+        ...this.DataCollectionComponent.videodiarytopicsObject.map(e => {
+          return e = {
+            "id": e.split('-')[0],
+            "duration": e.durationSecs
+          }
+        }),
+      ],
+      "studySurveys": [
+        {
+          "id": 2,
+          "active": true
+        }
+      ],
+      "studyWearables": [
+        {
+          "id": 2,
+          "active": false
+        }
+      ],
+      "icfClauses": [
+       ...this.InformedConsentFormComponent?.participantList,
+       ...this.InformedConsentFormComponent?.carerList,
+       ...this.InformedConsentFormComponent?.studyManagerList
+      ]
+    }).subscribe(res => {
+      console.log(res);
+    });
   }
 }

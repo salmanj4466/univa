@@ -41,4 +41,9 @@ export class ApiService {
     const signInUrl = `${environment.apiUrl}lists/video-diary-topics`;
     return this.http.get(signInUrl, { params: params });
   }
+
+  postStudy(information: any): Observable<any> {
+    const signInUrl = `${environment.apiUrl}studies`;
+    return this.http.post(signInUrl, information);
+  }
 }
