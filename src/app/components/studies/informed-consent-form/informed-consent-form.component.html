@@ -15,30 +15,41 @@
   <textarea
     class="form-control"
     rows="3"
+    name="icfParticipant"
+    [(ngModel)]="icfParticipant"
     placeholder="Please click here"
   ></textarea>
 </div>
 
 <p class="mb-2">Additional clauses</p>
-
+@for (item of participantList; track $index) {
 <div class="row">
   <div class="col-md-10">
     <div class="form-group mb-3">
       <textarea
         class="form-control"
         rows="3"
+        name="{{$index}}"
+        [(ngModel)]="item.description"
         placeholder="Add here your additional clause"
       ></textarea>
     </div>
   </div>
   <div class="col-md-2">
-    <p class="text-danger">
-      <span class="bi bi-x-circle me-1"></span> Remove clause
-    </p>
+    @if($index != participantList.length - 1 ){
+      <p class="text-danger" (click)="removeParticipant($index)">
+        <span class="bi bi-x-circle me-1"></span> Remove clause
+      </p>
+    }@else{
+      <p class="text-info" (click)="addParticipant()">
+        <span class="bi bi-plus-circle me-1"></span> Add clause
+      </p>
+    }
   </div>
 </div>
+}
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-10">
     <div class="form-group mb-3">
       <textarea
@@ -53,7 +64,7 @@
       <span class="bi bi-plus-circle me-1"></span> Add clause
     </p>
   </div>
-</div>
+</div> -->
 
 <h5 class="mt-5 mb-0">
   Informed consent Form for parent/carer
@@ -67,36 +78,76 @@
   <textarea
     class="form-control"
     rows="3"
+    name="icfCarer"
+    [(ngModel)]="icfCarer"
     placeholder="Please click here"
   ></textarea>
 </div>
 
 <p class="mb-2">Additional clauses</p>
 
-<div class="row">
-  <div class="col-md-10">
-    <div class="form-group mb-3">
-      <textarea
-        class="form-control"
-        rows="3"
-        placeholder="Add here your additional clause"
-      ></textarea>
+@for (item of carerList; track $index) {
+  <div class="row">
+    <div class="col-md-10">
+      <div class="form-group mb-3">
+        <textarea
+          class="form-control"
+          rows="3"
+          name="{{$index}}"
+          [(ngModel)]="item.description"
+          placeholder="Add here your additional clause"
+        ></textarea>
+      </div>
+    </div>
+    <div class="col-md-2">
+      @if($index != carerList.length - 1 ){
+        <p class="text-danger" (click)="removeCarer($index)">
+          <span class="bi bi-x-circle me-1"></span> Remove clause
+        </p>
+      }@else{
+        <p class="text-info" (click)="addCarer()">
+          <span class="bi bi-plus-circle me-1"></span> Add clause
+        </p>
+      }
     </div>
   </div>
-  <div class="col-md-2">
-    <p class="text-danger">
-      <span class="bi bi-x-circle me-1"></span> Remove clause
-    </p>
-  </div>
-</div>
+  }
 
 <h5 class="mt-5 mb-0">Study Manager Control Check</h5>
 <hr class="mt-2 mb-4" />
-
 <div class="form-group mb-3">
   <textarea
     class="form-control"
     rows="3"
+    name="icfStudyManager"
+    [(ngModel)]="icfStudyManager"
     placeholder="Please click here"
   ></textarea>
 </div>
+
+@for (item of studyManagerList; track $index) {
+  <div class="row">
+    <div class="col-md-10">
+      <div class="form-group mb-3">
+        <textarea
+          class="form-control"
+          rows="3"
+          name="{{$index}}"
+          [(ngModel)]="item.description"
+          placeholder="Add here your additional clause"
+        ></textarea>
+      </div>
+    </div>
+    <div class="col-md-2">
+      @if($index != studyManagerList.length - 1 ){
+        <p class="text-danger" (click)="removestudy($index)">
+          <span class="bi bi-x-circle me-1"></span> Remove clause
+        </p>
+      }@else{
+        <p class="text-info" (click)="addStudyManager()">
+          <span class="bi bi-plus-circle me-1"></span> Add clause
+        </p>
+      }
+    </div>
+  </div>
+  }

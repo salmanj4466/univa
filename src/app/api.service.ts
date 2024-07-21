@@ -31,4 +31,14 @@ export class ApiService {
     const signInUrl = `${environment.apiUrl}studies`;
     return this.http.get(signInUrl, { params: params });
   }
+
+  measurements(params: any): Observable<any> {
+    const signInUrl = `${environment.apiUrl}lists/measurements`;
+    return this.http.get(signInUrl, { params: params });
+  }
+
+  getvideodiarytopics(params: any): Observable<any> {
+    const signInUrl = `${environment.apiUrl}lists/video-diary-topics`;
+    return this.http.get(signInUrl, { params: params });
+  }
 }
