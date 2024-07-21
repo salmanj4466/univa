@@ -46,7 +46,7 @@
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="fourFormGroup" label="Screening questionnaire">
+      <mat-step [stepControl]="fourFormGroup"  (click)="screeningQuestionnairNext()" label="Screening questionnaire">
         <form [formGroup]="fourFormGroup">
           <app-screening-questionnaire></app-screening-questionnaire>
           <div class="d-flex justify-content-between mt-5">

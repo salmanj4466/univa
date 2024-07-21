@@ -114,7 +114,7 @@ export class AddNewStudyComponent {
        
         ...this.DataCollectionComponent.videodiarytopicsObject.map(e => {
           return e = {
-            "id": e.split('-')[0],
+            "id": e.topicId.split('-')[0],
             "duration": e.durationSecs
           }
         }),
