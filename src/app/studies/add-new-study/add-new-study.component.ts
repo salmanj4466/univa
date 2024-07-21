@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import {
   FormBuilder,
   Validators,
@@ -35,6 +35,12 @@ import { ScreeningQuestionnaireComponent } from "../../components/studies/screen
   styleUrl: "./add-new-study.component.scss",
 })
 export class AddNewStudyComponent {
+
+
+  @ViewChild(StudyInformationComponent)
+  private StudyInformationComponent!: StudyInformationComponent;
+
+  
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ["", Validators.required],
   });
@@ -56,4 +62,8 @@ export class AddNewStudyComponent {
   isLinear = false;
 
   constructor(private _formBuilder: FormBuilder) {}
+
+  nextStep1(){
+    console.log(this.StudyInformationComponent.studyInformationForm.value);
+  }
 }

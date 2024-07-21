@@ -1,104 +1,83 @@
 <div class="d-flex justify-content-between align-items-center mt-2">
   <h5 class="mb-0">Study Information</h5>
-  <a
-    href="#"
-    tooltipClass="custom-tooltip"
-    ngbTooltip="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-  Lorem Ipsum has been the industry's standard dummy"
-  >
+  <a href="#" tooltipClass="custom-tooltip" ngbTooltip="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+  Lorem Ipsum has been the industry's standard dummy">
     <i class="bi bi-info-circle"></i>
   </a>
 </div>
 <hr class="mt-2 mb-4" />
+<form [formGroup]="studyInformationForm">
+  <section>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb-3">
+          <label class="form-label">Study Name</label>
+          <input type="text" class="form-control" formControlName="name" placeholder="Enter study name here" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group mb-3">
+          <label class="form-label">Study short code</label>
+          <input type="text" class="form-control" formControlName="shortCode" placeholder="Enter study short code here" />
+        </div>
+      </div>
+    </div>
 
-<div class="row">
-  <div class="col-md-6">
     <div class="form-group mb-3">
-      <label class="form-label">Study Name</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter study name here"
-      />
+      <label class="form-label">Study Description</label>
+      <textarea class="form-control" rows="3" formControlName="description" placeholder="Enter study description here"></textarea>
     </div>
-  </div>
-  <div class="col-md-6">
-    <div class="form-group mb-3">
-      <label class="form-label">Study short code</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter study short code here"
-      />
-    </div>
-  </div>
-</div>
 
-<div class="form-group mb-3">
-  <label class="form-label">Study Description</label>
-  <textarea
-    class="form-control"
-    rows="3"
-    placeholder="Enter study description here"
-  ></textarea>
-</div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb-3">
+          <label class="form-label">Start Date</label>
+          <input type="date" class="form-control" formControlName="startDate" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group mb-3">
+          <label class="form-label">Planned study end date</label>
+          <input type="date" class="form-control" formControlName="plannedEndDate" />
+        </div>
+      </div>
+    </div>
 
-<div class="row">
-  <div class="col-md-6">
-    <div class="form-group mb-3">
-      <label class="form-label">Start Date</label>
-      <input type="date" class="form-control" />
-    </div>
-  </div>
-  <div class="col-md-6">
-    <div class="form-group mb-3">
-      <label class="form-label">Planned study end date</label>
-      <input type="date" class="form-control" />
-    </div>
-  </div>
-</div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb-3">
+          <label class="form-label">Planned number of Participants</label>
+          <input type="text" class="form-control" formControlName="plannedNumberOfParticipants" placeholder="Enter study duration per patient in week here" />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group mb-3">
+          <label class="form-label">Study duration per Participant (weeks)</label>
+          <input type="text" class="form-control" formControlName="durationInWeeksPerParticipant" placeholder="Enter study duration per patient (weeks)" />
+        </div>
+      </div>
 
-<div class="row">
-  <div class="col-md-6">
-    <div class="form-group mb-3">
-      <label class="form-label">Planned number of Participants</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter study duration per patient in week here"
-      />
+      <div class="col-md-6 offset-md-6">
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" value="" id="duration" />
+          <label class="form-check-label" for="duration">
+            No defined duration
+          </label>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="col-md-6">
-    <div class="form-group mb-3">
-      <label class="form-label">Study duration per Participant (weeks)</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter study duration per patient (weeks)"
-      />
-    </div>
-  </div>
 
-  <div class="col-md-6 offset-md-6">
-    <div class="form-check mb-3">
-      <input class="form-check-input" type="checkbox" value="" id="duration" />
-      <label class="form-check-label" for="duration">
-        No defined duration
-      </label>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb-3">
+          <label class="form-label">Study Team Members</label>
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Select one or mulitple users</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+          </select>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6">
-    <div class="form-group mb-3">
-      <label class="form-label">Study Team Members</label>
-      <select class="form-select" aria-label="Default select example">
-        <option selected>Select one or mulitple users</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-      </select>
-    </div>
-  </div>
-</div>
+  </section>
+</form>

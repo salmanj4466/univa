@@ -10,15 +10,15 @@
   <div class="card-body px-2 py-4">
     <mat-stepper [linear]="isLinear" #stepper>
       <mat-step [stepControl]="firstFormGroup" label="Study Information">
-        <form [formGroup]="firstFormGroup">
+        <!-- <form [formGroup]="firstFormGroup"> -->
           <app-study-information></app-study-information>
 
           <div class="text-end mt-4">
-            <button mat-button matStepperNext class="btn btn-success">
+            <button mat-button matStepperNext class="btn btn-success" (click)="nextStep1()">
               Next <i class="bi bi-arrow-right ms-1"></i>
             </button>
           </div>
-        </form>
+        <!-- </form> -->
       </mat-step>
       <mat-step [stepControl]="secondFormGroup" label="Data Collection">
         <form [formGroup]="secondFormGroup">
