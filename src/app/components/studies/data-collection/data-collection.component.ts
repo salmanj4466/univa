@@ -19,6 +19,10 @@ export class DataCollectionComponent {
   videodiarytopicsList: any[] = [];
   topicId!: number;
   durationSecs!: number;
+  videodiarytopicsObject: any[] = [{
+    topicId:'',
+    durationSecs: ''
+  }];
   constructor(private api: ApiService) {
     this.fetchMeasurementsList();
     this.getvideodiarytopics();
@@ -58,12 +62,23 @@ export class DataCollectionComponent {
   getvideodiarytopics() {
     this.api.getvideodiarytopics({ sort: 'id', start: 0, size: 1000 }).subscribe(
       (res: any) => {
-       this.videodiarytopicsList = res?.data;
+        this.videodiarytopicsList = res?.data;
 
       },
       error => {
 
       }
     );
+  }
+
+  add(){
+    this.videodiarytopicsObject.push({
+      topicId:'',
+      durationSecs: ''
+    });
+  }
+
+  remove(i: any){
+    this.videodiarytopicsObject.slice(i,1);
   }
 }

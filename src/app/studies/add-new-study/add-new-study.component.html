@@ -116,7 +116,7 @@
             <div class="col-md-4">
               <p class="text-success fw-medium mb-1">On-site measurements</p>
               <ul>
-                @for (item of DataCollectionComponent?.onsiteLists; track $index) {
+                @for (item of onsiteLists; track $index) {
                 <li>
                   <img class="me-1" width="20" src="assets/images/check-mark.png" alt="check" />
                   {{ item?.name }}
@@ -139,11 +139,11 @@
               <p class="text-success fw-medium mb-1 mt-4 pt-2">
                 Video diary topics battery
               </p>
-
+              @for (item of DataCollectionComponent?.videodiarytopicsObject; track $index) {
               <ul>
-                <li>Question 1, duration X seconds</li>
-                <li>Question 6, duration X seconds</li>
+                <li> {{item?.topicId}}, duration X {{item?.durationSecs}}</li>
               </ul>
+            }
             </div>
 
             <div class="col-md-4">
@@ -151,7 +151,7 @@
                 In-app digital measurements
               </p>
               <ul>
-                @for (item of DataCollectionComponent?.inAppLists; track $index) {
+                @for (item of inAppLists; track $index) {
                 <li>
                   <img class="me-1" width="20" src="assets/images/check-mark.png" alt="check" />
                   {{ item?.name }}

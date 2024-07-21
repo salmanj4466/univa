@@ -66,7 +66,8 @@ export class AddNewStudyComponent {
   });
 
   isLinear = false;
-
+  inAppLists: any[] =[];
+  onsiteLists: any[]=[];
   constructor(private _formBuilder: FormBuilder) {}
 
   nextStep1(){
@@ -74,6 +75,7 @@ export class AddNewStudyComponent {
   }
 
   screeningQuestionnairNext(){
-
+    this.inAppLists = this.DataCollectionComponent?.inAppLists.filter(e => e.checkbox == true);
+    this.onsiteLists = this.DataCollectionComponent?.onsiteLists.filter(e => e.checkbox == true);
   }
 }
