@@ -38,7 +38,13 @@ export class AddNewStudyComponent {
 
 
   @ViewChild(StudyInformationComponent)
-  private StudyInformationComponent!: StudyInformationComponent;
+  public StudyInformationComponent!: StudyInformationComponent;
+
+  @ViewChild(DataCollectionComponent)
+  public DataCollectionComponent!: DataCollectionComponent;
+
+  @ViewChild(InformedConsentFormComponent)
+  public InformedConsentFormComponent!: InformedConsentFormComponent;
 
   
   firstFormGroup = this._formBuilder.group({
@@ -65,5 +71,9 @@ export class AddNewStudyComponent {
 
   nextStep1(){
     console.log(this.StudyInformationComponent.studyInformationForm.value);
+  }
+
+  screeningQuestionnairNext(){
+
   }
 }
