@@ -14,7 +14,7 @@ export class ApiService {
 
   getToken(): string | null {
     // Implement logic to retrieve the token from local storage, session storage, etc.
-    return localStorage.getItem('token') ? localStorage.getItem('token'): null;
+    return localStorage.getItem('token');
   }
 
   signIn(email: string, password: string): Observable<any> {
