@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, inject, ViewChild } from "@angular/core";
 import {
   FormBuilder,
   Validators,
@@ -14,7 +14,7 @@ import { DataCollectionComponent } from "../../components/studies/data-collectio
 import { InformedConsentFormComponent } from "../../components/studies/informed-consent-form/informed-consent-form.component";
 import { ConfirmationComponent } from "../../components/studies/confirmation/confirmation.component";
 import { ScreeningQuestionnaireComponent } from "../../components/studies/screening-questionnaire/screening-questionnaire.component";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { ApiService } from "../../api.service";
 
 @Component({
@@ -39,7 +39,7 @@ import { ApiService } from "../../api.service";
   styleUrl: "./add-new-study.component.scss",
 })
 export class AddNewStudyComponent {
-
+  http = inject(HttpClient);
 
   @ViewChild(StudyInformationComponent)
   public StudyInformationComponent!: StudyInformationComponent;

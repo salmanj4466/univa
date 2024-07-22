@@ -1,5 +1,5 @@
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { environment } from '../environments/environment.development';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -8,8 +8,13 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ApiService {
+  http = inject(HttpClient);
+  constructor() {}
 
-  constructor(private http: HttpClient) {}
+  getToken(): string | null {
+    // Implement logic to retrieve the token from local storage, session storage, etc.
+    return localStorage.getItem('token');
+  }
 
   signIn(email: string, password: string): Observable<any> {
     const signInUrl = `${environment.apiUrl}auth/sign-in`;

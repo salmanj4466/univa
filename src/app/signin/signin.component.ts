@@ -33,9 +33,11 @@ export class SigninComponent {
       this.authService.signIn(email, password).subscribe(
         (res: any) => {
           // Handle successful sign-in (redirect, show message, etc.)
-          localStorage.setItem('token', JSON.stringify(res));
+         if(res && res.data && res.data.token){
+          localStorage.setItem('token', res.data.token);
           this.router.navigate(['/add-new-study']);
           console.log('Sign in successful');
+         }
           // this.toastr.success('', 'Sign In Error');
         },
         error => {

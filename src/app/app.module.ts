@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 
@@ -27,7 +27,9 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     }),
     FullCalendarModule,
   ],
-  providers: [HttpClientModule, ApiService, ToastrService],
+  providers: [HttpClientModule, ApiService, ToastrService,
+  ],
+  exports:[],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

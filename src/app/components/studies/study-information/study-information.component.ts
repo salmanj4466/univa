@@ -17,6 +17,7 @@ export class StudyInformationComponent {
   studyInformationForm!: FormGroup;
   errorMessage!: string;
 
+
   constructor(private fb: FormBuilder, private authService: ApiService) {}
 
   ngOnInit(): void {
