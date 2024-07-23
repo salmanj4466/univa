@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -29,6 +29,11 @@ import { SiteConfirmationComponent } from '../../components/sites/site-confirmat
   styleUrl: './add-new-site.component.scss',
 })
 export class AddNewSiteComponent {
+
+  @ViewChild(SiteInfoComponent)
+  public SiteInfoComponent!: SiteInfoComponent;
+
+
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
   });
@@ -46,4 +51,6 @@ export class AddNewSiteComponent {
   isLinear = false;
 
   constructor(private _formBuilder: FormBuilder) {}
+
+  
 }

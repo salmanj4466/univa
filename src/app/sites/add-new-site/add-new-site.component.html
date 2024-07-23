@@ -35,13 +35,13 @@
 
         <div class="row mb-3">
           <div class="col-md-6">
-            <p><span class="fw-medium">Name:</span> Demo study name</p>
-            <p><span class="fw-medium">Cit:</span> London</p>
-            <p><span class="fw-medium">Country:</span> United Kingdom</p>
+            <p><span class="fw-medium">Name:</span> {{ SiteInfoComponent?.siteForm?.name }} </p>
+            <p><span class="fw-medium">Cit:</span> {{ SiteInfoComponent?.siteForm?.city }} </p>
+            <p><span class="fw-medium">Country:</span> {{ SiteInfoComponent?.siteForm?.countryCode }} </p>
           </div>
           <div class="col-md-6">
-            <p><span class="fw-medium">Address:</span> Demo address here</p>
-            <p><span class="fw-medium">Postal code:</span> ABD123-1234</p>
+            <p><span class="fw-medium">Address:</span> {{ SiteInfoComponent?.siteForm?.address }}</p>
+            <p><span class="fw-medium">Postal code:</span> {{ SiteInfoComponent?.siteForm?.postalCode }}</p>
           </div>
         </div>
 
@@ -54,8 +54,10 @@
         <h5 class="mt-5">Clinical devices</h5>
         <hr class="mt-2 mb-3" />
 
-        <p><span class="fw-medium">Devices #1:</span> Site's demo device #1</p>
-        <p><span class="fw-medium">Devices #2:</span> Site's demo device #2</p>
+        @for (item of SiteInfoComponent?.clinicalLists; track $index) {
+
+        <p><span class="fw-medium">Devices #{{$index}}:</span> {{item}} #{{$index}}</p>
+        }
 
         <div class="d-flex justify-content-between mt-5">
           <button mat-button matStepperPrevious class="btn btn-secondary">
