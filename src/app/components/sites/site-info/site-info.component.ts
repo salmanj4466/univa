@@ -15,7 +15,7 @@ import { ApiService } from '../../../api.service';
 })
 export class SiteInfoComponent {
   countrieList:any[]=[];
-  clinicalLists:any[]=[''];
+  clinicalLists:any[]=[];
   siteForm!: FormGroup;
   errorMessage!: string;
   constructor(private api: ApiService, private fb: FormBuilder,) {
