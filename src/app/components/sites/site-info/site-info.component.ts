@@ -52,7 +52,8 @@ export class SiteInfoComponent {
 
   
   add(){
-    this.clinicalLists.push('');
+    this.clinicalLists.push(this.siteForm.value.clinicalname);
+    this.siteForm.patchValue({clinicalname: ''});
   }
 
   remove(i: any){
