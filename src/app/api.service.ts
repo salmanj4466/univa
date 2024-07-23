@@ -31,7 +31,7 @@ export class ApiService {
       'Authorization': `Bearer ${this.getToken()}`
     });
     const signInUrl = `${environment.apiUrl}auth/sign-out`;
-    return this.http.post(signInUrl, {headers});
+    return this.http.post(signInUrl, {}, {headers});
   }
 
   siteListing(params: any): Observable<any> {
