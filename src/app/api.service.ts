@@ -47,7 +47,7 @@ export class ApiService {
       'Authorization': `Bearer ${this.getToken()}`
     });
     const signInUrl = `${environment.apiUrl}studies`;
-    return this.http.get(signInUrl, { params: params, headers: headers });
+    return this.http.get(signInUrl, { params: params });
   }
 
   measurements(params: any): Observable<any> {

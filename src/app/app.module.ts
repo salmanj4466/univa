@@ -27,8 +27,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     }),
     FullCalendarModule,
   ],
-  providers: [ ApiService, ToastrService,
-  ],
+  providers: [],
   exports:[],
   bootstrap: [AppComponent],
 })
