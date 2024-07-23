@@ -8,83 +8,48 @@
 <div class="card">
   <h4 class="card-header">Study List</h4>
   <div class="card-body">
-    <ngx-datatable
-      class="bootstrap"
-      #table
-      [rows]="rows"
-      [columnMode]="'force'"
-      [headerHeight]="50"
-      [externalPaging]="true"
-      [footerHeight]="30"
-      [rowHeight]="'auto'"
-      [limit]="page.size"
-      [count]="page.totalElements"
-      [offset]="page.offset"
-      (page)="setPage($event)"
-    >
-      <ngx-datatable-column
-        prop="name"
-        name="Study Name"
-        [sortable]="true"
-        [flexGrow]="1"
-      >
+    <ngx-datatable class="bootstrap" #table [rows]="rows" [columnMode]="'force'" [headerHeight]="50"
+      [externalPaging]="true" [footerHeight]="30" [rowHeight]="'auto'" [limit]="page.size" [count]="page.totalElements"
+      [offset]="page.offset" (page)="setPage($event)">
+      <ngx-datatable-column prop="name" name="Study Name" [sortable]="true" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.name }}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column
-        prop="startDate"
-        name="Created On"
-        [sortable]="true"
-        [flexGrow]="1"
-      >
+      <ngx-datatable-column prop="startDate" name="Created On" [sortable]="true" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.startDate | date : "medium" }}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column
-        prop="status"
-        name="Status"
-        [sortable]="true"
-        [flexGrow]="1"
-      >
+      <ngx-datatable-column prop="status" name="Status" [sortable]="true" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <span
-            class="badge"
-            [ngClass]="{
+          <span class="badge" [ngClass]="{
               'text-bg-info': row.status == 'ongoing',
               'text-bg-success': row.status == 'planned'
-            }"
-          >
+            }">
             {{ row?.status }}
           </span>
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column
-        prop="plannedNumberOfParticipants"
-        name="Recruitment Status"
-        [sortable]="true"
-        [flexGrow]="1"
-      >
+      <ngx-datatable-column prop="plannedNumberOfParticipants" name="Recruitment Status" [sortable]="true"
+        [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.plannedNumberOfParticipants }}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column
-        prop="id"
-        name="Action"
-        [sortable]="true"
-        [flexGrow]="1"
-      >
+      <ngx-datatable-column prop="createdAt" name="Created On" [sortable]="true" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <a
-            [routerLink]="['/study-overview', row.id]"
-            class="btn btn-outline-success px-3"
-          >
+          {{ row?.createdAt | date:'dd/MM/YYYY' }}
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column prop="id" name="Action" [sortable]="true" [flexGrow]="1">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <a [routerLink]="['/study-overview', row.id]" class="btn btn-outline-success px-3">
             View details
           </a>
         </ng-template>

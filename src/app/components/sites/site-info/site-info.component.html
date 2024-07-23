@@ -52,9 +52,11 @@
     <div class="form-group mb-3">
       <label class="form-label">Select studies</label>
       <select class="form-select" aria-label="Default select example" formControlName="studies">
-        <option selected>Select one or more options</option>
-        <option value="1">Spain</option>
-        <option value="2">United State</option>
+        <option selected>Select one options</option>
+        @for (item of studyLists; track $index) {
+          <option [value]="item.id">{{ item.name}}</option>
+          }
+        <!-- <option value="2">United State</option> -->
       </select>
     </div>
   </div>

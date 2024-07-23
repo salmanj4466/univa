@@ -15,11 +15,13 @@ import { ApiService } from '../../../api.service';
 })
 export class SiteInfoComponent {
   countrieList:any[]=[];
+  studyLists:any[]=[];
   clinicalLists:any[]=[];
   siteForm!: FormGroup;
   errorMessage!: string;
-  constructor(private api: ApiService, private fb: FormBuilder,) {
+  constructor(private api: ApiService, private fb: FormBuilder) {
     this.countries();
+    this.studyListing();
   }
 
 
@@ -43,6 +45,25 @@ export class SiteInfoComponent {
       (res: any) => {
         console.log(res);
         this.countrieList = res;
+      },
+      error => {
+
+      }
+    );
+  }
+
+
+  
+  studyListing() {
+
+    this.api.studyListing({
+      sort: "id",
+      start: 0,
+      size: 90000,
+    }).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.studyLists = res.data;
       },
       error => {
 
