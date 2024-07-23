@@ -8,7 +8,7 @@ import { ApiService } from '../../../api.service';
 @Component({
   selector: 'app-informed-consent-form',
   standalone: true,
-  imports: [NgbTooltipModule, HttpClientModule, FormsModule, RouterLink],
+  imports: [NgbTooltipModule,  FormsModule, RouterLink],
   providers: [ApiService],
   templateUrl: './informed-consent-form.component.html',
   styleUrl: './informed-consent-form.component.scss',

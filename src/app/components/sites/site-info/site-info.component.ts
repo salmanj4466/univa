@@ -8,7 +8,7 @@ import { ApiService } from '../../../api.service';
 @Component({
   selector: 'app-site-info',
   standalone: true,
-  imports: [NgbTooltipModule, HttpClientModule, FormsModule, RouterLink, ReactiveFormsModule],
+  imports: [NgbTooltipModule,  FormsModule, RouterLink, ReactiveFormsModule],
   providers: [ApiService],
   templateUrl: './site-info.component.html',
   styleUrl: './site-info.component.scss'

@@ -9,7 +9,7 @@ import { OnInit } from '@angular/core';
 @Component({
   selector: 'app-site-list',
   standalone: true,
-  imports:[CommonModule, NgxDatatableModule, HttpClientModule,RouterLink],
+  imports:[CommonModule, NgxDatatableModule, RouterLink],
   providers:[ApiService],
   templateUrl: './site-list.component.html',
   styleUrl: './site-list.component.scss',

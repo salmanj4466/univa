@@ -14,7 +14,7 @@ import { NgxDatatableModule } from "@swimlane/ngx-datatable";
 @Component({
   selector: "app-study-list",
   standalone: true,
-  imports: [CommonModule, NgxDatatableModule, HttpClientModule, RouterLink],
+  imports: [CommonModule, NgxDatatableModule, RouterLink],
   providers: [ApiService],
   templateUrl: "./study-list.component.html",
   styleUrl: "./study-list.component.scss",
