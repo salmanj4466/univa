@@ -890,3 +890,89 @@ body::-webkit-scrollbar-thumb {
     gap: 20px;
   }
 }
+
+// NGX Datatable
+
+ngx-datatable.bootstrap {
+  border: 1px solid #dee2e6;
+}
+
+/* Header Styling */
+ngx-datatable.bootstrap .datatable-header {
+  border-bottom: 1px solid #dee2e6;
+  font-weight: 600;
+  font-size: 0.875rem;
+  background: rgba(77, 107, 126, 0.1803921569);
+  color: #4d6b7e;
+  height: 43px !important;
+}
+
+ngx-datatable.bootstrap .datatable-header-cell {
+  padding: 10px 20px;
+  text-align: left;
+  border-right: 1px solid #fff;
+}
+
+/* Row Styling */
+ngx-datatable.bootstrap .datatable-body-row {
+  border-bottom: 1px solid #ddd;
+}
+
+ngx-datatable.bootstrap .datatable-body-cell {
+  padding: 10px 20px;
+  border-right: 1px solid #dee2e6;
+  display: flex;
+  align-items: center;
+}
+
+/* Alternate Row Color */
+ngx-datatable.bootstrap .datatable-body-row:nth-child(even) {
+  background-color: #fafafa;
+}
+
+/* Hover Effect */
+ngx-datatable.bootstrap .datatable-body-row:hover {
+  background-color: #e9ecef;
+}
+
+/* Pagination Styling */
+ngx-datatable.bootstrap .datatable-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  padding: 6px 15px;
+  margin-top: -7px;
+}
+
+ngx-datatable.bootstrap .datatable-footer .page-count {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+ngx-datatable.bootstrap .datatable-footer .datatable-pager .pager li {
+  margin: 0 3px;
+}
+
+ngx-datatable.bootstrap .datatable-footer .datatable-pager .pager a {
+  width: 30px;
+  height: 30px;
+  color: #585555;
+  text-decoration: none;
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+  text-align: center;
+  font-size: 14px;
+}
+
+ngx-datatable.bootstrap .datatable-footer .datatable-pager .pager a:hover,
+ngx-datatable.bootstrap .datatable-footer .datatable-pager .pager li.active a {
+  background-color: #4d6b7e;
+  color: #fff;
+}
+
+ngx-datatable.bootstrap .datatable-footer .datatable-footer-inner {
+  height: auto !important;
+}
