@@ -12,20 +12,22 @@ import { ParticipantOverviewComponent } from './participants/participant-overvie
 import { ParticipantListComponent } from './participants/participant-list/participant-list.component';
 import { MyVisitsComponent } from './visits/my-visits/my-visits.component';
 import { VisitDataComponent } from './visits/visit-data/visit-data.component';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/add-new-study', pathMatch: 'full' },
+  { path: '', redirectTo: '/add-new-study', pathMatch: 'full',
+   },
   { path: 'signin', component: SigninComponent },
   { path: 'signin-verify', component: VerifyEmailComponent },
-  { path: 'add-new-study', component: AddNewStudyComponent },
-  { path: 'study-overview', component: StudyOverviewComponent },
-  { path: 'study-list', component: StudyListComponent },
-  { path: 'add-new-site', component: AddNewSiteComponent },
-  { path: 'site-overview', component: SiteOverviewComponent },
-  { path: 'site-list', component: SiteListComponent },
-  { path: 'add-new-participant', component: AddNewParticipantComponent },
-  { path: 'participant-overview', component: ParticipantOverviewComponent },
-  { path: 'participant-list', component: ParticipantListComponent },
-  { path: 'my-visits', component: MyVisitsComponent },
-  { path: 'visit-data', component: VisitDataComponent },
+  { path: 'add-new-study', component: AddNewStudyComponent ,  canActivate: [authGuard] },
+  { path: 'study-overview', component: StudyOverviewComponent, canActivate: [authGuard] },
+  { path: 'study-list', component: StudyListComponent, canActivate: [authGuard] },
+  { path: 'add-new-site', component: AddNewSiteComponent, canActivate: [authGuard] },
+  { path: 'site-overview', component: SiteOverviewComponent, canActivate: [authGuard] },
+  { path: 'site-list', component: SiteListComponent, canActivate: [authGuard] },
+  { path: 'add-new-participant', component: AddNewParticipantComponent, canActivate: [authGuard] },
+  { path: 'participant-overview', component: ParticipantOverviewComponent, canActivate: [authGuard] },
+  { path: 'participant-list', component: ParticipantListComponent, canActivate: [authGuard] },
+  { path: 'my-visits', component: MyVisitsComponent, canActivate: [authGuard] },
+  { path: 'visit-data', component: VisitDataComponent, canActivate: [authGuard] },
 ];
