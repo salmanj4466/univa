@@ -20,7 +20,7 @@ export class SiteListComponent implements OnInit, AfterViewInit {
   page = {
     totalElements: 0,
     pageNumber: 0,
-    size: 1
+    size: 10
   };
   loadingIndicator = false;
   @ViewChild('datatable') datatable: ElementRef;

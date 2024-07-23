@@ -24,7 +24,7 @@ export class StudyListComponent implements OnInit, AfterViewInit {
   page = {
     totalElements: 0,
     pageNumber: 0,
-    size: 1,
+    size: 10,
     offset: 0,
   };
   loadingIndicator = false;
