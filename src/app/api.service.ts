@@ -73,4 +73,13 @@ export class ApiService {
     const signInUrl = `${environment.apiUrl}studies`;
     return this.http.post(signInUrl, information, {headers});
   }
+
+  countries(): Observable<any> {
+    const  headers: any = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    const countries = `${environment.apiUrl}lists/countries`;
+    return this.http.get(countries, { headers: headers });
+  }
+
 }

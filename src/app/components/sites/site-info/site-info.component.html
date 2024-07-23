@@ -1,53 +1,44 @@
 <h5 class="mb-0">Study Site Information</h5>
 <hr class="mt-2 mb-4" />
-
+<form [formGroup]="siteForm" (ngSubmit)="onSubmit()">
 <div class="row">
   <div class="col-md-6">
     <div class="form-group mb-3">
       <label class="form-label">Site Name</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter Site name here"
-      />
+      <input type="text" class="form-control"  formControlName="name" placeholder="Enter Site name here" />
     </div>
   </div>
   <div class="col-md-6">
     <div class="form-group mb-3">
       <label class="form-label">Address</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter Address here"
-      />
+      <input type="text" class="form-control" formControlName="address" placeholder="Enter Address here" />
     </div>
   </div>
 
   <div class="col-md-6">
     <div class="form-group mb-3">
       <label class="form-label">City</label>
-      <input type="text" class="form-control" placeholder="Enter City here" />
+      <input type="text" class="form-control" formControlName="city" placeholder="Enter City here" />
     </div>
   </div>
 
   <div class="col-md-6">
     <div class="form-group mb-3">
       <label class="form-label">Postal Code</label>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter Postal Code here"
-      />
+      <input type="text" class="form-control" formControlName="postalCode" placeholder="Enter Postal Code here" />
     </div>
   </div>
 
   <div class="col-md-6">
     <div class="form-group mb-3">
       <label class="form-label">Country</label>
-      <select class="form-select" aria-label="Default select example">
+      <select class="form-select" aria-label="Default select example" formControlName="countryCode">
         <option selected>Select one Country</option>
-        <option value="1">Spain</option>
-        <option value="2">United State</option>
+        <!-- <option value="1">Spain</option> -->
+        @for (item of countrieList; track $index) {
+        <option [value]="item.code">{{ item.name}}</option>
+        }
+
       </select>
     </div>
   </div>
@@ -60,7 +51,7 @@
   <div class="col-md-6">
     <div class="form-group mb-3">
       <label class="form-label">Select studies</label>
-      <select class="form-select" aria-label="Default select example">
+      <select class="form-select" aria-label="Default select example" formControlName="studies">
         <option selected>Select one or more options</option>
         <option value="1">Spain</option>
         <option value="2">United State</option>
@@ -72,26 +63,28 @@
 <h5 class="mt-4 mb-0">Clinical devices</h5>
 <hr class="mt-2 mb-4" />
 
+@for (item of clinicalLists; track $index) {
 <p>
-  <span class="fw-medium">Device #1:</span> Site's demo device
-  <span class="d-block d-md-inline-block text-danger ms-md-4 mt-2 mt-md-0"
-    ><i class="bi bi-x-circle-fill me-1"></i> Remove device</span
-  >
+  <span class="fw-medium">Device #{{$index+1}}:</span> {{item}}
+  <span class="d-block d-md-inline-block text-danger ms-md-4 mt-2 mt-md-0" (click)="remove($index)"><i
+      class="bi bi-x-circle-fill me-1"></i> Remove device</span>
 </p>
+}
+
+
+
 
 <div class="row align-items-center mt-4">
   <div class="col-sm-6 col-md-4">
     <div class="form-group mb-3 mb-md-0">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Add your device here"
-      />
+      <input type="text" class="form-control" formControlName="clinicalname" placeholder="Add your device here" />
     </div>
   </div>
   <div class="col-sm-6 col-md-4">
-    <a href="#" class="text-info mb-0">
+    <a class="text-info mb-0" (click)="add()">
       <i class="bi bi-plus-circle me-1"></i> Add device
     </a>
   </div>
 </div>
+
+</form>
