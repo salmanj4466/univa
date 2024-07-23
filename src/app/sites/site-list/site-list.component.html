@@ -8,63 +8,7 @@
 <div class="card">
   <h4 class="card-header">Site List</h4>
   <div class="card-body">
-    <!-- <div class="table-responsive">
-      <table class="table table-bordered mb-2">
-        <thead>
-          <tr>
-            <th>Site Name</th>
-            <th>Study short code</th>
-            <th>Participant Recruited</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Study demo name 1...</td>
-            <td>UH-MON</td>
-            <td>25</td>
-            <td>
-              <a
-                routerLink="/site-overview"
-                class="btn btn-outline-success px-3"
-              >
-                View details
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>Study demo name 2...</td>
-            <td>UH-MON</td>
-            <td>60</td>
-            <td>
-              <a
-                routerLink="/site-overview"
-                class="btn btn-outline-success px-3"
-              >
-                View details
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>Study demo name 3...</td>
-            <td>UH-MON UH-TRT</td>
-            <td>0</td>
-            <td>
-              <a
-                routerLink="/site-overview"
-                class="btn btn-outline-success px-3"
-              >
-                View details
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div> -->
-    <div>
-      <!-- <ngx-datatable [rows]="rows" [columns]="columns"> </ngx-datatable> -->
-
-      <ngx-datatable
+    <ngx-datatable
       #datatable
       class="bootstrap"
       [rows]="rows"
@@ -76,45 +20,55 @@
       [count]="page.totalElements"
       [limit]="page.size"
       [offset]="page.pageNumber"
-      (page)="setPage($event)">
-    
-      <ngx-datatable-column prop="name" name="Site Name" [sortable]="true" [flexGrow]="1">
+      (page)="setPage($event)"
+    >
+      <ngx-datatable-column
+        prop="name"
+        name="Site Name"
+        [sortable]="true"
+        [flexGrow]="1"
+      >
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.name }}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column prop="studyShortCode" name="Study Short Code" [sortable]="true" [flexGrow]="1">
+      <ngx-datatable-column
+        prop="studyShortCode"
+        name="Study Short Code"
+        [sortable]="true"
+        [flexGrow]="1"
+      >
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.studyShortCode }}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column prop="participantsRecruited" name="Participant Recruited" [sortable]="true" [flexGrow]="1">
+      <ngx-datatable-column
+        prop="participantsRecruited"
+        name="Participant Recruited"
+        [sortable]="true"
+        [flexGrow]="1"
+      >
         <ng-template let-row="row" ngx-datatable-cell-template>
           {{ row?.participantsRecruited }}
         </ng-template>
       </ngx-datatable-column>
 
-      <ngx-datatable-column prop="id" name="Action" [sortable]="true" [flexGrow]="1">
+      <ngx-datatable-column
+        prop="id"
+        name="Action"
+        [sortable]="true"
+        [flexGrow]="1"
+      >
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <a
-                routerLink="/site-overview"
-                class="btn btn-outline-success px-3"
-              >
-                View details
-              </a>
+          <a routerLink="/site-overview" class="btn btn-outline-success px-3">
+            View details
+          </a>
         </ng-template>
       </ngx-datatable-column>
-    
     </ngx-datatable>
-    
-
-
-    </div>
   </div>
 </div>
 
-
 <!-- provideHttpClient -->
-
