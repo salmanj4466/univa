@@ -18,7 +18,10 @@ export class SigninComponent {
   signinForm!: FormGroup;
   errorMessage!: string;
 
-  constructor(private fb: FormBuilder, private authService: ApiService, private router: Router) {}
+  constructor(private fb: FormBuilder, 
+    private authService: ApiService, 
+    private router: Router,
+  public toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.signinForm = this.fb.group({
@@ -37,12 +40,14 @@ export class SigninComponent {
           localStorage.setItem('token', res.data.token);
           this.router.navigate(['/add-new-study']);
           console.log('Sign in successful');
+          this.toastr.success('Sign in successful', 'Sign In Error');
+         }else{
+          this.toastr.error(res.message, 'Sign In Error');
          }
-          // this.toastr.success('', 'Sign In Error');
         },
         error => {
           this.errorMessage = error.error.message;
-          // this.toastr.error(error.error.message, 'Sign In Error'); // Assuming API returns error message
+          this.toastr.error(error.error.message, 'Sign In Error'); // Assuming API returns error message
           console.error('Sign in error:', error);
         }
       );
