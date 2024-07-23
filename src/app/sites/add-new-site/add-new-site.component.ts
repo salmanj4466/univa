@@ -65,24 +65,26 @@ export class AddNewSiteComponent {
 
 
   onSubmit() {
-    this.api.postStudy({
+    this.api.postSite({
       "name": this.SiteInfoComponent?.siteForm?.value?.name,
       "address": this.SiteInfoComponent?.siteForm?.value?.address,
       "city": this.SiteInfoComponent?.siteForm?.value?.city,
       "postalCode": this.SiteInfoComponent?.siteForm?.value?.postalCode,
       "countryCode": this.SiteInfoComponent?.siteForm?.value?.countryCode,
-      "studies": [this.SiteInfoComponent?.siteForm?.value?.studies],
+      "studies": [Number(this.SiteInfoComponent?.siteForm?.value?.studies)],
       "clinicalDevices": this.SiteInfoComponent?.clinicalLists,
     }).subscribe(res => {
       console.log(res);
-
+debugger;
       if(res && res.data){
         this.router.navigate(['/site-list']);
         console.log('Sign in successful');
         this.toastr.success('Sign in successful', 'Sign In Error');
        }else{
-        this.toastr.error(res.message, 'Sign In Error');
+        this.toastr.error(res.error, 'Sign In Error');
        }
+    },err=> {
+      this.toastr.error(err.error.error, 'Sign In Error');
     });
   }
 }
