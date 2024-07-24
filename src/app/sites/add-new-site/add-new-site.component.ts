@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatStepperModule } from '@angular/material/stepper';
+import { MatStepper, MatStepperModule } from '@angular/material/stepper';
 import { MatButtonModule } from '@angular/material/button';
 import { SiteInfoComponent } from '../../components/sites/site-info/site-info.component';
 import { SiteConfirmationComponent } from '../../components/sites/site-confirmation/site-confirmation.component';
@@ -39,6 +39,8 @@ export class AddNewSiteComponent {
   @ViewChild(SiteInfoComponent)
   public SiteInfoComponent!: SiteInfoComponent;
 
+  @ViewChild('stepper') stepper: MatStepper;
+
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ['', Validators.required],
@@ -59,6 +61,15 @@ export class AddNewSiteComponent {
   constructor(private _formBuilder: FormBuilder, public api: ApiService,  private router: Router,
     public toastr: ToastrService) { }
 
+
+
+    next(){
+      if(this.SiteInfoComponent.siteForm.invalid){
+        this.toastr.error('Please fill the all required fields');
+      }else{
+        this.stepper.next();
+      }
+    }
 
 
 
