@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-data-collection',
   standalone: true,
-  imports: [NgbTooltipModule, HttpClientModule, FormsModule, RouterLink],
+  imports: [NgbTooltipModule,  FormsModule, RouterLink],
   providers: [ApiService],
   templateUrl: './data-collection.component.html',
   styleUrl: './data-collection.component.scss',
