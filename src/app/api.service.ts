@@ -90,4 +90,17 @@ export class ApiService {
     return this.http.post(signInUrl, information, {headers});
   }
 
+  putSite(information: any, id: number): Observable<any> {
+    const  headers: any = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    const signInUrl = `${environment.apiUrl}sites/${id}`;
+    return this.http.put(signInUrl, information, {headers});
+  }
+
+  getSiteById(id: number): Observable<any> {
+    const signInUrl = `${environment.apiUrl}sites/${id}`;
+    return this.http.get(signInUrl);
+  }
+
 }

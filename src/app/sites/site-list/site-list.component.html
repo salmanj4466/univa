@@ -62,7 +62,7 @@
         [flexGrow]="1"
       >
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <a routerLink="/site-overview" class="btn btn-outline-success px-3">
+          <a [routerLink]="['/edit-site', row.id]" class="btn btn-outline-success px-3">
             View details
           </a>
         </ng-template>
