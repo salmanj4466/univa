@@ -70,7 +70,7 @@ export class AddNewSiteComponent {
       if(this.siteId){
         this.api.getSiteById(this.siteId).subscribe(res => {
           console.log(res);
-          this.SiteInfoComponent.siteForm.patchValue({...res.data, countryCode: res.data.country, studies: res.data.studies[0].id});
+          this.SiteInfoComponent.siteForm.patchValue({...res.data, countryCode: res.data.country, studies: res.data.studies[0]?.id});
         });
       }
     
