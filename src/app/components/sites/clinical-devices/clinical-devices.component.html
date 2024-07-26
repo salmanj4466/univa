@@ -1,53 +1,20 @@
 <h5 class="mb-0">Clinical devices</h5>
 <hr class="mt-2 mb-4" />
 
+@for (item of lists; track $index) {
 <div class="row align-items-center mb-3">
   <div class="col-9 col-sm-8 col-md-6 col-lg-5 col-xl-4">
     <div class="form-group mb-0">
-      <input type="text" class="form-control" placeholder="Device 1" />
+      <input type="text" class="form-control" #name [value]="item.name" placeholder="Device 1" />
     </div>
   </div>
   <div class="col-3 col-sm-4 col-md-6 col-lg-7 col-xl-8">
-    <span class="me-2"><i class="bi bi-file-earmark-text-fill"></i></span>
-    <span class="text-danger"><i class="bi bi-x-circle-fill"></i></span>
+    <span class="me-2" (click)="save(item.id, name.value)"><i class="bi bi-file-earmark-text-fill"></i></span>
+    <span class="text-danger" (click)="remove(item.id)" ><i class="bi bi-x-circle-fill"></i></span>
   </div>
 </div>
+}
 
-<div class="row align-items-center mb-3">
-  <div class="col-9 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-    <div class="form-group mb-0">
-      <input type="text" class="form-control" placeholder="Device 2" />
-    </div>
-  </div>
-  <div class="col-3 col-sm-4 col-md-6 col-lg-7 col-xl-8">
-    <span class="me-2"><i class="bi bi-file-earmark-text-fill"></i></span>
-    <span class="text-danger"><i class="bi bi-x-circle-fill"></i></span>
-  </div>
-</div>
-
-<div class="row align-items-center mb-3">
-  <div class="col-9 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-    <div class="form-group mb-0">
-      <input type="text" class="form-control" placeholder="Device 3" />
-    </div>
-  </div>
-  <div class="col-3 col-sm-4 col-md-6 col-lg-7 col-xl-8">
-    <span class="me-2"><i class="bi bi-file-earmark-text-fill"></i></span>
-    <span class="text-danger"><i class="bi bi-x-circle-fill"></i></span>
-  </div>
-</div>
-
-<div class="row align-items-center mb-3">
-  <div class="col-9 col-sm-8 col-md-6 col-lg-5 col-xl-4">
-    <div class="form-group mb-0">
-      <input type="text" class="form-control" placeholder="Device 4" />
-    </div>
-  </div>
-  <div class="col-3 col-sm-4 col-md-6 col-lg-7 col-xl-8">
-    <span class="me-2"><i class="bi bi-file-earmark-text-fill"></i></span>
-    <span class="text-danger"><i class="bi bi-x-circle-fill"></i></span>
-  </div>
-</div>
 
 <p class="text-gray">
   There are no Clinical devices for this site. To add one, enter the name for
@@ -108,7 +75,7 @@
         </p>
 
         <div class="d-flex justify-content-end gap-2 mt-5">
-          <button type="button" class="btn btn-danger">Yes delete</button>
+          <button type="button" class="btn btn-danger"  data-bs-dismiss="modal" (click)="deleteAll()">Yes delete</button>
           <button
             type="button"
             class="btn btn-outline-secondary"

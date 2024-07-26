@@ -19,6 +19,7 @@ export class SiteInfoComponent {
   clinicalLists:any[]=[];
   siteForm!: FormGroup;
   errorMessage!: string;
+  siteId: number;
   constructor(private api: ApiService, private fb: FormBuilder) {
     this.countries();
     this.studyListing();

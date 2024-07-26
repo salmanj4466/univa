@@ -1,0 +1,30 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Sites</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> {{siteId ? 'Edit Site'  : ' Add New Site' }}</li>
+    </ol>
+  </nav>
+  
+  <div class="card add-new-site">
+    <h4 class="card-header"> {{siteId ? 'Edit Site'  : ' Add New Site' }} </h4>
+    <div class="card-body px-2 py-4">
+      <mat-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup" label="Site Information">
+          <form [formGroup]="firstFormGroup">
+            <app-site-info></app-site-info>
+  
+            <div class="text-end mt-4">
+              <button mat-button  class="btn btn-success" (click)="next()">
+                Next <i class="bi bi-arrow-right ms-1"></i>
+              </button>
+            </div>
+          </form>
+        </mat-step>
+  
+        <mat-step [stepControl]="fourFormGroup">
+          <ng-template matStepLabel>Clinical Devices </ng-template>
+            <app-clinical-devices [itemId]="siteId"></app-clinical-devices>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </div>

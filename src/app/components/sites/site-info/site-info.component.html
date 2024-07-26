@@ -55,7 +55,7 @@
         <option selected>Select one Country</option>
         <!-- <option value="1">Spain</option> -->
         @for (item of countrieList; track $index) {
-        <option [value]="item.code">{{ item.name}}</option>
+        <option [value]="item.name">{{ item.name}}</option>
         }
 
       </select>
@@ -87,6 +87,7 @@
   </div>
 </div>
 
+@if(!siteId){
 <h5 class="mt-4 mb-0">Clinical devices</h5>
 <hr class="mt-2 mb-4" />
 
@@ -113,5 +114,6 @@
     </a>
   </div>
 </div>
+}
 
 </form>
