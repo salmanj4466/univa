@@ -24,11 +24,11 @@
 <div class="row align-items-center mb-3">
   <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
     <div class="form-group mb-3 mb-sm-0">
-      <input type="text" class="form-control" placeholder="My new device 5" />
+      <input type="text" class="form-control" name="addDevices" [(ngModel)]="addDevices" placeholder="My new device 5" />
     </div>
   </div>
   <div class="col-12 col-sm-4 col-md-6 col-lg-7 col-xl-8">
-    <a href="#" class="text-info">
+    <a class="text-info" (click)="add()">
       <i class="bi bi-plus-circle me-1"></i> Add device
     </a>
   </div>
@@ -36,7 +36,7 @@
 
 <p class="mt-4">
   <a
-    href="#"
+   
     data-bs-toggle="modal"
     data-bs-target="#deletAllDevices"
     class="text-danger"

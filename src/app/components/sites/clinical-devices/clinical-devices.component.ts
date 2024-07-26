@@ -1,17 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { ApiService } from '../../../api.service';
 import { ToastrService } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-clinical-devices',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './clinical-devices.component.html',
   styleUrl: './clinical-devices.component.scss',
 })
 export class ClinicalDevicesComponent {
   lists: any[] = [];
   @Input() itemId; 
+  addDevices = "";
   constructor(private api: ApiService,     public toastr: ToastrService, ){
 
   }
@@ -48,6 +50,8 @@ export class ClinicalDevicesComponent {
       }else{
         this.toastr.error(res || "Please try again");
       }
+    }, err=>{
+      this.toastr.error(err.error.error || "Please try again");
     }); 
   }
 
@@ -59,6 +63,22 @@ export class ClinicalDevicesComponent {
       }else{
         this.toastr.error(res || "Please try again");
       }
+    }, err=>{
+      this.toastr.error(err.error.error || "Please try again");
+    }); 
+  }
+
+  add(){
+    this.api.addClinicalDevices(this.itemId, {clinicalDevices: [this.addDevices]}).subscribe(res => {
+      if(res && res.message){
+        this.toastr.success(  res.message || 'Site information is added successfully');
+        this.getId();
+        this.addDevices = "";
+      }else{
+        this.toastr.error(res || "Please try again");
+      }
+    }, err=>{
+      this.toastr.error(err.error.error || "Please try again");
     }); 
   }
 }

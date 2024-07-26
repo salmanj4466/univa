@@ -124,4 +124,9 @@ export class ApiService {
     return this.http.delete(signInUrl);
   }
 
+  addClinicalDevices(id: number, data): Observable<any> {
+    const signInUrl = `${environment.apiUrl}sites/${id}/clinical-devices`;
+    return this.http.post(signInUrl, data);
+  }
+
 }
