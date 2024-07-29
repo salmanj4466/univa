@@ -103,4 +103,30 @@ export class ApiService {
     return this.http.get(signInUrl);
   }
 
+  getClinicalDevicesId(id: number): Observable<any> {
+    const signInUrl = `${environment.apiUrl}sites/${id}/clinical-devices`;
+    return this.http.get(signInUrl);
+  }
+
+  
+  deleteClinicalDevicesId(id: number, deleteId: number): Observable<any> {
+    const signInUrl = `${environment.apiUrl}sites/${id}/clinical-devices/${deleteId}`;
+    return this.http.delete(signInUrl);
+  }
+
+  putClinicalDevicesId(id: number, deleteId: number, data:any): Observable<any> {
+    const signInUrl = `${environment.apiUrl}sites/${id}/clinical-devices/${deleteId}`;
+    return this.http.put(signInUrl, data);
+  }
+
+  deleteClinicalDevices(id: number): Observable<any> {
+    const signInUrl = `${environment.apiUrl}sites/${id}/clinical-devices`;
+    return this.http.delete(signInUrl);
+  }
+
+  addClinicalDevices(id: number, data): Observable<any> {
+    const signInUrl = `${environment.apiUrl}sites/${id}/clinical-devices`;
+    return this.http.post(signInUrl, data);
+  }
+
 }

@@ -13,6 +13,7 @@ import { ParticipantListComponent } from './participants/participant-list/partic
 import { MyVisitsComponent } from './visits/my-visits/my-visits.component';
 import { VisitDataComponent } from './visits/visit-data/visit-data.component';
 import { authGuard } from './auth.guard';
+import { EditsiteComponent } from './sites/editsite/editsite.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/add-new-study', pathMatch: 'full',
@@ -23,7 +24,7 @@ export const routes: Routes = [
   { path: 'study-overview', component: StudyOverviewComponent, canActivate: [authGuard] },
   { path: 'study-list', component: StudyListComponent, canActivate: [authGuard] },
   { path: 'add-new-site', component: AddNewSiteComponent, canActivate: [authGuard] },
-  { path: 'edit-site/:id', component: AddNewSiteComponent, canActivate: [authGuard] },
+  { path: 'edit-site/:id', component: EditsiteComponent, canActivate: [authGuard] },
   { path: 'site-overview', component: SiteOverviewComponent, canActivate: [authGuard] },
   { path: 'site-list', component: SiteListComponent, canActivate: [authGuard] },
   { path: 'add-new-participant', component: AddNewParticipantComponent, canActivate: [authGuard] },
