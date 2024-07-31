@@ -29,8 +29,8 @@ export class HeaderComponent {
           }
         },
         error => {
-          this.toastr.error(error.error.message, 'Sign In Error');
-          // this.toastr.error(error.error.message, 'Sign In Error'); // Assuming API returns error message
+          this.toastr.error(error.error.message,' ');
+          // this.toastr.error(error.error.message,' '); // Assuming API returns error message
           console.error('Sign in error:', error);
         }
       );

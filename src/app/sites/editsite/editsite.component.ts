@@ -124,12 +124,12 @@ onSubmit() {
       if (res && res.data) {
         this.router.navigate(['/site-list']);
         console.log('Sign in successful');
-        this.toastr.success('Sign in successful', 'Sign In Error');
+        this.toastr.success('Sign in successful',' ');
       } else {
-        this.toastr.error(res.error, 'Sign In Error');
+        this.toastr.error(res.error,' ');
       }
     }, err => {
-      this.toastr.error(err.error.error, 'Sign In Error');
+      this.toastr.error(err.error.error,' ');
     });
   } else {
     this.api.postSite({
@@ -146,12 +146,12 @@ onSubmit() {
       if (res && res.data) {
         this.router.navigate(['/site-list']);
         console.log('Sign in successful');
-        this.toastr.success('Sign in successful', 'Sign In Error');
+        this.toastr.success('Sign in successful',' ');
       } else {
-        this.toastr.error(res.error, 'Sign In Error');
+        this.toastr.error(res.error,' ');
       }
     }, err => {
-      this.toastr.error(err.error.error, 'Sign In Error');
+      this.toastr.error(err.error.error,' ');
     });
   }
 }
