@@ -31,7 +31,7 @@ import { ClinicalDevicesComponent } from '../../components/sites/clinical-device
   templateUrl: './editsite.component.html',
   styleUrl: './editsite.component.scss'
 })
-export class EditsiteComponent  {
+export class EditsiteComponent {
   @ViewChild(SiteInfoComponent)
   public SiteInfoComponent!: SiteInfoComponent;
 
@@ -57,10 +57,10 @@ export class EditsiteComponent  {
   isLinear = false;
   siteId: number;
 
-  constructor(private _formBuilder: FormBuilder, 
+  constructor(private _formBuilder: FormBuilder,
     public api: ApiService,
-     public router: Router,
-    public toastr: ToastrService, 
+    public router: Router,
+    public toastr: ToastrService,
     public activeRoute: ActivatedRoute) {
 
     this.siteId = this.activeRoute.snapshot.params['id'] ? Number(this.activeRoute.snapshot.params['id']) : null;
@@ -68,92 +68,94 @@ export class EditsiteComponent  {
 
 
   ngAfterViewInit(): void {
-   
-    if(this.siteId){
+
+    if (this.siteId) {
       this.api.getSiteById(this.siteId).subscribe(res => {
         console.log(res);
-        this.SiteInfoComponent.siteForm.patchValue({...res.data, countryCode: res.data.country, studies: res.data.studies[0]?.id});
-        this.SiteInfoComponent.siteId  = this.siteId;
+        const code: any = this.SiteInfoComponent.countrieList.find(e => e.name == res.data.country);
+        this.SiteInfoComponent.siteForm.patchValue({ ...res.data, countryCode: code?.code, studies: res.data.studies[0]?.id });
+        this.SiteInfoComponent.siteId = this.siteId;
       });
     }
-  
-}
 
-
-
-next() {
-  if (this.SiteInfoComponent.siteForm.invalid) {
-    this.toastr.error('Please fill the all required fields');
-  } else {
-    this.api.putSite({
-      "name": this.SiteInfoComponent?.siteForm?.value?.name,
-      "address": this.SiteInfoComponent?.siteForm?.value?.address,
-      "city": this.SiteInfoComponent?.siteForm?.value?.city,
-      "postalCode": this.SiteInfoComponent?.siteForm?.value?.postalCode,
-      "countryCode": this.SiteInfoComponent?.siteForm?.value?.countryCode,
-      "studies": [Number(this.SiteInfoComponent?.siteForm?.value?.studies)],
-    }, this.siteId).subscribe(res => {
-      if (res && res.data) {
-        this.stepper.next();
-        this.toastr.success('Site information is updated successfully');
-      } else {
-        this.toastr.error(res.error, 'Error');
-      }
-    }, err => {
-      this.toastr.error(err.error.error, 'Error');
-    });
-   
   }
-}
 
 
 
+  next() {
+    if (this.SiteInfoComponent.siteForm.invalid) {
+      this.toastr.error('Please fill the all required fields');
+      this.SiteInfoComponent.errorMessage = true;
+    } else {
+      this.api.putSite({
+        "name": this.SiteInfoComponent?.siteForm?.value?.name,
+        "address": this.SiteInfoComponent?.siteForm?.value?.address,
+        "city": this.SiteInfoComponent?.siteForm?.value?.city,
+        "postalCode": this.SiteInfoComponent?.siteForm?.value?.postalCode,
+        "countryCode": this.SiteInfoComponent?.siteForm?.value?.countryCode,
+        "studies": [Number(this.SiteInfoComponent?.siteForm?.value?.studies)],
+      }, this.siteId).subscribe(res => {
+        if (res && res.data) {
+          this.stepper.next();
+          this.toastr.success('Site information is updated successfully');
+        } else {
+          this.toastr.error(res.error, 'Error');
+        }
+      }, err => {
+        this.toastr.error(err.error.error, 'Error');
+      });
 
-
-onSubmit() {
-  if (this.siteId) {
-    this.api.putSite({
-      "name": this.SiteInfoComponent?.siteForm?.value?.name,
-      "address": this.SiteInfoComponent?.siteForm?.value?.address,
-      "city": this.SiteInfoComponent?.siteForm?.value?.city,
-      "postalCode": this.SiteInfoComponent?.siteForm?.value?.postalCode,
-      "countryCode": this.SiteInfoComponent?.siteForm?.value?.countryCode,
-      "studies": [Number(this.SiteInfoComponent?.siteForm?.value?.studies)],
-      "clinicalDevices": this.SiteInfoComponent?.clinicalLists,
-    }, this.siteId).subscribe(res => {
-      if (res && res.data) {
-        this.router.navigate(['/site-list']);
-        console.log('Sign in successful');
-        this.toastr.success('Sign in successful',' ');
-      } else {
-        this.toastr.error(res.error,' ');
-      }
-    }, err => {
-      this.toastr.error(err.error.error,' ');
-    });
-  } else {
-    this.api.postSite({
-      "name": this.SiteInfoComponent?.siteForm?.value?.name,
-      "address": this.SiteInfoComponent?.siteForm?.value?.address,
-      "city": this.SiteInfoComponent?.siteForm?.value?.city,
-      "postalCode": this.SiteInfoComponent?.siteForm?.value?.postalCode,
-      "countryCode": this.SiteInfoComponent?.siteForm?.value?.countryCode,
-      "studies": [Number(this.SiteInfoComponent?.siteForm?.value?.studies)],
-      "clinicalDevices": this.SiteInfoComponent?.clinicalLists,
-    }).subscribe(res => {
-      console.log(res);
-      debugger;
-      if (res && res.data) {
-        this.router.navigate(['/site-list']);
-        console.log('Sign in successful');
-        this.toastr.success('Sign in successful',' ');
-      } else {
-        this.toastr.error(res.error,' ');
-      }
-    }, err => {
-      this.toastr.error(err.error.error,' ');
-    });
+    }
   }
-}
+
+
+
+
+
+  onSubmit() {
+    if (this.siteId) {
+      this.api.putSite({
+        "name": this.SiteInfoComponent?.siteForm?.value?.name,
+        "address": this.SiteInfoComponent?.siteForm?.value?.address,
+        "city": this.SiteInfoComponent?.siteForm?.value?.city,
+        "postalCode": this.SiteInfoComponent?.siteForm?.value?.postalCode,
+        "countryCode": this.SiteInfoComponent?.siteForm?.value?.countryCode,
+        "studies": [Number(this.SiteInfoComponent?.siteForm?.value?.studies)],
+        "clinicalDevices": this.SiteInfoComponent?.clinicalLists,
+      }, this.siteId).subscribe(res => {
+        if (res && res.data) {
+          this.router.navigate(['/site-list']);
+          console.log('Sign in successful');
+          this.toastr.success('Sign in successful', ' ');
+        } else {
+          this.toastr.error(res.error, ' ');
+        }
+      }, err => {
+        this.toastr.error(err.error.error, ' ');
+      });
+    } else {
+      this.api.postSite({
+        "name": this.SiteInfoComponent?.siteForm?.value?.name,
+        "address": this.SiteInfoComponent?.siteForm?.value?.address,
+        "city": this.SiteInfoComponent?.siteForm?.value?.city,
+        "postalCode": this.SiteInfoComponent?.siteForm?.value?.postalCode,
+        "countryCode": this.SiteInfoComponent?.siteForm?.value?.countryCode,
+        "studies": [Number(this.SiteInfoComponent?.siteForm?.value?.studies)],
+        "clinicalDevices": this.SiteInfoComponent?.clinicalLists,
+      }).subscribe(res => {
+        console.log(res);
+        debugger;
+        if (res && res.data) {
+          this.router.navigate(['/site-list']);
+          console.log('Sign in successful');
+          this.toastr.success('Sign in successful', ' ');
+        } else {
+          this.toastr.error(res.error, ' ');
+        }
+      }, err => {
+        this.toastr.error(err.error.error, ' ');
+      });
+    }
+  }
 
 }

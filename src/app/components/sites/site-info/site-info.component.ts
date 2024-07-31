@@ -18,8 +18,9 @@ export class SiteInfoComponent {
   studyLists:any[]=[];
   clinicalLists:any[]=[];
   siteForm!: FormGroup;
-  errorMessage!: string;
+  errorMessage= false;
   siteId: number;
+  studyListInfo:any[]=[];
   constructor(private api: ApiService, private fb: FormBuilder) {
     this.countries();
     this.studyListing();
@@ -90,4 +91,9 @@ export class SiteInfoComponent {
       console.log('Form is invalid');
     }
   }
+
+  getstudyListInfo(){
+    this.studyListInfo = this.studyLists.filter(f => f.id == this.siteForm.value.studies);
+  }
+
 }

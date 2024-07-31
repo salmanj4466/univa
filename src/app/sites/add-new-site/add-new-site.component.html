@@ -1,12 +1,12 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Sites</a></li>
-    <li class="breadcrumb-item active" aria-current="page"> {{siteId ? 'Edit Site'  : ' Add New Site' }}</li>
+    <li class="breadcrumb-item active" aria-current="page"> {{siteId ? 'Edit Site' : ' Add New Site' }}</li>
   </ol>
 </nav>
 
 <div class="card add-new-site">
-  <h4 class="card-header"> {{siteId ? 'Edit Site'  : ' Add New Site' }} </h4>
+  <h4 class="card-header"> {{siteId ? 'Edit Site' : ' Add New Site' }} </h4>
   <div class="card-body px-2 py-4">
     <mat-stepper [linear]="isLinear" #stepper>
       <mat-step [stepControl]="firstFormGroup" label="Site Information">
@@ -14,7 +14,7 @@
           <app-site-info></app-site-info>
 
           <div class="text-end mt-4">
-            <button mat-button  class="btn btn-success" (click)="next()">
+            <button mat-button class="btn btn-success" (click)="next()">
               Next <i class="bi bi-arrow-right ms-1"></i>
             </button>
           </div>
@@ -48,22 +48,27 @@
         <h5 class="mt-5">Studies connected</h5>
         <hr class="mt-2 mb-3" />
 
-        <p><span class="fw-medium">Study:</span> Demo study name 1</p>
-        <p><span class="fw-medium">Study:</span> Demo study name 2</p>
+        @for (item of SiteInfoComponent?.studyListInfo; track $index) {
+          <p><span class="fw-medium">Study:</span> {{  item.name }} </p>
+        }
+
+
+        <!-- <p><span class="fw-medium">Study:</span> Demo study name 1</p> -->
+        <!-- <p><span class="fw-medium">Study:</span> Demo study name 2</p> -->
 
         <h5 class="mt-5">Clinical devices</h5>
         <hr class="mt-2 mb-3" />
 
         @for (item of SiteInfoComponent?.clinicalLists; track $index) {
 
-        <p><span class="fw-medium">Devices #{{$index}}:</span> {{item}} #{{$index}}</p>
+        <p><span class="fw-medium">Devices #{{$index}}: </span> {{item}}</p>
         }
 
         <div class="d-flex justify-content-between mt-5">
           <button mat-button matStepperPrevious class="btn btn-secondary">
             <i class="bi bi-arrow-left me-1"></i> Back
           </button>
-          <button mat-button class="btn btn-success" (click)="onSubmit()" >Submit</button>
+          <button mat-button class="btn btn-success" (click)="onSubmit()">Submit</button>
         </div>
       </mat-step>
     </mat-stepper>

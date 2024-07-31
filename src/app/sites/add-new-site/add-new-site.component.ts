@@ -80,8 +80,10 @@ export class AddNewSiteComponent {
 
   next() {
     if (this.SiteInfoComponent.siteForm.invalid) {
-      this.toastr.error('Please fill the all required fields');
+      this.SiteInfoComponent.errorMessage = true;
+      this.toastr.error('Please provide a value for all the required fields');
     } else {
+      this.SiteInfoComponent.getstudyListInfo();
       this.stepper.next();
     }
   }
@@ -106,7 +108,7 @@ export class AddNewSiteComponent {
         if (res && res.data) {
           this.router.navigate(['/site-list']);
           console.log('Sign in successful');
-          this.toastr.success('Sign in successful',' ');
+          this.toastr.success(res?.message,' ');
         } else {
           this.toastr.error(res.error,' ');
         }
@@ -128,7 +130,7 @@ export class AddNewSiteComponent {
         if (res && res.data) {
           this.router.navigate(['/site-list']);
           console.log('Sign in successful');
-          this.toastr.success('Sign in successful',' ');
+          this.toastr.success(res?.message,' ');
         } else {
           this.toastr.error(res.error,' ');
         }
