@@ -21,6 +21,7 @@ export class SiteInfoComponent {
   errorMessage= false;
   siteId: number;
   studyListInfo:any[]=[];
+  countryName!: string;
   constructor(private api: ApiService, private fb: FormBuilder) {
     this.countries();
     this.studyListing();
@@ -94,6 +95,7 @@ export class SiteInfoComponent {
 
   getstudyListInfo(){
     this.studyListInfo = this.studyLists.filter(f => f.id == this.siteForm.value.studies);
+    this.countryName = this.countrieList.filter(f => f.code == this.siteForm.value.code)[0]?.name;
   }
 
 }

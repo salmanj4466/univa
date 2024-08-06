@@ -37,7 +37,7 @@
           <div class="col-md-6">
             <p><span class="fw-medium">Name:</span> {{ SiteInfoComponent?.siteForm?.value?.name }} </p>
             <p><span class="fw-medium">Cit:</span> {{ SiteInfoComponent?.siteForm?.value?.city }} </p>
-            <p><span class="fw-medium">Country:</span> {{ SiteInfoComponent?.siteForm?.value?.countryCode }} </p>
+            <p><span class="fw-medium">Country:</span> {{ SiteInfoComponent?.countryName }} </p>
           </div>
           <div class="col-md-6">
             <p><span class="fw-medium">Address:</span> {{ SiteInfoComponent?.siteForm?.value?.address }}</p>
@@ -61,7 +61,7 @@
 
         @for (item of SiteInfoComponent?.clinicalLists; track $index) {
 
-        <p><span class="fw-medium">Devices #{{$index}}: </span> {{item}}</p>
+        <p><span class="fw-medium">Devices: </span> {{item}}</p>
         }
 
         <div class="d-flex justify-content-between mt-5">
