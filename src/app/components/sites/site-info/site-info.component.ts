@@ -95,7 +95,7 @@ export class SiteInfoComponent {
 
   getstudyListInfo(){
     this.studyListInfo = this.studyLists.filter(f => f.id == this.siteForm.value.studies);
-    this.countryName = this.countrieList.filter(f => f.code == this.siteForm.value.code)[0]?.name;
+    this.countryName = this.countrieList.filter(f => f.code == this.siteForm.value.countryCode)[0]?.name;
   }
 
 }
