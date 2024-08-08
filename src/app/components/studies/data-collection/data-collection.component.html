@@ -15,7 +15,7 @@
       <select class="form-select">
         <option selected>Select measurements</option>
         @for (item of measurementsDropdownlists; track $index) {
-        <option value="{{ item.id }}  - {{item.name}} ">{{ item?.name }}</option>
+        <option value="{{ item.id }}">{{ item?.name }}</option>
         }
 
       </select>
