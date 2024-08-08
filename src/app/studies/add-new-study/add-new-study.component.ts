@@ -102,6 +102,11 @@ export class AddNewStudyComponent {
   screeningQuestionnairNext() {
     this.inAppLists = this.DataCollectionComponent?.inAppLists.filter(e => e.checkbox == true);
     this.onsiteLists = this.DataCollectionComponent?.onsiteLists.filter(e => e.checkbox == true);
+    if(this.inAppLists.length == 0 || this.onsiteLists.length == 0 ){
+      this.toastr.error('Please provide a value for all the required fields');
+    } else {
+      this.stepper.next();
+    }
   }
 
   onSubmit() {
