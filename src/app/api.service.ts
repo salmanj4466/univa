@@ -135,12 +135,12 @@ export class ApiService {
   }
 
   getScreenings(): Observable<any> {
-    const signInUrl = `${environment.apiUrl}forms?type=screenings`;
+    const signInUrl = `${environment.apiUrl}lists/forms?type=screenings`;
     return this.http.get(signInUrl);
   }
 
   getdemographics(): Observable<any> {
-    const signInUrl = `${environment.apiUrl}forms?type=demographics`;
+    const signInUrl = `${environment.apiUrl}lists/forms?type=demographics`;
     return this.http.get(signInUrl);
   }
 

@@ -18,7 +18,7 @@
       <select class="form-select">
         <option selected>Select one option</option>
         @for (item of screeningLists; track $index) {
-          <option [value]="item.id">{{item.surname}}</option>
+          <option [value]="item.id">{{item.name}}</option>
         }
        
       </select>
@@ -34,7 +34,7 @@
       <select class="form-select">
         <option selected>Select one option</option>
         @for (item of demographicsLists; track $index) {
-          <option [value]="item.id">{{item.surname}}</option>
+          <option [value]="item.id">{{item.name}}</option>
         }
        
       </select>
