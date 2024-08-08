@@ -14,19 +14,35 @@
 <div class="row">
   <div class="col-md-6 col-lg-4">
     <div class="form-group mb-3">
-      <label class="form-label">Select Screening Form</label>
+      <label class="form-label">Select Screening Form:</label>
       <select class="form-select">
         <option selected>Select one option</option>
-        <option value="screening">Monitoring Study Screening Form</option>
-        <option value="form">Demo Screening Form</option>
-        <option value="form2">Demo Screening Form 2</option>
-        <option value="form3">Demo Screening Form 3</option>
+        @for (item of screeningLists; track $index) {
+          <option [value]="item.id">{{item.surname}}</option>
+        }
+       
       </select>
     </div>
   </div>
 </div>
 
-<p class="mb-2">Additional clauses</p>
+
+<div class="row">
+  <div class="col-md-6 col-lg-4">
+    <div class="form-group mb-3">
+      <label class="form-label">Select Demographics Form:</label>
+      <select class="form-select">
+        <option selected>Select one option</option>
+        @for (item of demographicsLists; track $index) {
+          <option [value]="item.id">{{item.surname}}</option>
+        }
+       
+      </select>
+    </div>
+  </div>
+</div>
+
+<!-- <p class="mb-2">Additional clauses</p>
 
 <div class="row">
   <div class="col-md-10">
@@ -54,4 +70,4 @@
     rows="3"
     placeholder="Please click here"
   ></textarea>
-</div>
+</div> -->

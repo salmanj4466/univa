@@ -134,5 +134,15 @@ export class ApiService {
     return this.http.get(signInUrl);
   }
 
+  getScreenings(): Observable<any> {
+    const signInUrl = `${environment.apiUrl}forms?type=screenings`;
+    return this.http.get(signInUrl);
+  }
+
+  getdemographics(): Observable<any> {
+    const signInUrl = `${environment.apiUrl}forms?type=demographics`;
+    return this.http.get(signInUrl);
+  }
+
 
 }
