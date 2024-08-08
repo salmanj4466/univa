@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between align-items-center mt-2">
-  <h5 class="mb-0">Informed consent Form for participant</h5>
+  <h5 class="mb-0">Informed consent Form for participant*</h5>
   <a
     href="#"
     tooltipClass="custom-tooltip"
@@ -19,6 +19,9 @@
     [(ngModel)]="icfParticipant"
     placeholder="Please click here"
   ></textarea>
+  @if(!icfParticipant && errorMessage  ){
+    <div class="text-danger">This field is required.</div> 
+  }
 </div>
 
 <p class="mb-2">Additional clauses</p>
@@ -67,7 +70,7 @@
 </div> -->
 
 <h5 class="mt-5 mb-0">
-  Informed consent Form for parent/carer
+  Informed consent Form for parent/career*
   <small class="fw-normal"
     >(Only requested when participant is younger than 16 years old)</small
   >
@@ -82,6 +85,9 @@
     [(ngModel)]="icfCarer"
     placeholder="Please click here"
   ></textarea>
+  @if(!icfCarer && errorMessage  ){
+    <div class="text-danger">This field is required.</div> 
+  }
 </div>
 
 <p class="mb-2">Additional clauses</p>
@@ -113,7 +119,7 @@
   </div>
   }
 
-<h5 class="mt-5 mb-0">Study Manager Control Check</h5>
+<h5 class="mt-5 mb-0">Study Manager Control Check*</h5>
 <hr class="mt-2 mb-4" />
 <div class="form-group mb-3">
   <textarea
@@ -123,6 +129,9 @@
     [(ngModel)]="icfStudyManager"
     placeholder="Please click here"
   ></textarea>
+  @if(!icfStudyManager && errorMessage  ){
+    <div class="text-danger">This field is required.</div> 
+  }
 </div>
 
 @for (item of studyManagerList; track $index) {

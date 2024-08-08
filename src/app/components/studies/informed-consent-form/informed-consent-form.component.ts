@@ -15,6 +15,7 @@ import { ApiService } from '../../../api.service';
 })
 export class InformedConsentFormComponent {
   title = 'angular';
+  errorMessage = false;
   icfParticipant!: any;
   icfCarer!: any;
   icfStudyManager!: any;

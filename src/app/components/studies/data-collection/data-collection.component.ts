@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-data-collection',
   standalone: true,
-  imports: [NgbTooltipModule,  FormsModule, RouterLink],
+  imports: [NgbTooltipModule, FormsModule, RouterLink],
   providers: [ApiService],
   templateUrl: './data-collection.component.html',
   styleUrl: './data-collection.component.scss',
@@ -20,12 +20,17 @@ export class DataCollectionComponent {
   topicId!: number;
   durationSecs!: number;
   videodiarytopicsObject: any[] = [{
-    topicId:'',
+    topicId: '',
     durationSecs: ''
   }];
+  measurementsDropdownlists: any[] = [];
   constructor(private api: ApiService) {
     this.fetchMeasurementsList();
     this.getvideodiarytopics();
+    this.api.getmeasurements().subscribe(res => {
+      this.measurementsDropdownlists = res?.data;
+    });
+
   }
 
   fetchMeasurementsList() {
@@ -71,14 +76,14 @@ export class DataCollectionComponent {
     );
   }
 
-  add(){
+  add() {
     this.videodiarytopicsObject.push({
-      topicId:'',
+      topicId: '',
       durationSecs: ''
     });
   }
 
-  remove(i: any){
-    this.videodiarytopicsObject.slice(i,1);
+  remove(i: any) {
+    this.videodiarytopicsObject.slice(i, 1);
   }
 }

@@ -129,4 +129,24 @@ export class ApiService {
     return this.http.post(signInUrl, data);
   }
 
+  studyManagerListing(): Observable<any> {
+    const signInUrl = `${environment.apiUrl}users?role=Study Manager`;
+    return this.http.get(signInUrl);
+  }
+
+  getScreenings(): Observable<any> {
+    const signInUrl = `${environment.apiUrl}lists/forms?type=screenings`;
+    return this.http.get(signInUrl);
+  }
+
+  getdemographics(): Observable<any> {
+    const signInUrl = `${environment.apiUrl}lists/forms?type=demographics`;
+    return this.http.get(signInUrl);
+  }
+  getmeasurements(): Observable<any> {
+    const signInUrl = `${environment.apiUrl}lists/forms?type=measurements`;
+    return this.http.get(signInUrl);
+  }
+
+
 }

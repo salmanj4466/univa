@@ -14,24 +14,25 @@
         <app-study-information></app-study-information>
 
         <div class="text-end mt-4">
-          <button mat-button matStepperNext class="btn btn-success" (click)="nextStep1()">
+          <button mat-button  class="btn btn-success" (click)="nextStep1()">
             Next <i class="bi bi-arrow-right ms-1"></i>
           </button>
         </div>
         <!-- </form> -->
       </mat-step>
-      <mat-step [stepControl]="secondFormGroup" label="Data Collection">
+      <mat-step [stepControl]="secondFormGroup" label="Screening & Demographics">
         <form [formGroup]="secondFormGroup">
-          <app-data-collection></app-data-collection>
-          <div class="d-flex justify-content-between mt-4">
+          <app-screening-questionnaire></app-screening-questionnaire>
+          <div class="d-flex justify-content-between mt-5">
             <button mat-button matStepperPrevious class="btn btn-secondary">
               <i class="bi bi-arrow-left me-1"></i> Back
             </button>
-            <button mat-button matStepperNext class="btn btn-success">
+            <button mat-button matStepperNext class="btn btn-success" >
               Next <i class="bi bi-arrow-right ms-1"></i>
             </button>
           </div>
         </form>
+
       </mat-step>
       <mat-step [stepControl]="thirdFormGroup" label="Informed Consent Form">
         <form [formGroup]="thirdFormGroup">
@@ -40,20 +41,21 @@
             <button mat-button matStepperPrevious class="btn btn-secondary">
               <i class="bi bi-arrow-left me-1"></i> Back
             </button>
-            <button mat-button matStepperNext class="btn btn-success">
+            <button mat-button (click)="consentForm()" class="btn btn-success">
               Next <i class="bi bi-arrow-right ms-1"></i>
             </button>
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="fourFormGroup"  (click)="screeningQuestionnairNext()" label="Screening questionnaire">
+      <mat-step [stepControl]="fourFormGroup"   label="Data Collection">
+      
         <form [formGroup]="fourFormGroup">
-          <app-screening-questionnaire></app-screening-questionnaire>
-          <div class="d-flex justify-content-between mt-5">
+          <app-data-collection></app-data-collection>
+          <div class="d-flex justify-content-between mt-4">
             <button mat-button matStepperPrevious class="btn btn-secondary">
               <i class="bi bi-arrow-left me-1"></i> Back
             </button>
-            <button mat-button matStepperNext class="btn btn-success" (click)="screeningQuestionnairNext()">
+            <button mat-button  class="btn btn-success" (click)="screeningQuestionnairNext()">
               Next <i class="bi bi-arrow-right ms-1"></i>
             </button>
           </div>
@@ -122,18 +124,7 @@
                   {{ item?.name }}
                 </li>
                 }
-                <!-- <li>
-                  <img class="me-1" width="20" src="assets/images/check-mark.png" alt="check" />
-                  Height
-                </li>
-                <li>
-                  <img class="me-1" width="20" src="assets/images/check-mark.png" alt="check" />
-                  Heart rate variabilty
-                </li>
-                <li>
-                  <img class="me-1" width="20" src="assets/images/check-mark.png" alt="check" />
-                  Heart rate
-                </li> -->
+              
               </ul>
 
               <p class="text-success fw-medium mb-1 mt-4 pt-2">
@@ -168,31 +159,7 @@
               </ul>
             </div>
 
-            <div class="col-md-4">
-              <p class="text-success fw-medium mt-4 mt-md-0 mb-1">
-                In-app scales/surveys
-              </p>
-              <ul>
-                @for (item of DataCollectionComponent?.inAppLists; track $index) {
-                <li>
-                  <img class="me-1" width="20" src="assets/images/check-mark.png" alt="check" />
-                  {{ item?.name }}
-                </li>
-                }
-                <!-- <li>
-                  <img class="me-1" width="20" src="assets/images/check-mark.png" alt="check" />
-                  Depression Single question
-                </li>
-                <li>
-                  <img class="me-1" width="20" src="assets/images/check-mark.png" alt="check" />
-                  GAD-7 scale
-                </li>
-                <li>
-                  <img class="me-1" width="20" src="assets/images/check-mark.png" alt="check" />
-                  EDE
-                </li> -->
-              </ul>
-            </div>
+           
           </div>
 
           <h5 class="mt-5">Informed Consent Form for participant</h5>

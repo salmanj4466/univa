@@ -10,7 +10,52 @@
 
 <div class="row">
   <div class="col-md-4">
-    <h6 class="text-success mb-3">On-site measurements</h6>
+    <h6 class="text-success mb-3">On-site measurements/Tasks*</h6>
+    <div class="form-group mb-3">
+      <select class="form-select">
+        <option selected>Select measurements</option>
+        @for (item of measurementsDropdownlists; track $index) {
+        <option value="{{ item.id }}">{{ item?.name }}</option>
+        }
+
+      </select>
+    </div>
+
+    <!-- <h6 class="text-success mt-5 mb-2">
+      <p class="" (click)="add()">
+        Video diary topics<span class="bi bi-plus-circle me-1 text-info mx-2"></span>
+      </p>
+    </h6>
+    @for (item of videodiarytopicsObject; track $index) {
+    <div class="row">
+      <div class="col-sm-7 col-md-7">
+        <div class="form-group mb-3">
+          <select class="form-select" name="topicId-{{$index}}" [(ngModel)]="item.topicId">
+            <option selected>Select topic</option>
+            @for (item of videodiarytopicsList; track $index) {
+            <option value="{{ item.id }}  - {{item.name}} ">{{ item?.name }}</option>
+            }
+
+
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-5 col-md-5">
+        <div class="form-group mb-3 d-flex">
+          <input type="text" class="form-control" name="durationSecs-{{$index}}" [(ngModel)]="item.durationSecs"
+            placeholder="Duration in secs" />
+          @if($index != videodiarytopicsObject.length - 1){
+          <p class="text-danger mx-3" (click)="remove($index)">
+            <span class="bi bi-x-circle "></span>
+          </p>
+          }
+        </div>
+      </div>
+    </div>
+    } -->
+  </div>
+  <div class="col-md-4">
+    <h6 class="text-success mb-3">On-site Tasks*</h6>
     @for (item of onsiteLists; track $index) {
     <div class="form-check form-switch mb-2">
       <input class="form-check-input" type="checkbox" name=" {{item.name}} - {{item.id}}" [(ngModel)]="item.checkbox"
@@ -19,138 +64,11 @@
     </div>
     }
 
-    <!-- <div class="form-check form-switch mb-2">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        role="switch"
-        id="height"
-      />
-      <label class="form-check-label" for="height">Height</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        role="switch"
-        id="heart_rate"
-      />
-      <label class="form-check-label" for="heart_rate">Heart rate</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        role="switch"
-        id="variabilty"
-      />
-      <label class="form-check-label" for="variabilty"
-        >Heart rate variabilty</label
-      >
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        role="switch"
-        id="blood_pressure"
-      />
-      <label class="form-check-label" for="blood_pressure"
-        >Blood pressure</label
-      >
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        role="switch"
-        id="oxygenation"
-      />
-      <label class="form-check-label" for="oxygenation"
-        >Blood oxygenation level</label
-      >
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        role="switch"
-        id="breathing_rate"
-      />
-      <label class="form-check-label" for="breathing_rate"
-        >Breathing rate</label
-      >
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        role="switch"
-        id="temperature"
-      />
-      <label class="form-check-label" for="temperature">Temperature</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        role="switch"
-        id="blood_test"
-      />
-      <label class="form-check-label" for="blood_test"
-        >Blood test (electrolyte balance)</label
-      >
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        role="switch"
-        id="glands"
-      />
-      <label class="form-check-label" for="glands"
-        >Size of parotic glands</label
-      >
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="Skin" />
-      <label class="form-check-label" for="Skin">Skin breakdown</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="Neck" />
-      <label class="form-check-label" for="Neck">Neck circumference</label>
-    </div>
-    <div class="form-check form-switch mb-2">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        role="switch"
-        id="Alcohol"
-      />
-      <label class="form-check-label" for="Alcohol">Alcohol use</label>
-    </div>
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="Flu" />
-      <label class="form-check-label" for="Flu">Flu symptoms</label>
-    </div>
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="Face" />
-      <label class="form-check-label" for="Face">Face swelling</label>
-    </div> -->
   </div>
 
   <div class="col-md-4">
-    <h6 class="text-success mt-4 pt-1 mb-3">In-app digital measurements</h6>
+    <h6 class="text-success mt-4 mt-md-0 mb-3">In-app scales/surveys*</h6>
+
     @for (item of inAppLists; track $index) {
     <div class="form-check form-switch mb-2">
       <input class="form-check-input" type="checkbox" name=" {{item.name}} - {{item.id}}" [(ngModel)]="item.checkbox"
@@ -158,29 +76,14 @@
       <label class="form-check-label" for="weight">{{ item?.name }}</label>
     </div>
     }
-    <!-- <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="fingertip" />
-      <label class="form-check-label" for="fingertip">Fingertip analysis</label>
-    </div>
+  </div>
 
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="test" />
-      <label class="form-check-label" for="test">Sit-Up-Squat-Stand Test</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="photo" />
-      <label class="form-check-label" for="photo">Photo reel</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="diary" />
-      <label class="form-check-label" for="diary">Video diary</label>
-    </div> -->
-
-    <h6 class="text-success mt-5 mb-2"><p class="" (click)="add()">
-      Video diary topics<span class="bi bi-plus-circle me-1 text-info mx-2"></span> 
-    </p></h6>
+  <div class="col-md-12">
+      <h6 class="text-success mt-5 mb-2">
+      <p class="" (click)="add()">
+        Video diary topics<span class="bi bi-plus-circle me-1 text-info mx-2"></span>
+      </p>
+    </h6>
     @for (item of videodiarytopicsObject; track $index) {
     <div class="row">
       <div class="col-sm-7 col-md-7">
@@ -188,81 +91,40 @@
           <select class="form-select" name="topicId-{{$index}}" [(ngModel)]="item.topicId">
             <option selected>Select topic</option>
             @for (item of videodiarytopicsList; track $index) {
-              <option value="{{ item.id }}  - {{item.name}} ">{{ item?.name }}</option>
+            <option value="{{ item.id }}-{{item.name}} ">{{ item?.name }}</option>
             }
-          
-           
+
+
           </select>
         </div>
       </div>
       <div class="col-sm-5 col-md-5">
         <div class="form-group mb-3 d-flex">
-          <input type="text" class="form-control" name="durationSecs-{{$index}}" [(ngModel)]="item.durationSecs" placeholder="Duration in secs" />
+          <input type="number" class="form-control" name="durationSecs-{{$index}}" [(ngModel)]="item.durationSecs"
+            placeholder="Duration in secs" />
           @if($index != videodiarytopicsObject.length - 1){
-            <p class="text-danger mx-3" (click)="remove($index)">
-              <span class="bi bi-x-circle "></span> 
-            </p>
+          <p class="text-danger mx-3" (click)="remove($index)">
+            <span class="bi bi-x-circle "></span>
+          </p>
           }
         </div>
       </div>
     </div>
-  }
-    <!-- <div class="row">
-      <div class="col-sm-7 col-md-7">
-        <div class="form-group mb-3">
-          <select class="form-select">
-            <option selected>Select topic</option>
-            @for (item of videodiarytopicsList; track $index) {
-              <option [value]="item.id">{{ item?.name }}</option>
-            }
-          </select>
-        </div>
-      </div>
-      <div class="col-sm-5 col-md-5">
-        <div class="form-group mb-3">
-          <input type="text" class="form-control" placeholder="Duration in secs" />
-        </div>
-      </div>
-    </div> -->
-  </div>
-
-  <div class="col-md-4">
-    <h6 class="text-success mt-4 mt-md-0 mb-3">In-app scales/surveys</h6>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="Anxiety" />
-      <label class="form-check-label" for="Anxiety">Anxiety single question</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="Depression" />
-      <label class="form-check-label" for="Depression">Depression single question</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="gad" />
-      <label class="form-check-label" for="gad">GAD-7 scale</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="phq" />
-      <label class="form-check-label" for="phq">PHQ-9 scale</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="EDI" />
-      <label class="form-check-label" for="EDI">EDI-3 subscales</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="questionnaire" />
-      <label class="form-check-label" for="questionnaire">Patient acceptance questionnaire
-      </label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="FSST" />
-      <label class="form-check-label" for="FSST">FSST</label>
-    </div>
+    }
   </div>
 </div>
+
+
+
+<!-- <div class="col-md-4">
+    <h6 class="text-success mt-4 mt-md-0 mb-3">In-app scales/surveys</h6>
+
+    @for (item of inAppLists; track $index) {
+      <div class="form-check form-switch mb-2">
+        <input class="form-check-input" type="checkbox" name=" {{item.name}} - {{item.id}}" [(ngModel)]="item.checkbox"
+          role="switch" id="weight" />
+        <label class="form-check-label" for="weight">{{ item?.name }}</label>
+      </div>
+      }
+  </div>
+</div> -->
