@@ -13,8 +13,8 @@
     <h6 class="text-success mb-3">On-site measurements/Tasks</h6>
     <div class="form-group mb-3">
       <select class="form-select">
-        <option selected>Select topic</option>
-        @for (item of videodiarytopicsList; track $index) {
+        <option selected>Select measurements</option>
+        @for (item of measurementsDropdownlists; track $index) {
         <option value="{{ item.id }}  - {{item.name}} ">{{ item?.name }}</option>
         }
 

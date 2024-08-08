@@ -143,6 +143,10 @@ export class ApiService {
     const signInUrl = `${environment.apiUrl}lists/forms?type=demographics`;
     return this.http.get(signInUrl);
   }
+  getmeasurements(): Observable<any> {
+    const signInUrl = `${environment.apiUrl}lists/forms?type=measurements`;
+    return this.http.get(signInUrl);
+  }
 
 
 }
