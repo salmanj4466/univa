@@ -229,40 +229,12 @@
   <div class="col-md-4">
     <h6 class="text-success mt-4 mt-md-0 mb-3">In-app scales/surveys</h6>
 
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="Anxiety" />
-      <label class="form-check-label" for="Anxiety">Anxiety single question</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="Depression" />
-      <label class="form-check-label" for="Depression">Depression single question</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="gad" />
-      <label class="form-check-label" for="gad">GAD-7 scale</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="phq" />
-      <label class="form-check-label" for="phq">PHQ-9 scale</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="EDI" />
-      <label class="form-check-label" for="EDI">EDI-3 subscales</label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="questionnaire" />
-      <label class="form-check-label" for="questionnaire">Patient acceptance questionnaire
-      </label>
-    </div>
-
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" role="switch" id="FSST" />
-      <label class="form-check-label" for="FSST">FSST</label>
-    </div>
+    @for (item of inAppLists; track $index) {
+      <div class="form-check form-switch mb-2">
+        <input class="form-check-input" type="checkbox" name=" {{item.name}} - {{item.id}}" [(ngModel)]="item.checkbox"
+          role="switch" id="weight" />
+        <label class="form-check-label" for="weight">{{ item?.name }}</label>
+      </div>
+      }
   </div>
 </div>

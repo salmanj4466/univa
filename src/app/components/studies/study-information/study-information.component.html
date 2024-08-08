@@ -53,13 +53,13 @@
       <div class="col-md-6">
         <div class="form-group mb-3">
           <label class="form-label">Study duration per Participant (weeks)</label>
-          <input type="text" class="form-control" formControlName="durationInWeeksPerParticipant" placeholder="Enter study duration per patient (weeks)" />
+          <input type="text" [readOnly]="studyInformationForm.value.readOnlyduration"  [ngClass]="{'disabled': studyInformationForm.value.readOnlyduration}" class="form-control" formControlName="durationInWeeksPerParticipant" placeholder="Enter study duration per patient (weeks)" />
         </div>
       </div>
 
       <div class="col-md-6 offset-md-6">
         <div class="form-check mb-3">
-          <input class="form-check-input" type="checkbox" value="" id="duration" />
+          <input class="form-check-input"  formControlName="readOnlyduration"   type="checkbox" value="" id="duration" />
           <label class="form-check-label" for="duration">
             No defined duration
           </label>
@@ -73,8 +73,10 @@
           <label class="form-label">Study Team Members</label>
           <select class="form-select" aria-label="Default select example">
             <option selected>Select one or mulitple users</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
+            @for (item of teamMembersdata; track $index) {
+              <option [value]="item.id">{{item.surname}}</option>
+            }
+           
           </select>
         </div>
       </div>

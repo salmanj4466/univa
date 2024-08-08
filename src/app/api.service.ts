@@ -129,4 +129,10 @@ export class ApiService {
     return this.http.post(signInUrl, data);
   }
 
+  studyManagerListing(): Observable<any> {
+    const signInUrl = `${environment.apiUrl}users?role=Study Manager`;
+    return this.http.get(signInUrl);
+  }
+
+
 }
