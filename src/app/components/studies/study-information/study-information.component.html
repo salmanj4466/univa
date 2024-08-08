@@ -11,34 +11,49 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group mb-3">
-          <label class="form-label">Study Name</label>
+          <label class="form-label">Study Name*</label>
           <input type="text" class="form-control" formControlName="name" placeholder="Enter study name here" />
+          @if(studyInformationForm.get('name').invalid && (studyInformationForm.get('name').dirty || studyInformationForm.get('name').touched  || errorMessage  )){
+            <div class="text-danger">This field is required.</div> 
+          }
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group mb-3">
-          <label class="form-label">Study short code</label>
+          <label class="form-label">Study short code*</label>
           <input type="text" class="form-control" formControlName="shortCode" placeholder="Enter study short code here" />
+          @if(studyInformationForm.get('shortCode').invalid && (studyInformationForm.get('shortCode').dirty || studyInformationForm.get('shortCode').touched  || errorMessage  )){
+            <div class="text-danger">This field is required.</div> 
+          }
         </div>
       </div>
     </div>
 
     <div class="form-group mb-3">
-      <label class="form-label">Study Description</label>
+      <label class="form-label">Study Description*</label>
       <textarea class="form-control" rows="3" formControlName="description" placeholder="Enter study description here"></textarea>
+      @if(studyInformationForm.get('description').invalid && (studyInformationForm.get('description').dirty || studyInformationForm.get('description').touched  || errorMessage  )){
+        <div class="text-danger">This field is required.</div> 
+      }
     </div>
 
     <div class="row">
       <div class="col-md-6">
         <div class="form-group mb-3">
-          <label class="form-label">Start Date</label>
+          <label class="form-label">Start Date*</label>
           <input type="date" class="form-control" formControlName="startDate" />
+          @if(studyInformationForm.get('startDate').invalid && (studyInformationForm.get('startDate').dirty || studyInformationForm.get('startDate').touched  || errorMessage  )){
+            <div class="text-danger">This field is required.</div> 
+          }
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group mb-3">
-          <label class="form-label">Planned study end date</label>
+          <label class="form-label">Planned study end date*</label>
           <input type="date" class="form-control" formControlName="plannedEndDate" />
+          @if(studyInformationForm.get('plannedEndDate').invalid && (studyInformationForm.get('plannedEndDate').dirty || studyInformationForm.get('plannedEndDate').touched  || errorMessage  )){
+            <div class="text-danger">This field is required.</div> 
+          }
         </div>
       </div>
     </div>
@@ -46,14 +61,17 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group mb-3">
-          <label class="form-label">Planned number of Participants</label>
-          <input type="text" class="form-control" formControlName="plannedNumberOfParticipants" placeholder="Enter study duration per patient in week here" />
+          <label class="form-label">Planned number of Participants*</label>
+          <input type="number" class="form-control" formControlName="plannedNumberOfParticipants" placeholder="Enter study duration per patient in week here" />
+          @if(studyInformationForm.get('plannedNumberOfParticipants').invalid && (studyInformationForm.get('plannedNumberOfParticipants').dirty || studyInformationForm.get('plannedNumberOfParticipants').touched  || errorMessage  )){
+            <div class="text-danger">This field is required.</div> 
+          }
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group mb-3">
           <label class="form-label">Study duration per Participant (weeks)</label>
-          <input type="text" [readOnly]="studyInformationForm.value.readOnlyduration"  [ngClass]="{'disabled': studyInformationForm.value.readOnlyduration}" class="form-control" formControlName="durationInWeeksPerParticipant" placeholder="Enter study duration per patient (weeks)" />
+          <input type="number" [readOnly]="studyInformationForm.value.readOnlyduration"  [ngClass]="{'disabled': studyInformationForm.value.readOnlyduration}" class="form-control" formControlName="durationInWeeksPerParticipant" placeholder="Enter study duration per patient (weeks)" />
         </div>
       </div>
 
@@ -71,7 +89,7 @@
       <div class="col-md-6">
         <div class="form-group mb-3">
           <label class="form-label">Study Team Members</label>
-          <select class="form-select" aria-label="Default select example">
+          <select class="form-select" aria-label="Default select example" formControlName="studyTeamMembers">
             <option selected>Select one or mulitple users</option>
             @for (item of teamMembersdata; track $index) {
               <option [value]="item.id">{{item.surname}}</option>

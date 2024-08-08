@@ -16,7 +16,7 @@ import { CommonModule } from "@angular/common";
 })
 export class StudyInformationComponent {
   studyInformationForm!: FormGroup;
-  errorMessage!: string;
+  errorMessage = false;
   teamMembersdata: any[] = [];
   readOnlyduration = true;
   constructor(private fb: FormBuilder, private authService: ApiService) { }
@@ -30,7 +30,8 @@ export class StudyInformationComponent {
       plannedEndDate: ['', Validators.required],
       plannedNumberOfParticipants: ['', Validators.required],
       readOnlyduration:[true],
-      durationInWeeksPerParticipant: ['', Validators.required],
+      studyTeamMembers:[],
+      durationInWeeksPerParticipant: [''],
     });
 
     this.authService.studyManagerListing().subscribe(res => {

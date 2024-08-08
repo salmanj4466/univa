@@ -14,7 +14,7 @@
         <app-study-information></app-study-information>
 
         <div class="text-end mt-4">
-          <button mat-button matStepperNext class="btn btn-success" (click)="nextStep1()">
+          <button mat-button  class="btn btn-success" (click)="nextStep1()">
             Next <i class="bi bi-arrow-right ms-1"></i>
           </button>
         </div>
@@ -27,7 +27,7 @@
             <button mat-button matStepperPrevious class="btn btn-secondary">
               <i class="bi bi-arrow-left me-1"></i> Back
             </button>
-            <button mat-button matStepperNext class="btn btn-success" (click)="screeningQuestionnairNext()">
+            <button mat-button matStepperNext class="btn btn-success" >
               Next <i class="bi bi-arrow-right ms-1"></i>
             </button>
           </div>
@@ -41,13 +41,13 @@
             <button mat-button matStepperPrevious class="btn btn-secondary">
               <i class="bi bi-arrow-left me-1"></i> Back
             </button>
-            <button mat-button matStepperNext class="btn btn-success">
+            <button mat-button (click)="consentForm()" class="btn btn-success">
               Next <i class="bi bi-arrow-right ms-1"></i>
             </button>
           </div>
         </form>
       </mat-step>
-      <mat-step [stepControl]="fourFormGroup"  (click)="screeningQuestionnairNext()" label="Data Collection">
+      <mat-step [stepControl]="fourFormGroup"   label="Data Collection">
       
         <form [formGroup]="fourFormGroup">
           <app-data-collection></app-data-collection>
@@ -55,7 +55,7 @@
             <button mat-button matStepperPrevious class="btn btn-secondary">
               <i class="bi bi-arrow-left me-1"></i> Back
             </button>
-            <button mat-button matStepperNext class="btn btn-success">
+            <button mat-button matStepperNext class="btn btn-success" (click)="screeningQuestionnairNext()">
               Next <i class="bi bi-arrow-right ms-1"></i>
             </button>
           </div>

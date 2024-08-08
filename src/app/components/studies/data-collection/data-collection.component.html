@@ -77,6 +77,41 @@
     </div>
     }
   </div>
+
+  <div class="col-md-12">
+      <h6 class="text-success mt-5 mb-2">
+      <p class="" (click)="add()">
+        Video diary topics<span class="bi bi-plus-circle me-1 text-info mx-2"></span>
+      </p>
+    </h6>
+    @for (item of videodiarytopicsObject; track $index) {
+    <div class="row">
+      <div class="col-sm-7 col-md-7">
+        <div class="form-group mb-3">
+          <select class="form-select" name="topicId-{{$index}}" [(ngModel)]="item.topicId">
+            <option selected>Select topic</option>
+            @for (item of videodiarytopicsList; track $index) {
+            <option value="{{ item.id }}-{{item.name}} ">{{ item?.name }}</option>
+            }
+
+
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-5 col-md-5">
+        <div class="form-group mb-3 d-flex">
+          <input type="number" class="form-control" name="durationSecs-{{$index}}" [(ngModel)]="item.durationSecs"
+            placeholder="Duration in secs" />
+          @if($index != videodiarytopicsObject.length - 1){
+          <p class="text-danger mx-3" (click)="remove($index)">
+            <span class="bi bi-x-circle "></span>
+          </p>
+          }
+        </div>
+      </div>
+    </div>
+    }
+  </div>
 </div>
 
 

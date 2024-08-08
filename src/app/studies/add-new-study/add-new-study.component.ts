@@ -7,7 +7,7 @@ import {
 } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatStepperModule } from "@angular/material/stepper";
+import { MatStepper, MatStepperModule } from "@angular/material/stepper";
 import { MatButtonModule } from "@angular/material/button";
 import { StudyInformationComponent } from "../../components/studies/study-information/study-information.component";
 import { DataCollectionComponent } from "../../components/studies/data-collection/data-collection.component";
@@ -16,6 +16,7 @@ import { ConfirmationComponent } from "../../components/studies/confirmation/con
 import { ScreeningQuestionnaireComponent } from "../../components/studies/screening-questionnaire/screening-questionnaire.component";
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { ApiService } from "../../api.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: "app-add-new-study",
@@ -72,10 +73,27 @@ export class AddNewStudyComponent {
   isLinear = false;
   inAppLists: any[] = [];
   onsiteLists: any[] = [];
-  constructor(private _formBuilder: FormBuilder, public api: ApiService) { }
+
+  @ViewChild('stepper') stepper: MatStepper;
+  constructor(private _formBuilder: FormBuilder, public api: ApiService, public toastr: ToastrService,) { }
 
   nextStep1() {
     console.log(this.StudyInformationComponent.studyInformationForm.value);
+    if (this.StudyInformationComponent.studyInformationForm.invalid) {
+      this.StudyInformationComponent.errorMessage = true;
+      this.toastr.error('Please provide a value for all the required fields');
+    } else {
+      this.stepper.next();
+    }
+  }
+
+  consentForm() {
+    if (!this.InformedConsentFormComponent.icfCarer || !this.InformedConsentFormComponent.icfParticipant || !this.InformedConsentFormComponent.icfStudyManager) {
+      this.InformedConsentFormComponent.errorMessage = true;
+      this.toastr.error('Please provide a value for all the required fields');
+    } else {
+      this.stepper.next();
+    }
   }
 
   screeningQuestionnairNext() {
@@ -86,16 +104,16 @@ export class AddNewStudyComponent {
   onSubmit() {
     this.api.postStudy({
       "name": this.StudyInformationComponent.studyInformationForm.value.name,
-      "description":  this.StudyInformationComponent.studyInformationForm.value.description,
-      "shortCode":  this.StudyInformationComponent.studyInformationForm.value.shortCode,
-      "startDate":  this.StudyInformationComponent.studyInformationForm.value.startDate,
-      "plannedEndDate":  this.StudyInformationComponent.studyInformationForm.value.plannedEndDate,
-      "plannedNumberOfParticipants":  this.StudyInformationComponent.studyInformationForm.value.plannedNumberOfParticipants,
-      "durationInWeeksPerParticipant":  this.StudyInformationComponent.studyInformationForm.value.durationInWeeksPerParticipant,
-      "icfParticipant":  this.StudyInformationComponent.studyInformationForm.value.icfParticipant,
-      "icfCarer":  this.StudyInformationComponent.studyInformationForm.value.icfCarer,
-      "icfStudyManager":  this.StudyInformationComponent.studyInformationForm.value.icfStudyManager,
-      "studyTeamMembers": [1, 3, 5],
+      "description": this.StudyInformationComponent.studyInformationForm.value.description,
+      "shortCode": this.StudyInformationComponent.studyInformationForm.value.shortCode,
+      "startDate": this.StudyInformationComponent.studyInformationForm.value.startDate,
+      "plannedEndDate": this.StudyInformationComponent.studyInformationForm.value.plannedEndDate,
+      "plannedNumberOfParticipants": Number(this.StudyInformationComponent.studyInformationForm.value.plannedNumberOfParticipants),
+      "durationInWeeksPerParticipant": Number(this.StudyInformationComponent.studyInformationForm.value.durationInWeeksPerParticipant),
+      "icfParticipant": this.InformedConsentFormComponent.icfParticipant,
+      "icfCarer":  this.InformedConsentFormComponent.icfCarer,
+      "icfStudyManager":  this.InformedConsentFormComponent.icfStudyManager,
+      "studyTeamMembers": [Number(this.StudyInformationComponent.studyInformationForm.value.studyTeamMembers)],
       "studyMeasurements": [
         ...this.inAppLists.map(e => {
           return e = {
@@ -108,14 +126,14 @@ export class AddNewStudyComponent {
             id: e.id,
             active: e.checkbox
           }
-        }) 
+        })
       ],
       "studyVideoDiaryTopics": [
-       
+
         ...this.DataCollectionComponent.videodiarytopicsObject.map(e => {
           return e = {
-            "id": e.topicId.split('-')[0],
-            "duration": e.durationSecs
+            "id": Number(e.topicId.split('-')[0]),
+            "duration": Number(e.durationSecs)
           }
         }),
       ],
@@ -132,9 +150,9 @@ export class AddNewStudyComponent {
         }
       ],
       "icfClauses": [
-       ...this.InformedConsentFormComponent?.participantList,
-       ...this.InformedConsentFormComponent?.carerList,
-       ...this.InformedConsentFormComponent?.studyManagerList
+        ...this.InformedConsentFormComponent?.participantList,
+        ...this.InformedConsentFormComponent?.carerList,
+        ...this.InformedConsentFormComponent?.studyManagerList
       ]
     }).subscribe(res => {
       console.log(res);
