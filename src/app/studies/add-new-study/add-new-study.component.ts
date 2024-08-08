@@ -17,6 +17,7 @@ import { ScreeningQuestionnaireComponent } from "../../components/studies/screen
 import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { ApiService } from "../../api.service";
 import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-add-new-study",
@@ -75,7 +76,9 @@ export class AddNewStudyComponent {
   onsiteLists: any[] = [];
 
   @ViewChild('stepper') stepper: MatStepper;
-  constructor(private _formBuilder: FormBuilder, public api: ApiService, public toastr: ToastrService,) { }
+  constructor(private _formBuilder: FormBuilder,
+    private router: Router,
+    public api: ApiService, public toastr: ToastrService,) { }
 
   nextStep1() {
     console.log(this.StudyInformationComponent.studyInformationForm.value);
@@ -111,8 +114,8 @@ export class AddNewStudyComponent {
       "plannedNumberOfParticipants": Number(this.StudyInformationComponent.studyInformationForm.value.plannedNumberOfParticipants),
       "durationInWeeksPerParticipant": Number(this.StudyInformationComponent.studyInformationForm.value.durationInWeeksPerParticipant),
       "icfParticipant": this.InformedConsentFormComponent.icfParticipant,
-      "icfCarer":  this.InformedConsentFormComponent.icfCarer,
-      "icfStudyManager":  this.InformedConsentFormComponent.icfStudyManager,
+      "icfCarer": this.InformedConsentFormComponent.icfCarer,
+      "icfStudyManager": this.InformedConsentFormComponent.icfStudyManager,
       "studyTeamMembers": [Number(this.StudyInformationComponent.studyInformationForm.value.studyTeamMembers)],
       "studyMeasurements": [
         ...this.inAppLists.map(e => {
@@ -156,6 +159,15 @@ export class AddNewStudyComponent {
       ]
     }).subscribe(res => {
       console.log(res);
+      if (res && res.data) {
+        this.router.navigate(['/study-list']);
+        console.log('Sign in successful');
+        this.toastr.success(res?.message, ' ');
+      } else {
+        this.toastr.error(res.error, ' ');
+      }
+    }, err => {
+      this.toastr.error(err.error.error, ' ');
     });
   }
 }
