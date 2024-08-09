@@ -76,8 +76,8 @@ export class AddNewStudyComponent {
   onsiteLists: any[] = [];
 
   @ViewChild('stepper') stepper: MatStepper;
-  constructor(private _formBuilder: FormBuilder,
-    private router: Router,
+  constructor(public _formBuilder: FormBuilder,
+    public router: Router,
     public api: ApiService, public toastr: ToastrService,) { }
 
   nextStep1() {

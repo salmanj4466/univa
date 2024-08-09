@@ -149,4 +149,17 @@ export class ApiService {
   }
 
 
+  getStudyById(id: number): Observable<any> {
+    const signInUrl = `${environment.apiUrl}studies/${id}`;
+    return this.http.get(signInUrl);
+  }
+
+  putStudy(information: any, id: number): Observable<any> {
+    const  headers: any = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    const signInUrl = `${environment.apiUrl}studies/${id}`;
+    return this.http.put(signInUrl, information, {headers});
+  }
+
 }
