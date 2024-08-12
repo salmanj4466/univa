@@ -64,7 +64,7 @@ export class EditstudyComponent extends AddNewStudyComponent implements OnInit {
       });
       this.DataCollectionComponent.videodiarytopicsObject = this.informationOfObject.data.studyVideoDiaryTopics.map(d => {
         return d = {
-          topicId: d.videoDiaryTopic.id,
+          topicId: `${d.videoDiaryTopic.id}-${d.videoDiaryTopic.name}`,
           durationSecs: d.duration
         }
       });
@@ -81,11 +81,11 @@ export class EditstudyComponent extends AddNewStudyComponent implements OnInit {
     });
     this.DataCollectionComponent.videodiarytopicsObject = this.informationOfObject.data.studyVideoDiaryTopics.map(d => {
       return d = {
-        topicId: d.videoDiaryTopic.id,
+        topicId: `${d.videoDiaryTopic.id}-${d.videoDiaryTopic.name}`,
         durationSecs: d.duration
       }
     });
-    console.log(this.inAppLists);
+    console.log(this.DataCollectionComponent.videodiarytopicsObject);
   }
 
 
