@@ -91,7 +91,11 @@ export class AddNewStudyComponent {
   }
 
   consentForm() {
-    if (!this.InformedConsentFormComponent.icfCarer || !this.InformedConsentFormComponent.icfParticipant || !this.InformedConsentFormComponent.icfStudyManager) {
+    if (!this.InformedConsentFormComponent.icfCarer || this.InformedConsentFormComponent.participantList.length == 0
+      || this.InformedConsentFormComponent.participantList.length == 0
+      || this.InformedConsentFormComponent.carerList.length == 0
+      || !this.InformedConsentFormComponent.icfParticipant
+      || !this.InformedConsentFormComponent.icfStudyManager) {
       this.InformedConsentFormComponent.errorMessage = true;
       this.toastr.error('Please provide a value for all the required fields');
     } else {
@@ -102,7 +106,7 @@ export class AddNewStudyComponent {
   screeningQuestionnairNext() {
     this.inAppLists = this.DataCollectionComponent?.inAppLists.filter(e => e.checkbox == true);
     this.onsiteLists = this.DataCollectionComponent?.onsiteLists.filter(e => e.checkbox == true);
-    if(this.inAppLists.length == 0 || this.onsiteLists.length == 0 ){
+    if (this.inAppLists.length == 0 || this.onsiteLists.length == 0 || this.DataCollectionComponent.videodiarytopicsObject.length == 0) {
       this.toastr.error('Please provide a value for all the required fields');
     } else {
       this.stepper.next();

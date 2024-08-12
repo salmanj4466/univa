@@ -38,6 +38,7 @@ import { ActivatedRoute } from '@angular/router';
 export class EditstudyComponent extends AddNewStudyComponent implements OnInit {
   activeRoute = inject(ActivatedRoute);
   studyId!: any;
+  informationOfObject: any = {};
   ngOnInit(): void {
     this.studyId = this.activeRoute.snapshot.params['id'] ? Number(this.activeRoute.snapshot.params['id']) : null;
   }
@@ -48,9 +49,32 @@ export class EditstudyComponent extends AddNewStudyComponent implements OnInit {
     if (this.studyId) {
       this.api.getStudyById(this.studyId).subscribe(res => {
         console.log(res);
-        this.StudyInformationComponent.studyInformationForm.patchValue({ ...res.data });
+        this.informationOfObject = res;
+        this.StudyInformationComponent.studyInformationForm.patchValue({ ...res.data, startDate: this.formatDateToMMDDYYYY(new Date(res.data.startDate)), plannedEndDate: this.formatDateToMMDDYYYY(new Date(res.data.plannedEndDate)), studyTeamMembers: res.data.studyTeamMembers.map(t => t.user.id)[0] });
+        console.log(this.StudyInformationComponent.studyInformationForm.value);
       });
     }
+
+    setTimeout(() => {
+      this.informationOfObject.data.studyMeasurements.filter(fl => fl.measurement.type == "In-app").forEach(d => {
+        this.DataCollectionComponent.inAppLists.find(f => f.id == d.measurement.id)['checkbox'] = true;
+      });
+      this.informationOfObject.data.studyMeasurements.filter(fl => fl.measurement.type == "On-site").forEach(d => {
+        this.DataCollectionComponent.onsiteLists.find(f => f.id == d.measurement.id)['checkbox'] = true;
+      });
+    }, 2000);
+
+    this.informationOfObject.videodiarytopicsObject = this.informationOfObject.data.studyVideoDiaryTopics;
+  }
+
+  screeingInfo() {
+    this.informationOfObject.data.studyMeasurements.filter(fl => fl.measurement.type == "In-app").forEach(d => {
+      this.DataCollectionComponent.inAppLists.find(f => f.id == d.measurement.id)['checkbox'] = true;
+    });
+    this.informationOfObject.data.studyMeasurements.filter(fl => fl.measurement.type == "On-site").forEach(d => {
+      this.DataCollectionComponent.onsiteLists.find(f => f.id == d.measurement.id)['checkbox'] = true;
+    });
+    console.log(this.inAppLists);
   }
 
 
@@ -120,5 +144,16 @@ export class EditstudyComponent extends AddNewStudyComponent implements OnInit {
       this.toastr.error(err.error.error, ' ');
     });
   }
+
+
+  formatDateToMMDDYYYY(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  }
+
+
 
 }
