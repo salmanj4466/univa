@@ -62,9 +62,14 @@ export class EditstudyComponent extends AddNewStudyComponent implements OnInit {
       this.informationOfObject.data.studyMeasurements.filter(fl => fl.measurement.type == "On-site").forEach(d => {
         this.DataCollectionComponent.onsiteLists.find(f => f.id == d.measurement.id)['checkbox'] = true;
       });
+      this.DataCollectionComponent.videodiarytopicsObject = this.informationOfObject.data.studyVideoDiaryTopics.map(d => {
+        return d = {
+          topicId: d.videoDiaryTopic.id,
+          durationSecs: d.duration
+        }
+      });
     }, 2000);
 
-    this.informationOfObject.videodiarytopicsObject = this.informationOfObject.data.studyVideoDiaryTopics;
   }
 
   screeingInfo() {
@@ -73,6 +78,12 @@ export class EditstudyComponent extends AddNewStudyComponent implements OnInit {
     });
     this.informationOfObject.data.studyMeasurements.filter(fl => fl.measurement.type == "On-site").forEach(d => {
       this.DataCollectionComponent.onsiteLists.find(f => f.id == d.measurement.id)['checkbox'] = true;
+    });
+    this.DataCollectionComponent.videodiarytopicsObject = this.informationOfObject.data.studyVideoDiaryTopics.map(d => {
+      return d = {
+        topicId: d.videoDiaryTopic.id,
+        durationSecs: d.duration
+      }
     });
     console.log(this.inAppLists);
   }
