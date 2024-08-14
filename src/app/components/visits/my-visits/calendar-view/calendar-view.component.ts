@@ -4,6 +4,7 @@ import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-calendar-view',
@@ -21,28 +22,78 @@ export class CalendarViewComponent implements OnInit {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay',
     },
-    events: [
-      {
-        title: 'All Day Event',
-        date: '2024-05-01',
-        backgroundColor: '#4d6b7e',
-        borderColor: '#4d6b7e',
-      },
-      {
-        title: 'Dinner',
-        date: '2024-05-10',
-        backgroundColor: '#dae032',
-        borderColor: '#dae032',
-      },
-      {
-        title: 'Meetings',
-        start: '2024-05-13',
-        end: '2024-05-15',
-        backgroundColor: '#e87b10',
-        borderColor: '#e87b10',
-      },
-    ],
+    events: [],
+    firstDay: 1, // Start the calendar on Mondays
+    eventDidMount: (info) => {
+      if (info.view.type === 'month') {
+        info.el.innerHTML = `${info.event.extendedProps['participantCode']} ${info.event.start.toLocaleTimeString()}`;
+      } else {
+        info.el.innerHTML = info.event.extendedProps['participantCode'];
+      }
+    },
   };
 
-  ngOnInit(): void {}
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.fetchSessions();
+  }
+
+  fetchSessions(): void {
+    const currentDate = new Date();
+    const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+    const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+
+    this.http.get(`/api/v1/sessions?dateStart=${startDate.toISOString()}&dateEnd=${endDate.toISOString()}`)
+      .subscribe((response: any) => {
+        this.calendarOptions.events = response.map((session: any) => ({
+          title: session.participantCode,
+          start: session.startDate,
+          end: session.endDate,
+          backgroundColor: this.getSessionColor(session.status),
+          borderColor: this.getSessionColor(session.status),
+          extendedProps: {
+            participantCode: session.participantCode,
+          },
+        }));
+      }, (error: any) => {
+        console.error(error);
+        // Display error message
+      });
+  }
+
+  getSessionColor(status: string): string {
+    switch (status) {
+      case 'past':
+        return '#4d6b7e';
+      case 'overdue':
+        return '#e87b10';
+      case 'scheduled':
+        return '#dae032';
+      default:
+        return '#fff';
+    }
+  }
+
+  handleDateChange(date: Date): void {
+    const startDate = new Date(date.getFullYear(), date.getMonth(), 1);
+    const endDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+    this.http.get(`/api/v1/sessions?dateStart=${startDate.toISOString()}&dateEnd=${endDate.toISOString()}`)
+      .subscribe((response: any) => {
+        this.calendarOptions.events = response.map((session: any) => ({
+          title: session.participantCode,
+          start: session.startDate,
+          end: session.endDate,
+          backgroundColor: this.getSessionColor(session.status),
+          borderColor: this.getSessionColor(session.status),
+          extendedProps: {
+            participantCode: session.participantCode,
+          },
+        }));
+      }, (error: any) => {
+        console.error(error);
+        // Display error message
+      });
+  }
 }
