@@ -23,7 +23,7 @@ export class CalendarViewComponent implements OnInit {
       right: 'dayGridMonth,timeGridWeek,timeGridDay',
     },
     events: [],
-    firstDay: 1, // Start the calendar on Mondays
+    firstDay: 1, 
     eventDidMount: (info) => {
       if (info.view.type === 'month') {
         info.el.innerHTML = `${info.event.extendedProps['participantCode']} ${info.event.start.toLocaleTimeString()}`;
@@ -58,7 +58,7 @@ export class CalendarViewComponent implements OnInit {
         }));
       }, (error: any) => {
         console.error(error);
-        // Display error message
+   
       });
   }
 
@@ -93,7 +93,7 @@ export class CalendarViewComponent implements OnInit {
         }));
       }, (error: any) => {
         console.error(error);
-        // Display error message
+       
       });
   }
 }
