@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
   standalone: true,
   imports: [FullCalendarModule],
   templateUrl: './calendar-view.component.html',
-  styleUrl: './calendar-view.component.scss',
+  styleUrls: ['./calendar-view.component.scss'],
 })
 export class CalendarViewComponent implements OnInit {
   calendarOptions: CalendarOptions = {
@@ -25,7 +25,7 @@ export class CalendarViewComponent implements OnInit {
     events: [],
     firstDay: 1, 
     eventDidMount: (info) => {
-      if (info.view.type === 'month') {
+      if (info.view.type === 'dayGridMonth') {
         info.el.innerHTML = `${info.event.extendedProps['participantCode']} ${info.event.start.toLocaleTimeString()}`;
       } else {
         info.el.innerHTML = info.event.extendedProps['participantCode'];
@@ -47,7 +47,7 @@ export class CalendarViewComponent implements OnInit {
     this.http.get(`/api/v1/sessions?dateStart=${startDate.toISOString()}&dateEnd=${endDate.toISOString()}`)
       .subscribe((response: any) => {
         this.calendarOptions.events = response.map((session: any) => ({
-          title: session.participantCode,
+          title: `Session #${session.number} with ${session.participantCode}`,
           start: session.startDate,
           end: session.endDate,
           backgroundColor: this.getSessionColor(session.status),
@@ -57,8 +57,7 @@ export class CalendarViewComponent implements OnInit {
           },
         }));
       }, (error: any) => {
-        console.error(error);
-   
+        console.error('Failed to load sessions:', error);
       });
   }
 
@@ -71,7 +70,7 @@ export class CalendarViewComponent implements OnInit {
       case 'scheduled':
         return '#dae032';
       default:
-        return '#fff';
+        return '#fff'; 
     }
   }
 
@@ -82,7 +81,7 @@ export class CalendarViewComponent implements OnInit {
     this.http.get(`/api/v1/sessions?dateStart=${startDate.toISOString()}&dateEnd=${endDate.toISOString()}`)
       .subscribe((response: any) => {
         this.calendarOptions.events = response.map((session: any) => ({
-          title: session.participantCode,
+          title: `Session #${session.number} with ${session.participantCode}`,
           start: session.startDate,
           end: session.endDate,
           backgroundColor: this.getSessionColor(session.status),
@@ -92,8 +91,7 @@ export class CalendarViewComponent implements OnInit {
           },
         }));
       }, (error: any) => {
-        console.error(error);
-       
+        console.error('Failed to load sessions:', error);
       });
   }
 }
