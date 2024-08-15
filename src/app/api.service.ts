@@ -42,6 +42,18 @@ export class ApiService {
     return this.http.get(signInUrl, { params: params, headers: headers });
   }
 
+
+  
+  participants(params: any): Observable<any> {
+    const  headers: any = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    const signInUrl = `${environment.apiUrl}participants`;
+    return this.http.get(signInUrl, { params: params, headers: headers });
+  }
+
+  
+
   studyListing(params: any): Observable<any> {
     const  headers: any = new HttpHeaders({
       'Authorization': `Bearer ${this.getToken()}`
@@ -160,6 +172,14 @@ export class ApiService {
     });
     const signInUrl = `${environment.apiUrl}studies/${id}`;
     return this.http.put(signInUrl, information, {headers});
+  }
+
+  postSession(information: any): Observable<any> {
+    const  headers: any = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    const signInUrl = `${environment.apiUrl}sessions`;
+    return this.http.post(signInUrl, information, {headers});
   }
 
 }

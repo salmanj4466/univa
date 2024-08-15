@@ -45,16 +45,18 @@ export class CalendarViewComponent implements OnInit {
     const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
 
-    this.http.get(`${environment.apiUrl}sessions?dateStart=2024-07-01&dateEnd=2024-07-31`)
+    this.http.get(`${environment.apiUrl}sessions?dateStart=${this.formatDateToMMDDYYYY(startDate)}&dateEnd=${this.formatDateToMMDDYYYY(endDate)}`)
       .subscribe((response: any) => {
-        this.calendarOptions.events = response.map((session: any) => ({
-          title: `Session #${session.number} with ${session.participantCode}`,
-          start: session.startDate,
-          end: session.endDate,
+        console.log(response.data);
+        const info: any = response.data;
+        this.calendarOptions.events = info.map((session: any) => ({
+          title: `Session #${session?.studyMember?.user?.firstName} with ${session?.patient?.user?.firstName}`,
+          start: session.scheduledAt,
+          end: session.scheduledAt,
           backgroundColor: this.getSessionColor(session.status),
           borderColor: this.getSessionColor(session.status),
           extendedProps: {
-            participantCode: session.participantCode,
+            participantCode: session?.studySite?.site.name,
           },
         }));
       }, (error: any) => {
