@@ -6,21 +6,27 @@
           <label class="form-label">Study</label>
           <select class="form-select">
             <option selected>Select one option</option>
-            <option value="1">One</option>
+            @for (item of studyLists; track $index) {
+            <option [value]="item.id"> {{ item?.name }}</option>
+            }
           </select>
         </td>
         <td class="px-1">
           <label class="form-label">Site</label>
           <select class="form-select">
             <option selected>Select one option</option>
-            <option value="1">One</option>
+            @for (item of siteLists; track $index) {
+            <option [value]="item.id"> {{ item?.name }}</option>
+            }
           </select>
         </td>
         <td class="px-1">
           <label class="form-label">Participant</label>
           <select class="form-select">
             <option selected>Select one option</option>
-            <option value="1">One</option>
+            @for (item of partipantLists; track $index) {
+            <option [value]="item.id"> {{ item?.participantCode }}</option>
+            }
           </select>
         </td>
         <td class="px-1">
@@ -49,129 +55,36 @@
   <table class="table mb-2">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Department</th>
-        <th>Gender</th>
-        <th>Education</th>
-        <th>Mobile</th>
+        <th>Study Member Name</th>
+        <th>Participant - Study</th>
+        <th>Participant - Site</th>
+        <th>Participant Session Number</th>
+        <th>Status</th>
         <th>Email</th>
         <th>Joining Date</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Achitect</td>
-        <td>Male</td>
-        <td>M.COM, P.H.D</td>
-        <td>123 456 7890</td>
-        <td>infogmail.com</td>
-        <td>2011/04/20</td>
-        <td>
-          <button
-            data-bs-toggle="modal"
-            data-bs-target="#rescheduleVisit"
-            type="button"
-            class="btn btn-info px-2 me-2"
-          >
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button
-            data-bs-toggle="modal"
-            data-bs-target="#cancelVisit"
-            type="button"
-            class="btn btn-danger px-2"
-          >
-            <i class="bi bi-trash"></i>
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>John</td>
-        <td>Achitect</td>
-        <td>Male</td>
-        <td>M.COM, P.H.D</td>
-        <td>123 456 7890</td>
-        <td>infogmail.com</td>
-        <td>2011/04/20</td>
-        <td>
-          <button type="button" class="btn btn-info px-2 me-2">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button type="button" class="btn btn-danger px-2">
-            <i class="bi bi-trash"></i>
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>John</td>
-        <td>Achitect</td>
-        <td>Male</td>
-        <td>M.COM, P.H.D</td>
-        <td>123 456 7890</td>
-        <td>infogmail.com</td>
-        <td>2011/04/20</td>
-        <td>
-          <button type="button" class="btn btn-info px-2 me-2">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button type="button" class="btn btn-danger px-2">
-            <i class="bi bi-trash"></i>
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>John</td>
-        <td>Achitect</td>
-        <td>Male</td>
-        <td>M.COM, P.H.D</td>
-        <td>123 456 7890</td>
-        <td>infogmail.com</td>
-        <td>2011/04/20</td>
-        <td>
-          <button type="button" class="btn btn-info px-2 me-2">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button type="button" class="btn btn-danger px-2">
-            <i class="bi bi-trash"></i>
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>John</td>
-        <td>Achitect</td>
-        <td>Male</td>
-        <td>M.COM, P.H.D</td>
-        <td>123 456 7890</td>
-        <td>infogmail.com</td>
-        <td>2011/04/20</td>
-        <td>
-          <button type="button" class="btn btn-info px-2 me-2">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button type="button" class="btn btn-danger px-2">
-            <i class="bi bi-trash"></i>
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td>John</td>
-        <td>Achitect</td>
-        <td>Male</td>
-        <td>M.COM, P.H.D</td>
-        <td>123 456 7890</td>
-        <td>infogmail.com</td>
-        <td>2011/04/20</td>
-        <td>
-          <button type="button" class="btn btn-info px-2 me-2">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button type="button" class="btn btn-danger px-2">
-            <i class="bi bi-trash"></i>
-          </button>
-        </td>
-      </tr>
+      @for (item of sessionLists; track $index) {
+        <tr>
+          <td>{{ item?.studyMember?.user?.firstName }}</td>
+          <td>{{ item?.studyParticipant?.studySite?.study?.name }}</td>
+          <td>{{ item?.studyParticipant?.studySite?.site?.name }}</td>
+          <td>{{ item?.participantSessionNumber }}</td>
+          <td>{{ item?.status }}</td>
+         
+          <td>
+            <button data-bs-toggle="modal" data-bs-target="#rescheduleVisit" type="button" class="btn btn-info px-2 me-2">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button data-bs-toggle="modal" data-bs-target="#cancelVisit" type="button" class="btn btn-danger px-2">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+      }
+     
     </tbody>
   </table>
 </div>
@@ -202,25 +115,14 @@
 </div>
 
 <!-- Cancel Visit -->
-<div
-  class="modal fade"
-  id="cancelVisit"
-  tabindex="-1"
-  aria-labelledby="cancelVisitLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="cancelVisit" tabindex="-1" aria-labelledby="cancelVisitLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="cancelVisitLabel">
           <i class="bi bi-exclamation-triangle me-1"></i> Cancel Visit
         </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <i class="bi bi-x"></i>
         </button>
       </div>
@@ -232,11 +134,7 @@
 
         <div class="d-flex justify-content-end gap-2 mt-5">
           <button type="button" class="btn btn-danger">Yes, cancel</button>
-          <button
-            type="button"
-            class="btn btn-outline-secondary"
-            data-bs-dismiss="modal"
-          >
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
             No, Close
           </button>
         </div>
@@ -246,25 +144,14 @@
 </div>
 
 <!-- Reschedule visit with John Doe -->
-<div
-  class="modal fade"
-  id="rescheduleVisit"
-  tabindex="-1"
-  aria-labelledby="rescheduleVisitLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="rescheduleVisit" tabindex="-1" aria-labelledby="rescheduleVisitLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="rescheduleVisitLabel">
           Reschedule visit with John Doe
         </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        >
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <i class="bi bi-x"></i>
         </button>
       </div>
@@ -288,21 +175,13 @@
           </div>
         </form>
 
-        <div
-          class="d-flex justify-content-between align-items-center gap-2 mt-5"
-        >
-          <a href="#" class="text-danger"
-            ><i class="bi bi-x-circle"></i> Cancel Visit</a
-          >
+        <div class="d-flex justify-content-between align-items-center gap-2 mt-5">
+          <a href="#" class="text-danger"><i class="bi bi-x-circle"></i> Cancel Visit</a>
           <span>
             <button type="button" class="btn btn-success px-3 me-2">
               Re-schedule
             </button>
-            <button
-              type="button"
-              class="btn btn-outline-secondary"
-              data-bs-dismiss="modal"
-            >
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
               Close
             </button>
           </span>
