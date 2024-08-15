@@ -10,7 +10,9 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-
+import { CalendarViewComponent } from './components/visits/my-visits/calendar-view/calendar-view.component';
+import { MyVisitsComponent } from './visits/my-visits/my-visits.component';
+import { VisitListComponent } from './components/visits/my-visits/visit-list/visit-list.component';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -26,6 +28,9 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
       preventDuplicates: true
     }),
     FullCalendarModule,
+    MyVisitsComponent,
+    VisitListComponent,
+    CalendarViewComponent
   ],
   providers: [],
   exports:[],
