@@ -82,12 +82,13 @@ export class MyVisitsComponent {
   }
 
   onSubmit() {
+    debugger;
     if (this.form.valid) {
       // console.log('Form Submitted!', this.form.value);
       this.form.value.studyMember = Number(this.form.value.studyMember);
       this.form.value.site = Number(this.form.value.site);
       this.form.value.participant = Number(this.form.value.participant);
-      this.form.value.scheduledAt = new Date(this.form.value.scheduledAt);
+      this.form.value.scheduledAt = this.formatDateWithOffset(new Date(this.form.value.scheduledAt));
       this.api.postSession(this.form.value).subscribe(res => {
         console.log(res);
         if (res && res.data) {
@@ -103,5 +104,18 @@ export class MyVisitsComponent {
       });
     }
   }
+
+  formatDateWithOffset(date) {
+    // Extract year, month, day, hours, minutes, and seconds
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const day = String(date.getUTCDate()).padStart(2, '0');
+    const hours = String(date.getUTCHours()).padStart(2, '0');
+    const minutes = String(date.getUTCMinutes()).padStart(2, '0');
+    const seconds = String(date.getUTCSeconds()).padStart(2, '0');
+    
+    // Format the date string with the time zone offset
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}+00:00`;
+}
 
 }
