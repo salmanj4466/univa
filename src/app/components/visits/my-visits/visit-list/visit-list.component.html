@@ -4,47 +4,36 @@
       <tr>
         <td class="px-1">
           <label class="form-label">Study</label>
-          <select class="form-select">
-            <option selected>Select one option</option>
-            @for (item of studyLists; track $index) {
-            <option [value]="item.id"> {{ item?.name }}</option>
-            }
+          <select class="form-select" formControlName="study">
+            <option value="" selected>Select one option</option>
+            <option *ngFor="let item of studyLists" [value]="item.id">{{ item?.name }}</option>
           </select>
         </td>
         <td class="px-1">
           <label class="form-label">Site</label>
-          <select class="form-select">
-            <option selected>Select one option</option>
-            @for (item of siteLists; track $index) {
-            <option [value]="item.id"> {{ item?.name }}</option>
-            }
+          <select class="form-select" formControlName="site">
+            <option value="" selected>Select one option</option>
+            <option *ngFor="let item of siteLists" [value]="item.id">{{ item?.name }}</option>
           </select>
         </td>
         <td class="px-1">
           <label class="form-label">Participant</label>
-          <select class="form-select">
-            <option selected>Select one option</option>
-            @for (item of partipantLists; track $index) {
-            <option [value]="item.id"> {{ item?.participantCode }}</option>
-            }
+          <select class="form-select" formControlName="participant">
+            <option value="" selected>Select one option</option>
+            <option *ngFor="let item of participantLists" [value]="item.id">{{ item?.participantCode }}</option>
           </select>
         </td>
         <td class="px-1">
           <label class="form-label">Date start</label>
-          <select class="form-select">
-            <option selected>Select one option</option>
-            <option value="1">One</option>
-          </select>
+          <input type="date" class="form-control" formControlName="startDate" />
         </td>
         <td class="px-1">
           <label class="form-label">Date end</label>
-          <select class="form-select">
-            <option selected>Select one option</option>
-            <option value="1">One</option>
-          </select>
+          <input type="date" class="form-control" formControlName="endDate" />
         </td>
         <td class="px-1" align="center" valign="end">
-          <button class="btn btn-success mt-3">Submit</button>
+          <button class="btn btn-success mt-3" (click)="onSubmit()">Submit</button>
+          <button class="btn btn-outline-secondary mt-3 ms-2" (click)="onReset()">Reset</button>
         </td>
       </tr>
     </tbody>
@@ -60,51 +49,46 @@
         <th>Participant - Site</th>
         <th>Participant Session Number</th>
         <th>Status</th>
-      
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
-      @for (item of sessionLists; track $index) {
-        <tr>
-          <td>{{ item?.studyMember?.user?.firstName }}</td>
-          <td>{{ item?.studyParticipant?.studySite?.study?.name }}</td>
-          <td>{{ item?.studyParticipant?.studySite?.site?.name }}</td>
-          <td>{{ item?.participantSessionNumber }}</td>
-          <td>{{ item?.status }}</td>
-         
-          <td>
-            <button data-bs-toggle="modal" data-bs-target="#rescheduleVisit" type="button" class="btn btn-info px-2 me-2">
-              <i class="bi bi-pencil"></i>
-            </button>
-            <button data-bs-toggle="modal" data-bs-target="#cancelVisit" type="button" class="btn btn-danger px-2">
-              <i class="bi bi-trash"></i>
-            </button>
-          </td>
-        </tr>
-      }
-     
+      <tr *ngFor="let item of sessionLists">
+        <td>{{ item?.studyMember?.user?.firstName }}</td>
+        <td>{{ item?.studyParticipant?.studySite?.study?.name }}</td>
+        <td>{{ item?.studyParticipant?.studySite?.site?.name }}</td>
+        <td>{{ item?.participantSessionNumber }}</td>
+        <td [ngClass]="getStatusClass(item?.status)">{{ item?.status }}</td>
+        <td>
+          <button *ngIf="canViewDetails(item)" data-bs-toggle="modal" data-bs-target="#rescheduleVisit" (click)="openRescheduleForm(item)" type="button" class="btn btn-info px-2 me-2">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button *ngIf="canRemove(item)" data-bs-toggle="modal" data-bs-target="#cancelVisit" (click)="prepareForCancellation(item)" type="button" class="btn btn-danger px-2">
+            <i class="bi bi-trash"></i>
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>
 
 <div class="row align-items-center mt-4">
   <div class="col-sm-4">
-    <p class="text-center text-sm-start mb-3 mb-sm-0">2 entries</p>
+    <p class="text-center text-sm-start mb-3 mb-sm-0">{{ totalItems }} entries</p>
   </div>
   <div class="col-sm-8">
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center justify-content-sm-end">
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link" href="#" aria-label="Previous" (click)="onPageChange(currentPage - 1)">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
+        <li class="page-item" *ngFor="let page of getPages()">
+          <a class="page-link" href="#" (click)="onPageChange(page)">{{ page }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link" href="#" aria-label="Next" (click)="onPageChange(currentPage + 1)">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
@@ -130,9 +114,8 @@
           You are about to cancel a scheduled visit. The visit will be removed.
           This action cannot be undone. Are you sure you want to proceed?
         </p>
-
         <div class="d-flex justify-content-end gap-2 mt-5">
-          <button type="button" class="btn btn-danger">Yes, cancel</button>
+          <button type="button" class="btn btn-danger" (click)="confirmCancellation()">Yes, cancel</button>
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
             No, Close
           </button>
@@ -148,36 +131,35 @@
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="rescheduleVisitLabel">
-          Reschedule visit with John Doe
+          Reschedule visit with {{ selectedVisit?.studyMember?.user?.firstName }}
         </h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <i class="bi bi-x"></i>
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form [formGroup]="rescheduleForm">
           <div class="form-group mb-2">
             <label class="form-label">Date</label>
-            <input type="date" class="form-control" />
+            <input type="date" class="form-control" formControlName="date" />
           </div>
           <div class="form-group mb-2">
             <label class="form-label">Study</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="study" />
           </div>
           <div class="form-group mb-2">
             <label class="form-label">Site</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="site" />
           </div>
           <div class="form-group mb-2">
             <label class="form-label">Participant</label>
-            <input type="text" class="form-control" />
+            <input type="text" class="form-control" formControlName="participant" />
           </div>
         </form>
-
         <div class="d-flex justify-content-between align-items-center gap-2 mt-5">
-          <a href="#" class="text-danger"><i class="bi bi-x-circle"></i> Cancel Visit</a>
+          <a href="#" class="text-danger" (click)="confirmCancellation()"><i class="bi bi-x-circle"></i> Cancel Visit</a>
           <span>
-            <button type="button" class="btn btn-success px-3 me-2">
+            <button type="button" class="btn btn-success px-3 me-2" (click)="confirmReschedule()">
               Re-schedule
             </button>
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">

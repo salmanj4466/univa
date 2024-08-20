@@ -1,146 +1,185 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../../../../api.service';
-import { environment } from '../../../../../environments/environment.development';
-import { HttpClient } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-visit-list',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   providers: [ApiService],
   templateUrl: './visit-list.component.html',
-  styleUrl: './visit-list.component.scss'
+  styleUrls: ['./visit-list.component.scss'],
 })
-export class VisitListComponent {
-
-  form: any;
-  api = inject(ApiService);
-  http = inject(HttpClient);
+export class VisitListComponent implements OnInit {
+  form: FormGroup;
+  rescheduleForm: FormGroup;
+  sessionLists: any[] = [];
+  filteredSessions: any[] = [];
+  totalItems = 0;
+  totalPages = 0;
+  currentPage = 1;
+  pageSize = 10;
   studyLists: any[] = [];
   siteLists: any[] = [];
-  partipantLists: any[] = [];
-  sessionLists: any[]=[];
+  participantLists: any[] = [];
+  selectedVisit: any = null; // Ensure it's initialized properly
 
-  constructor(private fb: FormBuilder, public toastr: ToastrService) {
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private api: ApiService) {
     this.form = this.fb.group({
-      studyMember: ['', Validators.required],
-      site: ['', Validators.required],
-      participant: ['', Validators.required],
-      scheduledAt: ['', Validators.required]
+      study: [''],
+      site: [''],
+      participant: [''],
+      startDate: [''],
+      endDate: [''],
+    });
+
+    this.rescheduleForm = this.fb.group({
+      date: [''],
+      study: [''],
+      site: [''],
+      participant: [''],
     });
   }
+
   ngOnInit(): void {
-    this.api
-      .studyListing({
-        sort: "id",
-        start: 1,
-        size: 1000,
-      })
-      .subscribe(
-        (res: any) => {
-          this.studyLists = res?.data;
-        },
-        (error) => {
-          console.error("Error fetching data:", error);
-
-        }
-      );
-
-
-
-    this.api
-      .siteListing({
-        sort: "id",
-        start: 1,
-        size: 1000,
-      })
-      .subscribe(
-        (res: any) => {
-          this.siteLists = res?.data;
-        },
-        (error) => {
-          console.error("Error fetching data:", error);
-
-        }
-      );
-
-    this.api
-      .participants({
-        sort: "id",
-        start: 1,
-        size: 1000,
-      })
-      .subscribe(
-        (res: any) => {
-          this.partipantLists = res?.data;
-        },
-        (error) => {
-          console.error("Error fetching data:", error);
-
-        }
-      );
-
-
-    const currentDate = new Date();
-    const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
-    const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-
-    this.http.get(`${environment.apiUrl}sessions?dateStart=${this.formatDateToMMDDYYYY(startDate)}&dateEnd=${this.formatDateToMMDDYYYY(endDate)}`)
-      .subscribe((response: any) => {
-        console.log(response.data);
-      this.sessionLists = response.data;
-
-      }, (error: any) => {
-        console.error('Failed to load sessions:', error);
-      });
-
+    this.loadSessions();
+    this.loadDropdownData();
   }
 
-  onSubmit() {
-    if (this.form.valid) {
-      // console.log('Form Submitted!', this.form.value);
-      this.form.value.studyMember = Number(this.form.value.studyMember);
-      this.form.value.site = Number(this.form.value.site);
-      this.form.value.participant = Number(this.form.value.participant);
-      this.form.value.scheduledAt = this.formatDateWithOffset(this.form.value.scheduledAt);
-      this.api.postSession(this.form.value).subscribe(res => {
-        console.log(res);
-        if (res && res.data) {
-          // this.router.navigate(['/study-list']);
-          console.log('Sign in successful');
-          this.toastr.success(res?.message, ' ');
-          document.getElementById('close').click();
-        } else {
-          this.toastr.error(res.error, ' ');
-        }
-      }, err => {
-        this.toastr.error(err.error.error, ' ');
+  loadSessions(page: number = this.currentPage, size: number = this.pageSize): void {
+    const filters = this.form.value;
+    this.api.getSessions(page, size, filters).pipe(
+      catchError((error) => {
+        console.error('Error fetching session data:', error);
+        this.toastr.error('Failed to load sessions. Please try again.', 'Error');
+        return of({ data: [], total: 0 });
+      }),
+      switchMap((res: any) => {
+        this.totalItems = res?.total || 0;
+        this.totalPages = Math.ceil(this.totalItems / this.pageSize);
+        this.sessionLists = res?.data || [];
+        this.filteredSessions = [...this.sessionLists];
+        return of(this.sessionLists);
+      })
+    ).subscribe();
+  }
+
+  loadDropdownData(): void {
+    this.api.getStudies().pipe(
+      catchError((error) => {
+        console.error('Error fetching studies:', error);
+        this.toastr.error('Failed to load studies. Please try again.', 'Error');
+        return of([]);
+      })
+    ).subscribe(data => this.studyLists = data);
+
+    this.api.getSites().pipe(
+      catchError((error) => {
+        console.error('Error fetching sites:', error);
+        this.toastr.error('Failed to load sites. Please try again.', 'Error');
+        return of([]);
+      })
+    ).subscribe(data => this.siteLists = data);
+
+    this.api.getParticipants().pipe(
+      catchError((error) => {
+        console.error('Error fetching participants:', error);
+        this.toastr.error('Failed to load participants. Please try again.', 'Error');
+        return of([]);
+      })
+    ).subscribe(data => this.participantLists = data);
+  }
+
+  onSubmit(): void {
+    this.loadSessions();
+  }
+
+  onReset(): void {
+    this.form.reset();
+    this.loadSessions();
+  }
+
+  onPageChange(page: number): void {
+    if (page > 0 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.loadSessions(page);
+    }
+  }
+
+  getPages(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+
+  getStatusClass(status: string): string {
+    switch (status) {
+      case 'Overdue':
+        return 'text-danger';
+      case 'Completed':
+        return 'text-success';
+      case 'Scheduled':
+        return 'text-primary';
+      default:
+        return '';
+    }
+  }
+
+  canViewDetails(item: any): boolean {
+    return item?.status === 'Overdue' || item?.status === 'Completed' || (item?.status === 'Scheduled' && new Date(item.scheduledAt).toDateString() === new Date().toDateString());
+  }
+
+  canRemove(item: any): boolean {
+    return new Date(item.scheduledAt) > new Date();
+  }
+
+  openRescheduleForm(item: any): void {
+    this.selectedVisit = item;
+    this.rescheduleForm.patchValue({
+      date: item?.scheduledAt,
+      study: item?.studyParticipant?.studySite?.study?.name,
+      site: item?.studyParticipant?.studySite?.site?.name,
+      participant: item?.studyParticipant?.participantCode,
+    });
+  }
+
+  prepareForCancellation(item: any): void {
+    this.selectedVisit = item;
+  }
+
+  confirmCancellation(): void {
+    if (this.selectedVisit) {
+      this.api.deleteSession(this.selectedVisit.id).pipe(
+        catchError((error) => {
+          console.error('Error cancelling visit:', error);
+          this.toastr.error('Failed to cancel visit. Please try again.', 'Error');
+          return of(null);
+        })
+      ).subscribe(() => {
+        this.toastr.success('Visit cancelled successfully', 'Success');
+        this.loadSessions();
       });
     }
   }
 
-   formatDateWithOffset(date) {
-    // Extract year, month, day, hours, minutes, and seconds
-    const year = date.getUTCFullYear();
-    const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-    const day = String(date.getUTCDate()).padStart(2, '0');
-    const hours = String(date.getUTCHours()).padStart(2, '0');
-    const minutes = String(date.getUTCMinutes()).padStart(2, '0');
-    const seconds = String(date.getUTCSeconds()).padStart(2, '0');
-    
-    // Format the date string with the time zone offset
-    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}+00:00`;
-}
+  confirmReschedule(): void {
+    if (this.selectedVisit) {
+      const updatedVisit = {
+        ...this.selectedVisit,
+        ...this.rescheduleForm.value
+      };
 
-  formatDateToMMDDYYYY(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
-    const day = String(date.getDate()).padStart(2, '0');
-
-    return `${year}-${month}-${day}`;
+      this.api.updateSession(this.selectedVisit.id, updatedVisit).pipe(
+        catchError((error) => {
+          console.error('Error rescheduling visit:', error);
+          this.toastr.error('Failed to reschedule visit. Please try again.', 'Error');
+          return of(null);
+        })
+      ).subscribe(() => {
+        this.toastr.success('Visit rescheduled successfully', 'Success');
+        this.loadSessions();
+      });
+    }
   }
-
-
 }
