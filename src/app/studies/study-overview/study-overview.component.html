@@ -15,6 +15,21 @@
       <li class="nav-item" role="presentation">
         <button
           class="nav-link active"
+          id="overview-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#overview-tab-pane"
+          type="button"
+          role="tab"
+          aria-controls="overview-tab-pane"
+          aria-selected="false"
+        >
+          <i class="bi bi-search"></i> Study Overview
+        </button>
+      </li>
+
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
           id="info-tab"
           data-bs-toggle="tab"
           data-bs-target="#info-tab-pane"
@@ -26,20 +41,22 @@
           <i class="bi bi-info-circle"></i> Study Information
         </button>
       </li>
+
       <li class="nav-item" role="presentation">
         <button
           class="nav-link"
-          id="collection-tab"
+          id="screening-tab"
           data-bs-toggle="tab"
-          data-bs-target="#collection-tab-pane"
+          data-bs-target="#screening-tab-pane"
           type="button"
           role="tab"
-          aria-controls="collection-tab-pane"
-          aria-selected="false"
+          aria-controls="screening-tab-pane"
+          aria-selected="true"
         >
-          <i class="bi bi-gear"></i> Data Collection Settings
+          <i class="bi bi-file-earmark-check"></i> Screening & demographics
         </button>
       </li>
+
       <li class="nav-item" role="presentation">
         <button
           class="nav-link"
@@ -54,25 +71,33 @@
           <i class="bi bi-file-earmark-check"></i> Informed Consent Forms
         </button>
       </li>
-
       <li class="nav-item" role="presentation">
         <button
           class="nav-link"
-          id="overview-tab"
+          id="collection-tab"
           data-bs-toggle="tab"
-          data-bs-target="#overview-tab-pane"
+          data-bs-target="#collection-tab-pane"
           type="button"
           role="tab"
-          aria-controls="overview-tab-pane"
+          aria-controls="collection-tab-pane"
           aria-selected="false"
         >
-          <i class="bi bi-search"></i> Study Overview
+          <i class="bi bi-gear"></i> Data Collection
         </button>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
       <div
         class="tab-pane fade show active"
+        id="overview-tab-pane"
+        role="tabpanel"
+        aria-labelledby="overview-tab"
+        tabindex="0"
+      >
+        <app-study-overview-data></app-study-overview-data>
+      </div>
+      <div
+        class="tab-pane fade"
         id="info-tab-pane"
         role="tabpanel"
         aria-labelledby="info-tab"
@@ -80,21 +105,25 @@
       >
         <app-study-information></app-study-information>
         <div class="text-end mt-4">
-          <span class="text-danger me-4 me-md-5"
+          <!-- <span class="text-danger me-4 me-md-5"
             ><i class="bi bi-x-circle-fill me-1"></i> Delete Study</span
-          >
+          > -->
           <button class="btn btn-success">Update</button>
         </div>
       </div>
+
       <div
         class="tab-pane fade"
-        id="collection-tab-pane"
+        id="screening-tab-pane"
         role="tabpanel"
-        aria-labelledby="collection-tab"
+        aria-labelledby="screening-tab"
         tabindex="0"
       >
-        <app-data-collection></app-data-collection>
+        <app-screening-questionnaire></app-screening-questionnaire>
         <div class="text-end mt-4">
+          <!-- <span class="text-danger me-4 me-md-5"
+            ><i class="bi bi-x-circle-fill me-1"></i> Delete Study</span
+          > -->
           <button class="btn btn-success">Update</button>
         </div>
       </div>
@@ -110,14 +139,18 @@
           <button class="btn btn-success">Update</button>
         </div>
       </div>
+
       <div
         class="tab-pane fade"
-        id="overview-tab-pane"
+        id="collection-tab-pane"
         role="tabpanel"
-        aria-labelledby="overview-tab"
+        aria-labelledby="collection-tab"
         tabindex="0"
       >
-        <app-study-overview-data></app-study-overview-data>
+        <app-data-collection></app-data-collection>
+        <div class="text-end mt-4">
+          <button class="btn btn-success">Update</button>
+        </div>
       </div>
     </div>
   </div>
