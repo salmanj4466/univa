@@ -53,7 +53,12 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
         this.siteLists = res;
 
       });
+
+      this.InformedConsentFormComponent.participantList = this.informationOfObject.icfClauses.filter(d => d.type == 'Participant');
+      this.InformedConsentFormComponent.carerList = this.informationOfObject.icfClauses.filter(d => d.type == 'Carer');
+      this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.icfClauses.filter(d => d.type == 'Study Manager');
     }
+
 
     setTimeout(() => {
       this.informationOfObject.data.studyMeasurements.filter(fl => fl.measurement.type == "In-app").forEach(d => {
@@ -68,6 +73,10 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
           durationSecs: d.duration
         }
       });
+
+      this.InformedConsentFormComponent.participantList = this.informationOfObject.icfClauses.filter(d => d.type == 'Participant');
+      this.InformedConsentFormComponent.carerList = this.informationOfObject.icfClauses.filter(d => d.type == 'Carer');
+      this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.icfClauses.filter(d => d.type == 'Study Manager');
     }, 2000);
 
   }
@@ -249,6 +258,12 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
 
   }
 
+
+  consentFormMap(){
+    this.InformedConsentFormComponent.participantList = this.informationOfObject.icfClauses.filter(d => d.type == 'Participant');
+    this.InformedConsentFormComponent.carerList = this.informationOfObject.icfClauses.filter(d => d.type == 'Carer');
+    this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.icfClauses.filter(d => d.type == 'Study Manager'); 
+  }
 
 
 
