@@ -53,10 +53,9 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
         this.siteLists = res;
 
       });
-
-      this.InformedConsentFormComponent.participantList = this.informationOfObject.icfClauses.filter(d => d.type == 'Participant');
-      this.InformedConsentFormComponent.carerList = this.informationOfObject.icfClauses.filter(d => d.type == 'Carer');
-      this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.icfClauses.filter(d => d.type == 'Study Manager');
+      this.InformedConsentFormComponent.participantList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Participant');
+      this.InformedConsentFormComponent.carerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Carer');
+      this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Study Manager'); 
     }
 
 
@@ -74,9 +73,9 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
         }
       });
 
-      this.InformedConsentFormComponent.participantList = this.informationOfObject.icfClauses.filter(d => d.type == 'Participant');
-      this.InformedConsentFormComponent.carerList = this.informationOfObject.icfClauses.filter(d => d.type == 'Carer');
-      this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.icfClauses.filter(d => d.type == 'Study Manager');
+      this.InformedConsentFormComponent.participantList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Participant');
+    this.InformedConsentFormComponent.carerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Carer');
+    this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Study Manager'); 
     }, 2000);
 
   }
@@ -260,9 +259,11 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
 
 
   consentFormMap(){
-    this.InformedConsentFormComponent.participantList = this.informationOfObject.icfClauses.filter(d => d.type == 'Participant');
-    this.InformedConsentFormComponent.carerList = this.informationOfObject.icfClauses.filter(d => d.type == 'Carer');
-    this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.icfClauses.filter(d => d.type == 'Study Manager'); 
+    this.InformedConsentFormComponent.participantList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Participant');
+    this.InformedConsentFormComponent.carerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Carer');
+    this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Study Manager'); 
+
+    
   }
 
 
