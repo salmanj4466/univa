@@ -52,6 +52,9 @@ export class AddNewStudyComponent {
   @ViewChild(InformedConsentFormComponent)
   public InformedConsentFormComponent!: InformedConsentFormComponent;
 
+  @ViewChild(ScreeningQuestionnaireComponent)
+  public ScreeningQuestionnaireComponent!: ScreeningQuestionnaireComponent;
+
 
   firstFormGroup = this._formBuilder.group({
     firstCtrl: ["", Validators.required],

@@ -33,7 +33,7 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
   activeRoute = inject(ActivatedRoute);
   studyId!: any;
   informationOfObject: any = {};
-  siteLists: any[]=[];
+  siteLists: any[] = [];
   ngOnInit(): void {
     this.studyId = this.activeRoute.snapshot.params['id'] ? Number(this.activeRoute.snapshot.params['id']) : null;
   }
@@ -51,7 +51,7 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
       this.api.getStudySiteById(this.studyId).subscribe(res => {
         console.log(res);
         this.siteLists = res;
-   
+
       });
     }
 
@@ -165,35 +165,91 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
     return `${year}-${month}-${day}`;
   }
 
-  studyUpdate(){
-    if(this.StudyInformationComponent.studyInformationForm.valid){
-    this.api.putStudy({
-      "name": this.StudyInformationComponent.studyInformationForm.value.name,
-      "description": this.StudyInformationComponent.studyInformationForm.value.description,
-      "shortCode": this.StudyInformationComponent.studyInformationForm.value.shortCode,
-      "startDate": this.StudyInformationComponent.studyInformationForm.value.startDate,
-      "plannedEndDate": this.StudyInformationComponent.studyInformationForm.value.plannedEndDate,
-      "plannedNumberOfParticipants": Number(this.StudyInformationComponent.studyInformationForm.value.plannedNumberOfParticipants),
-      "durationInWeeksPerParticipant": Number(this.StudyInformationComponent.studyInformationForm.value.durationInWeeksPerParticipant),
-      "icfParticipant": this.InformedConsentFormComponent.icfParticipant,
-      "icfCarer": this.InformedConsentFormComponent.icfCarer,
-      "icfStudyManager": this.InformedConsentFormComponent.icfStudyManager,
-      "studyTeamMembers": [Number(this.StudyInformationComponent.studyInformationForm.value.studyTeamMembers)],
-    }, this.studyId).subscribe(res => {
-      console.log(res);
-      if (res && res.data) {
-       
-        this.toastr.success(res?.message, ' ');
-      } else {
-        this.toastr.error(res.error, ' ');
-      }
-    }, err => {
-      this.toastr.error(err.error.error, ' ');
-    });
-  }else{
-    this.toastr.error( "Please try again");
+  studyUpdate() {
+    if (this.StudyInformationComponent.studyInformationForm.valid) {
+      this.api.putStudy({
+        "name": this.StudyInformationComponent.studyInformationForm.value.name,
+        "description": this.StudyInformationComponent.studyInformationForm.value.description,
+        "shortCode": this.StudyInformationComponent.studyInformationForm.value.shortCode,
+        "startDate": this.StudyInformationComponent.studyInformationForm.value.startDate,
+        "plannedEndDate": this.StudyInformationComponent.studyInformationForm.value.plannedEndDate,
+        "plannedNumberOfParticipants": Number(this.StudyInformationComponent.studyInformationForm.value.plannedNumberOfParticipants),
+        "durationInWeeksPerParticipant": Number(this.StudyInformationComponent.studyInformationForm.value.durationInWeeksPerParticipant),
+        "icfParticipant": this.InformedConsentFormComponent.icfParticipant,
+        "icfCarer": this.InformedConsentFormComponent.icfCarer,
+        "icfStudyManager": this.InformedConsentFormComponent.icfStudyManager,
+        "studyTeamMembers": [Number(this.StudyInformationComponent.studyInformationForm.value.studyTeamMembers)],
+      }, this.studyId).subscribe(res => {
+        console.log(res);
+        if (res && res.data) {
+
+          this.toastr.success(res?.message, ' ');
+        } else {
+          this.toastr.error(res.error, ' ');
+        }
+      }, err => {
+        this.toastr.error(err.error.error, ' ');
+      });
+    } else {
+      this.toastr.error("Please try again");
+      this.StudyInformationComponent.errorMessage = true;
+    }
   }
+
+  screeningUpdate() {
+    if (this.ScreeningQuestionnaireComponent.screenings && this.ScreeningQuestionnaireComponent.demographics) {
+      this.api.postForms({
+        "screenings": [Number(this.ScreeningQuestionnaireComponent.screenings)],
+        "demographics": [Number(this.ScreeningQuestionnaireComponent.demographics)],
+      }, this.studyId).subscribe(res => {
+        console.log(res);
+        if (res && res.data) {
+
+          this.toastr.success(res?.message, ' ');
+        } else {
+          this.toastr.error(res.error, ' ');
+        }
+      }, err => {
+        this.toastr.error(err.error.error, ' ');
+      });
+    } else {
+      this.toastr.error("Please try again");
+      this.StudyInformationComponent.errorMessage = true;
+    }
   }
+
+  consentUpdate() {
+
+    if (!this.InformedConsentFormComponent.icfCarer || this.InformedConsentFormComponent.participantList.length == 0
+      || this.InformedConsentFormComponent.participantList.length == 0
+      || this.InformedConsentFormComponent.carerList.length == 0
+      || !this.InformedConsentFormComponent.icfParticipant
+      || !this.InformedConsentFormComponent.icfStudyManager) {
+      this.InformedConsentFormComponent.errorMessage = true;
+      this.toastr.error('Please provide a value for all the required fields');
+    } else {
+      this.api.putStudy({
+        "icfClauses": [
+          ...this.InformedConsentFormComponent?.participantList,
+          ...this.InformedConsentFormComponent?.carerList,
+          ...this.InformedConsentFormComponent?.studyManagerList
+        ]
+      }, this.studyId).subscribe(res => {
+        console.log(res);
+        if (res && res.data) {
+
+          this.toastr.success(res?.message, ' ');
+        } else {
+          this.toastr.error(res.error, ' ');
+        }
+      }, err => {
+        this.toastr.error(err.error.error, ' ');
+      });
+    }
+
+  }
+
+
 
 
 }

@@ -15,7 +15,7 @@
   <div class="col-md-6 col-lg-4">
     <div class="form-group mb-3">
       <label class="form-label">Select Screening Form:</label>
-      <select class="form-select">
+      <select class="form-select" name="screenings" [(ngModel)]="screenings">
         <option selected>Select one option</option>
         @for (item of screeningLists; track $index) {
           <option [value]="item.id">{{item.name}}</option>
@@ -31,7 +31,7 @@
   <div class="col-md-6 col-lg-4">
     <div class="form-group mb-3">
       <label class="form-label">Select Demographics Form:</label>
-      <select class="form-select">
+      <select class="form-select" name="demographics" [(ngModel)]="demographics">
         <option selected>Select one option</option>
         @for (item of demographicsLists; track $index) {
           <option [value]="item.id">{{item.name}}</option>
