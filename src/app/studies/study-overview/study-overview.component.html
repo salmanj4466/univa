@@ -1,14 +1,14 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Studies</a></li>
-    <li class="breadcrumb-item active" aria-current="page">UH-ST-00</li>
+    <li class="breadcrumb-item"><a >Studies</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{informationOfObject?.name  }} {{informationOfObject?.shortCode  }}</li>
   </ol>
 </nav>
 
 <div class="card">
   <h4 class="card-header d-flex justify-content-between">
-    <span>UH-ST-001</span>
-    <span class="badge text-bg-info">On-going</span>
+    <span>{{informationOfObject?.name  }} {{informationOfObject?.shortCode  }}</span>
+    <span class="badge text-bg-info">{{ informationOfObject?.status }}</span>
   </h4>
   <div class="card-body">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -108,7 +108,7 @@
           <!-- <span class="text-danger me-4 me-md-5"
             ><i class="bi bi-x-circle-fill me-1"></i> Delete Study</span
           > -->
-          <button class="btn btn-success">Update</button>
+          <button class="btn btn-success" (click)="studyUpdate()">Update</button>
         </div>
       </div>
 

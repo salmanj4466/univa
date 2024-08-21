@@ -92,7 +92,7 @@
           <select class="form-select" aria-label="Default select example" formControlName="studyTeamMembers">
             <option selected>Select one or mulitple users</option>
             @for (item of teamMembersdata; track $index) {
-              <option [value]="item.id">{{item.surname}}</option>
+              <option [value]="item.id">{{item.firstName}}</option>
             }
            
           </select>

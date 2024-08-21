@@ -22,7 +22,7 @@ export const routes: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'signin-verify', component: VerifyEmailComponent },
   { path: 'add-new-study', component: AddNewStudyComponent ,  canActivate: [authGuard] },
-  { path: 'study-overview', component: StudyOverviewComponent, canActivate: [authGuard] },
+  { path: 'study-overview/:id', component: StudyOverviewComponent, canActivate: [authGuard] },
   { path: 'study-list', component: StudyListComponent, canActivate: [authGuard] },
   { path: 'add-new-site', component: AddNewSiteComponent, canActivate: [authGuard] },
   { path: 'edit-site/:id', component: EditsiteComponent, canActivate: [authGuard] },

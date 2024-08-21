@@ -44,7 +44,7 @@
 
       <ngx-datatable-column prop="id" name="Action" [sortable]="true" [flexGrow]="1">
         <ng-template let-row="row" ngx-datatable-cell-template>
-          <a [routerLink]="['/edit-study', row.id]" class="btn btn-outline-success px-3">
+          <a [routerLink]="['/study-overview', row.id]" class="btn btn-outline-success px-3">
             View details
           </a>
         </ng-template>
