@@ -183,8 +183,13 @@ export class ApiService {
   }
 
   getStudySiteById(id: number): Observable<any> {
-    const signInUrl = `${environment.apiUrl}sites?studyId=${id}`;
+    const signInUrl = `${environment.apiUrl}sites?study=${id}`;
     return this.http.get(signInUrl);
+  }
+
+  getStudySiteByIdQueryparm(params: any): Observable<any> {
+    const signInUrl = `${environment.apiUrl}sites`;
+    return this.http.get(signInUrl, {params});
   }
 
 

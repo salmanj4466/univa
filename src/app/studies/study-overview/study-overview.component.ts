@@ -33,7 +33,7 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
   activeRoute = inject(ActivatedRoute);
   studyId!: any;
   informationOfObject: any = {};
-  siteLists: any[] = [];
+  siteLists: any = {};
   ngOnInit(): void {
     this.studyId = this.activeRoute.snapshot.params['id'] ? Number(this.activeRoute.snapshot.params['id']) : null;
   }
@@ -53,9 +53,9 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
         this.siteLists = res;
 
       });
-      this.InformedConsentFormComponent.participantList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Participant');
-      this.InformedConsentFormComponent.carerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Carer');
-      this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Study Manager'); 
+      // this.InformedConsentFormComponent.participantList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Participant');
+      // this.InformedConsentFormComponent.carerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Carer');
+      // this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Study Manager'); 
     }
 
 
@@ -74,8 +74,8 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
       });
 
       this.InformedConsentFormComponent.participantList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Participant');
-    this.InformedConsentFormComponent.carerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Carer');
-    this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Study Manager'); 
+      this.InformedConsentFormComponent.carerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Carer');
+      this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Study Manager');
     }, 2000);
 
   }
@@ -207,8 +207,16 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
   screeningUpdate() {
     if (this.ScreeningQuestionnaireComponent.screenings && this.ScreeningQuestionnaireComponent.demographics) {
       this.api.postForms({
-        "screenings": [Number(this.ScreeningQuestionnaireComponent.screenings)],
-        "demographics": [Number(this.ScreeningQuestionnaireComponent.demographics)],
+        "forms": [
+          {
+            "id": [Number(this.ScreeningQuestionnaireComponent.screenings)],
+            "type": "screenings"
+          },
+          {
+            "id": [Number(this.ScreeningQuestionnaireComponent.demographics)],
+            "type": "demographics"
+          }
+        ]
       }, this.studyId).subscribe(res => {
         console.log(res);
         if (res && res.data) {
@@ -258,14 +266,71 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
   }
 
 
-  consentFormMap(){
+  consentFormMap() {
     this.InformedConsentFormComponent.participantList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Participant');
     this.InformedConsentFormComponent.carerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Carer');
-    this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Study Manager'); 
+    this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Study Manager');
 
-    
+
   }
 
+
+  collectionUpdate() {
+    this.inAppLists = this.DataCollectionComponent?.inAppLists.filter(e => e.checkbox == true);
+    this.onsiteLists = this.DataCollectionComponent?.onsiteLists.filter(e => e.checkbox == true);
+    if (this.inAppLists.length == 0 || this.onsiteLists.length == 0 || this.DataCollectionComponent.videodiarytopicsObject.length == 0) {
+      this.toastr.error('Please provide a value for all the required fields');
+    } else {
+      this.api.putStudy({
+        "studyMeasurements": [
+          ...this.inAppLists.map(e => {
+            return e = {
+              id: e.id,
+              active: e.checkbox
+            }
+          }),
+          ...this.onsiteLists.map(e => {
+            return e = {
+              id: e.id,
+              active: e.checkbox
+            }
+          })
+        ],
+        "studyVideoDiaryTopics": [
+
+          ...this.DataCollectionComponent.videodiarytopicsObject.map(e => {
+            return e = {
+              "id": Number(e.topicId.split('-')[0]),
+              "duration": Number(e.durationSecs)
+            }
+          }),
+        ],
+        "studySurveys": [
+          {
+            "id": 2,
+            "active": true
+          }
+        ],
+        "studyWearables": [
+          {
+            "id": 2,
+            "active": false
+          }
+        ],
+      }, this.studyId).subscribe(res => {
+        console.log(res);
+        if (res && res.data) {
+
+          this.toastr.success(res?.message, ' ');
+        } else {
+          this.toastr.error(res.error, ' ');
+        }
+      }, err => {
+        this.toastr.error(err.error.error, ' ');
+      });
+    }
+
+  }
 
 
 }
