@@ -1,14 +1,14 @@
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a >Studies</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{informationOfObject?.name  }} {{informationOfObject?.shortCode  }}</li>
+    <li class="breadcrumb-item"><a >Studies</a></li> 
+    <li class="breadcrumb-item active" aria-current="page">{{informationOfObject?.data?.name  }} {{informationOfObject?.data?.shortCode  }}</li>
   </ol>
 </nav>
 
 <div class="card">
   <h4 class="card-header d-flex justify-content-between">
-    <span>{{informationOfObject?.name  }} {{informationOfObject?.shortCode  }}</span>
-    <span class="badge text-bg-info">{{ informationOfObject?.status }}</span>
+    <span>{{informationOfObject?.data?.name  }} {{informationOfObject?.data?.shortCode  }}</span>
+    <span class="badge text-bg-info">{{ informationOfObject?.data?.status }}</span>
   </h4>
   <div class="card-body">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -120,7 +120,7 @@
         aria-labelledby="screening-tab"
         tabindex="0"
       >
-        <app-screening-questionnaire></app-screening-questionnaire>
+        <app-screening-questionnaire [studyId]="studyId"></app-screening-questionnaire>
         <div class="text-end mt-4">
           <!-- <span class="text-danger me-4 me-md-5"
             ><i class="bi bi-x-circle-fill me-1"></i> Delete Study</span

@@ -202,4 +202,11 @@ export class ApiService {
     return this.http.post(signInUrl, information, {headers});
   }
 
+  getForms(id: number): Observable<any> {
+    const  headers: any = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    const signInUrl = `${environment.apiUrl}studies/${id}/forms `;
+    return this.http.get(signInUrl,{headers});
+  }
 }
