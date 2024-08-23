@@ -209,4 +209,9 @@ export class ApiService {
     const signInUrl = `${environment.apiUrl}studies/${id}/forms `;
     return this.http.get(signInUrl,{headers});
   }
+
+  deleteStudyById(id: number): Observable<any> {
+    const signInUrl = `${environment.apiUrl}studies/${id}`;
+    return this.http.delete(signInUrl);
+  }
 }

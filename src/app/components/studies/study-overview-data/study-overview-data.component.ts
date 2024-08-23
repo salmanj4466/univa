@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, inject, Input, SimpleChanges, ViewChild } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { ApiService } from '../../../api.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-study-overview-data',
@@ -27,6 +28,11 @@ export class StudyOverviewDataComponent {
   loadingIndicator = false;
   @ViewChild("datatable") datatable: ElementRef;
 
+  constructor(public router: Router,
+    public toastr: ToastrService) {
+
+  }
+
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
@@ -38,7 +44,7 @@ export class StudyOverviewDataComponent {
     this.page.totalElements = this.siteLists.pagination.totalCount;
     this.rows = [...this.siteLists.data];
     this.loadingIndicator = false;
-    
+
   }
   setPage(pageInfo: any) {
     this.page.pageNumber = pageInfo.offset;
@@ -61,6 +67,20 @@ export class StudyOverviewDataComponent {
       this.loadingIndicator = false;
 
     });
+  }
+
+  deleteStudy() {
+    this.api.deleteStudyById(this.studyId).subscribe(res => {
+      if (res && res.data) {
+        this.router.navigate(['/study-list']);
+        this.toastr.success('Study information is deleted successfully');
+      } else {
+        this.toastr.error(res.error, 'Error');
+      }
+    }, err => {
+      this.toastr.error(err.error.error, 'Error');
+    });
+
   }
 
 }
