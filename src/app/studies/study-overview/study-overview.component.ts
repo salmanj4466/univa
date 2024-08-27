@@ -246,6 +246,7 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
       this.toastr.error('Please provide a value for all the required fields');
     } else {
       this.api.putStudy({
+        "studyTeamMembers": [Number(this.StudyInformationComponent.studyInformationForm.value.studyTeamMembers)],
         "icfClauses": [
           ...this.InformedConsentFormComponent?.participantList,
           ...this.InformedConsentFormComponent?.carerList,
@@ -268,6 +269,7 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
 
 
   consentFormMap() {
+    debugger;
     this.InformedConsentFormComponent.participantList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Participant');
     if (this.InformedConsentFormComponent.participantList.length == 0) {
       this.InformedConsentFormComponent.participantList = [
@@ -310,6 +312,7 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
       this.toastr.error('Please provide a value for all the required fields');
     } else {
       this.api.putStudy({
+        "studyTeamMembers": [Number(this.StudyInformationComponent.studyInformationForm.value.studyTeamMembers)],
         "studyMeasurements": [
           ...this.inAppLists.map(e => {
             return e = {
