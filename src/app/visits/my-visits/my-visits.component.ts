@@ -23,7 +23,7 @@ export class MyVisitsComponent {
   constructor(private fb: FormBuilder, public toastr: ToastrService) {
     this.form = this.fb.group({
       studyMember: ['', Validators.required],
-      site: [''],
+      // site: [''],
       participant: ['', Validators.required],
       scheduledAt: ['', Validators.required]
     });
@@ -86,7 +86,7 @@ export class MyVisitsComponent {
     if (this.form.valid) {
       // console.log('Form Submitted!', this.form.value);
       this.form.value.studyMember = Number(this.form.value.studyMember);
-      this.form.value.site = Number(this.form.value.site);
+      // this.form.value.site = Number(this.form.value.site);
       this.form.value.participant = Number(this.form.value.participant);
       this.form.value.scheduledAt = this.formatDateWithOffset(new Date(this.form.value.scheduledAt));
       this.api.postSession(this.form.value).subscribe(res => {
