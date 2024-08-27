@@ -27,7 +27,9 @@ export class StudyOverviewDataComponent {
   };
   loadingIndicator = false;
   @ViewChild("datatable") datatable: ElementRef;
-
+  percentage = 0;
+  percentageSyle = '0%';
+  @Input() informationOfObject: any;
   constructor(public router: Router,
     public toastr: ToastrService) {
 
@@ -36,14 +38,25 @@ export class StudyOverviewDataComponent {
   ngAfterViewInit(): void {
     //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
     //Add 'implements AfterViewInit' to the class.
+    if(this.informationOfObject){
+      const num: any = (this.informationOfObject.data.currentNumberOfParticipants / this.informationOfObject.data.plannedNumberOfParticipants) * 100; 
+      this.percentageSyle = `${Number(num)}%`;
+    }
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
     //Add '${implements OnChanges}' to the class.
+
     this.page.totalElements = this.siteLists.pagination.totalCount;
     this.rows = [...this.siteLists.data];
     this.loadingIndicator = false;
+
+    if(this.informationOfObject){
+      const num: any = (this.informationOfObject.data.currentNumberOfParticipants / this.informationOfObject.data.plannedNumberOfParticipants) * 100; 
+      this.percentageSyle =  `${Number(num)}%`;
+    }
 
   }
   setPage(pageInfo: any) {
