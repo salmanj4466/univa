@@ -83,6 +83,10 @@ export class VisitListComponent {
       );
 
 
+   this.apiCall();
+  }
+
+  apiCall(){
     const currentDate = new Date();
     const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
@@ -95,7 +99,6 @@ export class VisitListComponent {
       }, (error: any) => {
         console.error('Failed to load sessions:', error);
       });
-
   }
 
   onSubmit() {
@@ -148,11 +151,12 @@ export class VisitListComponent {
   yes(){
     this.api.deletesessionById(this.cancelId).subscribe(res => {
       console.log(res);
-      if (res && res.data) {
+      if (res && res) {
         // this.router.navigate(['/study-list']);
         console.log('Sign in successful');
         this.toastr.success(res?.message, ' ');
         document.getElementById('cancelVisit-model').click();
+        this.apiCall();
       } else {
         this.toastr.error(res.error, ' ');
       }
