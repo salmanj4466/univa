@@ -251,6 +251,11 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
           ...this.InformedConsentFormComponent?.participantList,
           ...this.InformedConsentFormComponent?.carerList,
           ...this.InformedConsentFormComponent?.studyManagerList
+        ],
+        "StudyICFClause":[
+          ...this.InformedConsentFormComponent?.participantList,
+          ...this.InformedConsentFormComponent?.carerList,
+          ...this.InformedConsentFormComponent?.studyManagerList
         ]
       }, this.studyId).subscribe(res => {
         console.log(res);
