@@ -22,7 +22,7 @@ export class VisitListComponent {
   siteLists: any[] = [];
   partipantLists: any[] = [];
   sessionLists: any[]=[];
-
+  cancelId: any;
   constructor(private fb: FormBuilder, public toastr: ToastrService) {
     this.form = this.fb.group({
       studyMember: ['', Validators.required],
@@ -140,6 +140,25 @@ export class VisitListComponent {
     const day = String(date.getDate()).padStart(2, '0');
 
     return `${year}-${month}-${day}`;
+  }
+  delete(item: any){
+    this.cancelId = item?.id;
+  }
+
+  yes(){
+    this.api.deletesessionById(this.cancelId).subscribe(res => {
+      console.log(res);
+      if (res && res.data) {
+        // this.router.navigate(['/study-list']);
+        console.log('Sign in successful');
+        this.toastr.success(res?.message, ' ');
+        document.getElementById('cancelVisit-model').click();
+      } else {
+        this.toastr.error(res.error, ' ');
+      }
+    }, err => {
+      this.toastr.error(err.error.error, ' ');
+    });
   }
 
 

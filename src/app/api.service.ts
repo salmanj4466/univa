@@ -214,4 +214,9 @@ export class ApiService {
     const signInUrl = `${environment.apiUrl}studies/${id}`;
     return this.http.delete(signInUrl);
   }
+
+  deletesessionById(id: number): Observable<any> {
+    const signInUrl = `${environment.apiUrl}sessions/${id}`;
+    return this.http.delete(signInUrl);
+  }
 }
