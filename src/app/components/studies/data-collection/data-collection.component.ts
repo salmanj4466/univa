@@ -84,6 +84,6 @@ export class DataCollectionComponent {
   }
 
   remove(i: any) {
-    this.videodiarytopicsObject.slice(i, 1);
+    this.videodiarytopicsObject.splice(i, 1);
   }
 }
