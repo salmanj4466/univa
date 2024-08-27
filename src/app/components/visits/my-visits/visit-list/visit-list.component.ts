@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../../../../api.service';
 import { environment } from '../../../../../environments/environment.development';
@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-visit-list',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   providers: [ApiService],
   templateUrl: './visit-list.component.html',
   styleUrl: './visit-list.component.scss'
@@ -25,8 +25,9 @@ export class VisitListComponent {
   cancelId: any;
   constructor(private fb: FormBuilder, public toastr: ToastrService) {
     this.form = this.fb.group({
+      id:[],
       studyMember: ['', Validators.required],
-      site: ['', Validators.required],
+      // site: ['', Validators.required],
       participant: ['', Validators.required],
       scheduledAt: ['', Validators.required]
     });
@@ -107,13 +108,14 @@ export class VisitListComponent {
       this.form.value.studyMember = Number(this.form.value.studyMember);
       this.form.value.site = Number(this.form.value.site);
       this.form.value.participant = Number(this.form.value.participant);
-      this.form.value.scheduledAt = this.formatDateWithOffset(this.form.value.scheduledAt);
-      this.api.postSession(this.form.value).subscribe(res => {
+      this.form.value.scheduledAt = this.formatDateWithOffset(new Date(this.form.value.scheduledAt));
+      this.api.editSession(this.form.value).subscribe(res => {
         console.log(res);
         if (res && res.data) {
           // this.router.navigate(['/study-list']);
           console.log('Sign in successful');
           this.toastr.success(res?.message, ' ');
+          this.apiCall();
           document.getElementById('close').click();
         } else {
           this.toastr.error(res.error, ' ');
@@ -165,5 +167,33 @@ export class VisitListComponent {
     });
   }
 
+  edit(item: any){
+    this.form.patchValue({
+      id: item.id,
+      studyMember: item?.studyMember?.id,
+      // site: ['', Validators.required],
+      participant: item?.studyParticipant?.id,
+      scheduledAt: this.formatDateToMMDDYYYY(new Date(item?.scheduledAt))
+    });
+    console.log(this.form.value);
+  }
+
+
+  deletession(){
+    this.api.deletesessionById(this.form.value.id).subscribe(res => {
+      console.log(res);
+      if (res && res) {
+        // this.router.navigate(['/study-list']);
+        console.log('Sign in successful');
+        this.toastr.success(res?.message, ' ');
+        document.getElementById('close').click();
+        this.apiCall();
+      } else {
+        this.toastr.error(res.error, ' ');
+      }
+    }, err => {
+      this.toastr.error(err.error.error, ' ');
+    });
+  }
 
 }

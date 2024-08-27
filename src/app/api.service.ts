@@ -219,4 +219,12 @@ export class ApiService {
     const signInUrl = `${environment.apiUrl}sessions/${id}`;
     return this.http.delete(signInUrl);
   }
+
+  editSession(information: any): Observable<any> {
+    const  headers: any = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+    const signInUrl = `${environment.apiUrl}sessions/${information.id}`;
+    return this.http.put(signInUrl, information, {headers});
+  }
 }
