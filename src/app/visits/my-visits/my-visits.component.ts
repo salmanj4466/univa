@@ -23,7 +23,7 @@ export class MyVisitsComponent {
   constructor(private fb: FormBuilder, public toastr: ToastrService) {
     this.form = this.fb.group({
       studyMember: ['', Validators.required],
-      site: ['',Validators.required],
+      site: [''],
       participant: ['', Validators.required],
       scheduledAt: ['', Validators.required]
     });
