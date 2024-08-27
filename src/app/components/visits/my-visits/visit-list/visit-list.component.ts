@@ -116,7 +116,7 @@ export class VisitListComponent {
           console.log('Sign in successful');
           this.toastr.success(res?.message, ' ');
           this.apiCall();
-          document.getElementById('close').click();
+          document.getElementById('closeEdit').click();
         } else {
           this.toastr.error(res.error, ' ');
         }
@@ -186,7 +186,7 @@ export class VisitListComponent {
         // this.router.navigate(['/study-list']);
         console.log('Sign in successful');
         this.toastr.success(res?.message, ' ');
-        document.getElementById('close').click();
+        document.getElementById('closeEdit').click();
         this.apiCall();
       } else {
         this.toastr.error(res.error, ' ');
