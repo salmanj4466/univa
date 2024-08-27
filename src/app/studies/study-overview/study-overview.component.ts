@@ -73,9 +73,10 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
         }
       });
 
-      this.InformedConsentFormComponent.participantList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Participant');
-      this.InformedConsentFormComponent.carerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Carer');
-      this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Study Manager');
+      // this.InformedConsentFormComponent.participantList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Participant');
+      // this.InformedConsentFormComponent.carerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Carer');
+      // this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Study Manager');
+      this.consentFormMap();
     }, 2000);
 
   }
@@ -268,8 +269,35 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
 
   consentFormMap() {
     this.InformedConsentFormComponent.participantList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Participant');
+    if (this.InformedConsentFormComponent.participantList.length == 0) {
+      this.InformedConsentFormComponent.participantList = [
+        {
+          type: "Participant",
+          description: ""
+        }
+      ]
+
+    }
     this.InformedConsentFormComponent.carerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Carer');
+    if (this.InformedConsentFormComponent.carerList.length == 0) {
+      this.InformedConsentFormComponent.carerList = [
+        {
+          type: "Carer",
+          description: ""
+        }
+      ]
+
+    }
     this.InformedConsentFormComponent.studyManagerList = this.informationOfObject.data.icfClauses.filter(d => d.type == 'Study Manager');
+    if (this.InformedConsentFormComponent.studyManagerList.length == 0) {
+      this.InformedConsentFormComponent.studyManagerList = [
+        {
+          type: "Study Manager",
+          description: ""
+        }
+      ]
+
+    }
 
 
   }
