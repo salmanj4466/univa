@@ -84,6 +84,7 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
   screeingInfo() {
     this.informationOfObject.data.studyMeasurements.filter(fl => fl.measurement.type == "In-app").forEach(d => {
       this.DataCollectionComponent.inAppLists.find(f => f.id == d.measurement.id)['checkbox'] = true;
+      console.log(d);
     });
     this.informationOfObject.data.studyMeasurements.filter(fl => fl.measurement.type == "On-site").forEach(d => {
       this.DataCollectionComponent.onsiteLists.find(f => f.id == d.measurement.id)['checkbox'] = true;
@@ -94,7 +95,7 @@ export class StudyOverviewComponent extends AddNewStudyComponent {
         durationSecs: d.duration
       }
     });
-    console.log(this.DataCollectionComponent.videodiarytopicsObject);
+    
   }
 
 

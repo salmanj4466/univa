@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../../../api.service';
@@ -24,6 +24,7 @@ export class DataCollectionComponent {
     durationSecs: ''
   }];
   measurementsDropdownlists: any[] = [];
+  videoDiaryDisabled = false;
   constructor(private api: ApiService) {
     this.fetchMeasurementsList();
     this.getvideodiarytopics();
@@ -31,6 +32,13 @@ export class DataCollectionComponent {
       this.measurementsDropdownlists = res?.data;
     });
 
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    // Add '${implements OnChanges}' to the class.
+    debugger;
+    this.videoDiaryDisabled = this.inAppLists.filter((e: any) => e.name == 'Video diary')[0]?.checkbox;
   }
 
   fetchMeasurementsList() {
@@ -85,5 +93,9 @@ export class DataCollectionComponent {
 
   remove(i: any) {
     this.videodiarytopicsObject.splice(i, 1);
+  }
+
+  dairyChange(){
+    this.videoDiaryDisabled = this.inAppLists.filter((e: any) => e.name == 'Video diary')[0]?.checkbox;
   }
 }
