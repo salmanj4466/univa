@@ -10,7 +10,7 @@
 
 <div class="row">
   <div class="col-md-4">
-    <h6 class="text-success mb-3">On-site measurements/Tasks*</h6>
+    <h6 class="text-success mb-3">On-site measurements*</h6>
     <div class="form-group mb-3">
       <select class="form-select">
         <option selected>Select measurements</option>
@@ -53,16 +53,6 @@
     </div>
     } -->
   </div>
-  <div class="col-md-4">
-    <h6 class="text-success mb-3">In-app tasks</h6>
-    @for (item of onsiteLists; track $index) {
-    <div class="form-check form-switch mb-2">
-      <input class="form-check-input" type="checkbox" name=" {{ item.name }} - {{ item.id }}"
-        [(ngModel)]="item.checkbox" role="switch" id="weight" />
-      <label class="form-check-label" for="weight">{{ item?.name }}</label>
-    </div>
-    }
-  </div>
 
   <div class="col-md-4">
     <h6 class="text-success mt-4 mt-md-0 mb-3">In-app scales/surveys</h6>
@@ -70,6 +60,16 @@
     @for (item of inAppLists; track $index) {
     <div class="form-check form-switch mb-2">
       <input (change)="dairyChange()" class="form-check-input" type="checkbox" name=" {{ item.name }} - {{ item.id }}"
+        [(ngModel)]="item.checkbox" role="switch" id="weight" />
+      <label class="form-check-label" for="weight">{{ item?.name }}</label>
+    </div>
+    }
+  </div>
+  <div class="col-md-4">
+    <h6 class="text-success mb-3">On-site tasks</h6>
+    @for (item of onsiteLists; track $index) {
+    <div class="form-check form-switch mb-2">
+      <input class="form-check-input" type="checkbox" name=" {{ item.name }} - {{ item.id }}"
         [(ngModel)]="item.checkbox" role="switch" id="weight" />
       <label class="form-check-label" for="weight">{{ item?.name }}</label>
     </div>
