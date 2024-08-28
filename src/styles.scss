@@ -690,6 +690,11 @@ body::-webkit-scrollbar-thumb {
     color: #0dcaf0 !important;
   }
 
+  &.text-bg-warning {
+    background-color: #ffc1073d !important;
+    color: #ffc107 !important;
+  }
+
   &.text-bg-danger {
     background-color: #ffe5df !important;
     color: #ff6746 !important;
