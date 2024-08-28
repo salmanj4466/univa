@@ -93,29 +93,40 @@
   <ngx-datatable #datatable class="bootstrap" [rows]="rows" [columnMode]="'flex'" [headerHeight]="50"
     [footerHeight]="50" [rowHeight]="'auto'" [externalPaging]="true" [count]="page.totalElements" [limit]="page.size"
     [offset]="page.pageNumber" (page)="setPage($event)">
-    <ngx-datatable-column prop="name" name="Site Name" [sortable]="true" [flexGrow]="1">
+    <ngx-datatable-column prop="name" name="Study Member Name" [sortable]="true" [flexGrow]="1">
       <ng-template let-row="row" ngx-datatable-cell-template>
-        {{ row?.name }}
+        {{ item?.studyMember?.user?.firstName }}
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column prop="studyShortCode" name="Study Short Code" [sortable]="true" [flexGrow]="1">
+    <ngx-datatable-column prop="studyShortCode" name="Participant - Study" [sortable]="true" [flexGrow]="1">
       <ng-template let-row="row" ngx-datatable-cell-template>
-        {{ row?.studyShortCode }}
+        {{ item?.studyParticipant?.studySite?.study?.name }}
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column prop="participantsRecruited" name="Participant Recruited" [sortable]="true" [flexGrow]="1">
+    <ngx-datatable-column prop="participantsRecruited" name="Participant - Site" [sortable]="true" [flexGrow]="1">
       <ng-template let-row="row" ngx-datatable-cell-template>
-        {{ row?.participantsRecruited }}
+        {{ item?.studyParticipant?.studySite?.site?.name  }}
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column prop="id" name="Action" [sortable]="true" [flexGrow]="1">
+    <ngx-datatable-column prop="participantsRecruited" name="Participant Session Number" [sortable]="true" [flexGrow]="1">
       <ng-template let-row="row" ngx-datatable-cell-template>
-        <a [routerLink]="['/edit-site', row.id]" class="btn btn-outline-success px-3">
-          View details
-        </a>
+        {{ item?.participantSessionNumber  }}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column prop="id" name="Status" [sortable]="true" [flexGrow]="1">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <button data-bs-toggle="modal" (click)="edit(item)" data-bs-target="#rescheduleVisit" type="button"
+            class="btn btn-info px-2 me-2">
+            <i class="bi bi-pencil"></i>
+          </button>
+          <button data-bs-toggle="modal" (click)="delete(item)" data-bs-target="#cancelVisit" type="button"
+            class="btn btn-danger px-2">
+            <i class="bi bi-trash"></i>
+          </button>
       </ng-template>
     </ngx-datatable-column>
   </ngx-datatable>
