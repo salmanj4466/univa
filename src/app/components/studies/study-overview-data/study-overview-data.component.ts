@@ -55,7 +55,7 @@ export class StudyOverviewDataComponent {
 
     if(this.informationOfObject){
       const num: any = (this.informationOfObject.data.currentNumberOfParticipants / this.informationOfObject.data.plannedNumberOfParticipants) * 100; 
-      this.percentageSyle =  `${Number(num)}%`;
+      this.percentageSyle = `${Number(num).toFixed(2)}%`;
     }
 
   }
