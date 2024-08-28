@@ -111,8 +111,11 @@ export class VisitListComponent {
     }
     this.http.get(`${environment.apiUrl}sessions}`, {params})
       .subscribe((response: any) => {
-        console.log(response.data);
+        // console.log(response.data);
       this.sessionLists = response.data;
+      this.page.totalElements = response.pagination.totalCount;
+      this.rows = [...response.data];
+      // this.loadingIndicator = false;
 
       }, (error: any) => {
         console.error('Failed to load sessions:', error);
