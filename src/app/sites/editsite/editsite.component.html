@@ -1,12 +1,12 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Sites</a></li>
-      <li class="breadcrumb-item active" aria-current="page"> {{siteId ? 'Edit Site'  : ' Add New Site' }}</li>
+      <li class="breadcrumb-item"><a>Sites</a></li>
+      <li class="breadcrumb-item active" aria-current="page"> Edit Site {{SiteInfoComponent?.siteForm?.value?.name}}</li>
     </ol>
   </nav>
   
   <div class="card add-new-site">
-    <h4 class="card-header"> {{siteId ? 'Edit Site'  : ' Add New Site' }} </h4>
+    <h4 class="card-header">  Edit Site {{SiteInfoComponent?.siteForm?.value?.name}}  </h4>
     <div class="card-body px-2 py-4">
       <mat-stepper [linear]="isLinear" #stepper>
         <mat-step [stepControl]="firstFormGroup" label="Site Information">
@@ -15,7 +15,7 @@
   
             <div class="text-end mt-4">
               <button mat-button  class="btn btn-success" (click)="next()">
-                Next <i class="bi bi-arrow-right ms-1"></i>
+                Update <i class="bi bi-arrow-right ms-1"></i>
               </button>
             </div>
           </form>
