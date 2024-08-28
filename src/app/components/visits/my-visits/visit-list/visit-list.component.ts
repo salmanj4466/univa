@@ -4,11 +4,12 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../../../../api.service';
 import { environment } from '../../../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @Component({
   selector: 'app-visit-list',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgxDatatableModule],
   providers: [ApiService],
   templateUrl: './visit-list.component.html',
   styleUrl: './visit-list.component.scss'
@@ -23,6 +24,13 @@ export class VisitListComponent {
   partipantLists: any[] = [];
   sessionLists: any[]=[];
   cancelId: any;
+  rows = [];
+  columns = [{ prop: 'name', name: 'Site Name' }, { prop: 'studyShortCode:', name: 'Study short code' }, { prop: 'participantsRecruited:', name: 'Participant Recruited' }];
+  page = {
+    totalElements: 0,
+    pageNumber: 0,
+    size: 10
+  };
   constructor(private fb: FormBuilder, public toastr: ToastrService) {
     this.form = this.fb.group({
       id:[],
@@ -91,8 +99,17 @@ export class VisitListComponent {
     const currentDate = new Date();
     const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
     const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+    // sort: 'id', start:this.page.pageNumber, size:  this.page.size
+    // const params: any = "dateStart=${this.formatDateToMMDDYYYY(startDate)}&dateEnd=${this.formatDateToMMDDYYYY(endDate)";
 
-    this.http.get(`${environment.apiUrl}sessions?dateStart=${this.formatDateToMMDDYYYY(startDate)}&dateEnd=${this.formatDateToMMDDYYYY(endDate)}`)
+    const params: any = {
+      sort: 'id', 
+      start:this.page.pageNumber, 
+      size:  this.page.size,
+      dateStart: this.formatDateToMMDDYYYY(startDate),
+      dateEnd: this.formatDateToMMDDYYYY(endDate)
+    }
+    this.http.get(`${environment.apiUrl}sessions}`, {params})
       .subscribe((response: any) => {
         console.log(response.data);
       this.sessionLists = response.data;
@@ -194,6 +211,11 @@ export class VisitListComponent {
     }, err => {
       this.toastr.error(err.error.error, ' ');
     });
+  }
+
+  setPage(e: any){
+    this.page.pageNumber = e.offset;
+    this.apiCall();
   }
 
 }
