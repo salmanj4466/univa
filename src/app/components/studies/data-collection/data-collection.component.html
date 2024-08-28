@@ -90,7 +90,7 @@
     <div class="row">
       <div class="col-sm-7 col-md-5">
         <div class="form-group mb-3">
-          <select [disabled]="videoDiaryDisabled" class="form-select" name="topicId-{{ $index }}"
+          <select [disabled]="!videoDiaryDisabled" class="form-select" name="topicId-{{ $index }}"
             [(ngModel)]="item.topicId">
             <option selected>Select topic</option>
             @for (item of videodiarytopicsList; track $index) {
@@ -103,7 +103,7 @@
       </div>
       <div class="col-sm-5 col-md-3">
         <div class="form-group mb-3 d-flex">
-          <input [disabled]="videoDiaryDisabled" type="number" class="form-control" name="durationSecs-{{ $index }}"
+          <input [disabled]="!videoDiaryDisabled" type="number" class="form-control" name="durationSecs-{{ $index }}"
             [(ngModel)]="item.durationSecs" placeholder="Duration in secs" />
           @if($index != videodiarytopicsObject.length - 1){
           @if(videoDiaryDisabled){
