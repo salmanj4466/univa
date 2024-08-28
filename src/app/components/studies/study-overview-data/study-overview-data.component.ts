@@ -40,7 +40,7 @@ export class StudyOverviewDataComponent {
     //Add 'implements AfterViewInit' to the class.
     if(this.informationOfObject){
       const num: any = (this.informationOfObject.data.currentNumberOfParticipants / this.informationOfObject.data.plannedNumberOfParticipants) * 100; 
-      this.percentageSyle = `${Number(num)}%`;
+      this.percentageSyle = `${Number(num).toFixed(2)}%`;
     }
 
   }
