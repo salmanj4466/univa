@@ -1,30 +1,76 @@
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a>Sites</a></li>
-      <li class="breadcrumb-item active" aria-current="page"> Edit Site {{SiteInfoComponent?.siteForm?.value?.name}}</li>
-    </ol>
-  </nav>
-  
-  <div class="card add-new-site">
-    <h4 class="card-header">  Edit Site {{SiteInfoComponent?.siteForm?.value?.name}}  </h4>
-    <div class="card-body px-2 py-4">
-      <mat-stepper [linear]="isLinear" #stepper>
-        <mat-step [stepControl]="firstFormGroup" label="Site Information">
-          <form [formGroup]="firstFormGroup">
-            <app-site-info></app-site-info>
-  
-            <div class="text-end mt-4">
-              <button mat-button  class="btn btn-success" (click)="next()">
-                Update <i class="bi bi-arrow-right ms-1"></i>
-              </button>
-            </div>
-          </form>
-        </mat-step>
-  
-        <mat-step [stepControl]="fourFormGroup">
-          <ng-template matStepLabel>Clinical Devices </ng-template>
-            <app-clinical-devices [itemId]="siteId"></app-clinical-devices>
-        </mat-step>
-      </mat-stepper>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a>Sites</a></li>
+    <li class="breadcrumb-item active" aria-current="page"> Edit Site {{SiteInfoComponent?.siteForm?.value?.name}}</li>
+  </ol>
+</nav>
+
+<!-- <div class="card add-new-site">
+  <h4 class="card-header"> Edit Site {{SiteInfoComponent?.siteForm?.value?.name}} </h4>
+  <div class="card-body px-2 py-4">
+    <mat-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup" label="Site Information">
+        <form [formGroup]="firstFormGroup">
+          <app-site-info></app-site-info>
+
+          <div class="text-end mt-4">
+            <button mat-button class="btn btn-success" (click)="next()">
+              Update <i class="bi bi-arrow-right ms-1"></i>
+            </button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="fourFormGroup">
+        <ng-template matStepLabel>Clinical Devices </ng-template>
+        <app-clinical-devices [itemId]="siteId"></app-clinical-devices>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div> -->
+
+
+
+
+<div class="card">
+  <h4 class="card-header d-flex justify-content-between">
+    <span>Edit Site {{SiteInfoComponent?.siteForm?.value?.name}}</span>
+    <!-- <span class="badge text-bg-info">{{ informationOfObject?.data?.status }}</span> -->
+  </h4>
+  <div class="card-body">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview-tab-pane"
+          type="button" role="tab" aria-controls="overview-tab-pane" aria-selected="false">
+          <i class="bi bi-search"></i> Site Information
+        </button>
+      </li>
+
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="info-tab" data-bs-toggle="tab" data-bs-target="#info-tab-pane" type="button"
+          role="tab" aria-controls="info-tab-pane" aria-selected="true">
+          <i class="bi bi-info-circle"></i> Clinical Devices
+        </button>
+      </li>
+
+
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab"
+        tabindex="0">
+        <app-site-info></app-site-info>
+
+        <div class="text-end mt-4">
+          <button mat-button class="btn btn-success" (click)="next()">
+            Update 
+          </button>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="info-tab-pane" role="tabpanel" aria-labelledby="info-tab" tabindex="0">
+        <app-clinical-devices [itemId]="siteId"></app-clinical-devices>
+
+      </div>
+
     </div>
   </div>
+</div>

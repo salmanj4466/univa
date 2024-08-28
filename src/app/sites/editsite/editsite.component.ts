@@ -96,7 +96,7 @@ export class EditsiteComponent {
         "studies": [Number(this.SiteInfoComponent?.siteForm?.value?.studies)],
       }, this.siteId).subscribe(res => {
         if (res && res.data) {
-          this.stepper.next();
+          // this.stepper.next();
           this.toastr.success('Site information is updated successfully');
         } else {
           this.toastr.error(res.error, 'Error');
